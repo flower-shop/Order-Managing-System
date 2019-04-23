@@ -10,8 +10,8 @@ public class Arrangement {
 	private boolean hasCard = false;
 	private String cardText;
 
-	public Arrangement(FlowerType flowerType, int flowerQuantity, ArrangementTheme theme, AccessoryType accessoryType,
-			boolean hasCard) {
+	public Arrangement(FlowerType flowerType, int flowerQuantity, ArrangementTheme theme,
+			AccessoryType accessoryType, boolean hasCard) {
 		this.flowerType = flowerType;
 		this.theme = theme;
 		this.hasCard = hasCard;
@@ -30,14 +30,12 @@ public class Arrangement {
 		} else {
 			flowersInArrangement.clear();
 		}
-
 	}
 
 	public void calculateCost() {
 		for (Flower flower : flowersInArrangement) {
 			cost += flower.getCost();
 		}
-
 		cost += accessory.getCost();
 	}
 
