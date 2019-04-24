@@ -17,13 +17,17 @@ public class FlowerShopGui extends JFrame {
 	static Statement statement = null;
 
 	private FlowerShopGui() {
-		this.setLookAndFeel();
-
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL);
 			if (conn != null) {
 				System.out.println("Connected");
+				
+//				statement = conn.createStatement();
+//				
+//				String sql = "INSERT INTO Employee(lastName, firstName, employeeId, password, isAdmin) VALUES ('DeBenedictis','James','123','1234','yes')";
+//				
+//				statement.executeUpdate(sql);
 			}
 		} catch (SQLException se1) {
 			System.out.println("Failed to connect");
@@ -45,9 +49,8 @@ public class FlowerShopGui extends JFrame {
 			}
 		}
 
-		MainWindow mw = new MainWindow();
-		mw.setResizable(false);
-		mw.setVisible(true);
+		this.setLookAndFeel();
+		new MainWindow();
 	}
 
 	public static void main(String[] args) {

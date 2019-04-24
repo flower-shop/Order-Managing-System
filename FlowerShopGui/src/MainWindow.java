@@ -14,40 +14,50 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
-
-/*
- * @formatter:on
- */
 
 public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = 3434469359320329958L;
 	private static Color BACKGROUND_PANEL_COLOR = new Color(Integer.parseInt("ffcbbc", 16));
 	private static Color BACKGROUND_TAB_COLOR = new Color(Integer.parseInt("bee8d9", 16));
+	private static Integer MAX_ROW_COUNT = 256;
+
+	JTextField firstNameInputField = new JTextField();
+	JTextField lastNameInputField = new JTextField();
+	JTextField phoneNumberTextField = new JTextField();
+	JTextField emailTextField = new JTextField();
+	JTextField deliveryAddressTextField = new JTextField();
+	JTextField quantityTextField = new JTextField();
+	JTextField cardInfoTextField = new JTextField();
+	JDateChooser dateChooser = new JDateChooser();
+	JComboBox<FlowerType> flowerTypeComboBox = new JComboBox<>(FlowerType.values());
+	JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
+	JComboBox<ArrangementTheme> arrangementThemeComboBox = new JComboBox<>(
+			ArrangementTheme.values());
 
 	public MainWindow() {
 
-		// Tab 1 - New Order
+		// ----------------------------------------------------------------------
+		// --------------------Tab 1 - New Order
+		// ----------------------------------------------------------------------
 
 		JPanel customerInfoPanel = new JPanel();
 		customerInfoPanel.setBorder(BorderFactory.createTitledBorder("Customer info"));
 		customerInfoPanel.setBackground(BACKGROUND_TAB_COLOR);
 
 		JLabel firstNameLabel = new JLabel("First name");
-		JTextField firstNameInputField = new JTextField();
 
 		JLabel lastNameLabel = new JLabel("Last name");
-		JTextField lastNameInputField = new JTextField();
 
 		JLabel phoneNumberLabel = new JLabel("Phone number");
-		JTextField phoneNumberTextField = new JTextField();
 
 		JLabel emailLabel = new JLabel("Email");
-		JTextField emailTextField = new JTextField();
 
 		GroupLayout customerInfoLayout = new GroupLayout(customerInfoPanel);
 		customerInfoPanel.setLayout(customerInfoLayout);
@@ -78,9 +88,7 @@ public class MainWindow extends JFrame {
 
 		JLabel deliveryAddressLabel = new JLabel("Delivery address");
 		JLabel deliveryDateLabel = new JLabel("Delivery date");
-		JTextField deliveryAddressTextField = new JTextField();
 
-		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBackground(BACKGROUND_TAB_COLOR);
 
 		GroupLayout deliveryInfoLayout = new GroupLayout(deliveryInfoPanel);
@@ -119,7 +127,6 @@ public class MainWindow extends JFrame {
 		orderInfoPanel.setBackground(BACKGROUND_TAB_COLOR);
 
 		JLabel flowerTypeLabel = new JLabel("Flower type");
-		JComboBox<FlowerType> flowerTypeComboBox = new JComboBox<>(FlowerType.values());
 
 		JLabel unitPriceLabel = new JLabel("Unit price");
 		JTextField unitPriceTextField = new JTextField();
@@ -127,24 +134,20 @@ public class MainWindow extends JFrame {
 		unitPriceTextField.setFocusable(false);
 
 		JLabel quantityLabel = new JLabel("Quantity");
-		JTextField quantityTextField = new JTextField();
 
 		JLabel accessoryTypeLabel = new JLabel("Accessory type");
-		JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
 
 		JLabel arrangementThemeLabel = new JLabel("Arrangement theme");
-		JComboBox<ArrangementTheme> arrangementThemeComboBox = new JComboBox<>(
-				ArrangementTheme.values());
 
 		JLabel cardLabel = new JLabel("Card");
 		JRadioButton noRadioButton = new JRadioButton("No", true);
+
 		JRadioButton yesRadioButton = new JRadioButton("Yes");
 		ButtonGroup cardOptionsButtonGroup = new ButtonGroup();
 
 		cardOptionsButtonGroup.add(noRadioButton);
 		cardOptionsButtonGroup.add(yesRadioButton);
 
-		JTextField cardInfoTextField = new JTextField();
 		cardInfoTextField.setToolTipText("Card text goes here");
 
 		GroupLayout orderInfoLayout = new GroupLayout(orderInfoPanel);
@@ -227,17 +230,54 @@ public class MainWindow extends JFrame {
 		newOrderPanel.add(Box.createVerticalGlue());
 		newOrderPanel.setLayout(newOrderLayout);
 
-		// Pane 2 - Inventory
-
+		// ----------------------------------------------------------------------
+		// --------------------Pane 2 - Inventory
+		// ----------------------------------------------------------------------
 		JPanel inventoryPanel = new JPanel();
+		inventoryPanel.setBackground(BACKGROUND_TAB_COLOR);
+		String[] inventoryColumnNames = {"Flower Type", "Price", "Quantity"};
+		Object[][] inventoryContent = new Object[MainWindow.MAX_ROW_COUNT][3];
+		for (int i = 0; i < MAX_ROW_COUNT; i++) {
+			inventoryContent[i] = new Object[]{"", "", ""};
+		}
+		JTable inventoryTable = new JTable(inventoryContent, inventoryColumnNames);
+		JScrollPane inventoryScrollPane = new JScrollPane(inventoryTable);
 
-		// TODO Inventory panel
+		FlowLayout inventoryControlButtonsLayout = new FlowLayout();
+		inventoryControlButtonsLayout.setAlignment(FlowLayout.CENTER);
+		inventoryControlButtonsLayout.setHgap(100);
+
+		JButton inventoryCancelButton = new JButton("Cancel");
+		inventoryCancelButton.setBackground(BACKGROUND_PANEL_COLOR);
+
+		JButton inventoryUpdateButton = new JButton("Update inventory");
+		inventoryUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
+
+		JPanel inventoryControlButtonsPanel = new JPanel();
+		inventoryControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
+		inventoryControlButtonsPanel.setLayout(inventoryControlButtonsLayout);
+		inventoryControlButtonsPanel.add(inventoryCancelButton);
+
+		Component verticalGlue_1 = Box.createVerticalGlue();
+		inventoryControlButtonsPanel.add(verticalGlue_1);
+		inventoryControlButtonsPanel.add(inventoryUpdateButton);
+
+		GroupLayout inventoryPanelLayout = new GroupLayout(inventoryPanel);
+		inventoryPanel.setLayout(inventoryPanelLayout);
+		inventoryPanelLayout.setAutoCreateGaps(true);
+		inventoryPanelLayout.setAutoCreateContainerGaps(true);
+
+		inventoryPanelLayout.setHorizontalGroup(inventoryPanelLayout.createParallelGroup()
+				.addComponent(inventoryScrollPane).addComponent(inventoryControlButtonsPanel));
+
+		inventoryPanelLayout.setVerticalGroup(inventoryPanelLayout.createSequentialGroup()
+				.addComponent(inventoryScrollPane).addComponent(inventoryControlButtonsPanel));
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 		tabbedPane.addTab("New Order", newOrderPanel);
 		tabbedPane.addTab("Inventory", inventoryPanel);
 		getContentPane().add(tabbedPane);
-
+		setResizable(false);
 		getContentPane().setBackground(BACKGROUND_PANEL_COLOR);
 		setTitle("Flower Shop");
 		setSize(800, 600);
