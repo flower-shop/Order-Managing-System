@@ -28,18 +28,17 @@ public class MainWindow extends JFrame {
 	private static Color BACKGROUND_TAB_COLOR = new Color(Integer.parseInt("bee8d9", 16));
 	private static Integer MAX_ROW_COUNT = 256;
 
-	JTextField firstNameInputField = new JTextField();
-	JTextField lastNameInputField = new JTextField();
-	JTextField phoneNumberTextField = new JTextField();
-	JTextField emailTextField = new JTextField();
-	JTextField deliveryAddressTextField = new JTextField();
-	JTextField quantityTextField = new JTextField();
-	JTextField cardInfoTextField = new JTextField();
-	JDateChooser dateChooser = new JDateChooser();
-	JComboBox<FlowerType> flowerTypeComboBox = new JComboBox<>(FlowerType.values());
-	JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
-	JComboBox<ArrangementTheme> arrangementThemeComboBox = new JComboBox<>(
-			ArrangementTheme.values());
+	private JTextField firstNameInputField = new JTextField();
+	private JTextField lastNameInputField = new JTextField();
+	private JTextField phoneNumberTextField = new JTextField();
+	private JTextField emailTextField = new JTextField();
+	private JTextField deliveryAddressTextField = new JTextField();
+	private JTextField quantityTextField = new JTextField();
+	private JTextField cardInfoTextField = new JTextField();
+	private JDateChooser dateChooser = new JDateChooser();
+	private JComboBox<FlowerType> flowerTypeComboBox = new JComboBox<>(FlowerType.values());
+	private JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
+	private JComboBox<ArrangementTheme> arrangementThemeComboBox = new JComboBox<>(ArrangementTheme.values());
 
 	public MainWindow() {
 
@@ -92,32 +91,31 @@ public class MainWindow extends JFrame {
 		dateChooser.setBackground(BACKGROUND_TAB_COLOR);
 
 		GroupLayout deliveryInfoLayout = new GroupLayout(deliveryInfoPanel);
-		deliveryInfoLayout.setHorizontalGroup(deliveryInfoLayout
-				.createParallelGroup(Alignment.LEADING)
+		deliveryInfoLayout.setHorizontalGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(deliveryInfoLayout.createSequentialGroup()
 						.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(deliveryAddressLabel).addComponent(deliveryDateLabel))
 						.addGap(18)
 						.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(deliveryAddressTextField, GroupLayout.PREFERRED_SIZE,
-										641, GroupLayout.PREFERRED_SIZE)
+								.addComponent(deliveryAddressTextField, GroupLayout.PREFERRED_SIZE, 641,
+										GroupLayout.PREFERRED_SIZE)
 								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 166,
 										GroupLayout.PREFERRED_SIZE))
 						.addGap(106)));
-		deliveryInfoLayout.setVerticalGroup(deliveryInfoLayout
-				.createParallelGroup(Alignment.LEADING)
-				.addGroup(deliveryInfoLayout.createSequentialGroup()
-						.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(deliveryAddressLabel)
-								.addComponent(deliveryAddressTextField, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(6)
-						.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(deliveryDateLabel, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap()));
+		deliveryInfoLayout
+				.setVerticalGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(deliveryInfoLayout.createSequentialGroup()
+								.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(deliveryAddressLabel)
+										.addComponent(deliveryAddressTextField, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGap(6)
+								.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(deliveryDateLabel, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addContainerGap()));
 		deliveryInfoLayout.setAutoCreateGaps(true);
 		deliveryInfoLayout.setAutoCreateContainerGaps(true);
 		deliveryInfoPanel.setLayout(deliveryInfoLayout);
@@ -175,8 +173,8 @@ public class MainWindow extends JFrame {
 						.addComponent(accessoryTypeLabel).addComponent(accessoryTypeComboBox)
 						.addComponent(arrangementThemeLabel).addComponent(arrangementThemeComboBox))
 				.addGroup(orderInfoLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(cardLabel).addComponent(noRadioButton)
-						.addComponent(yesRadioButton).addComponent(cardInfoTextField)));
+						.addComponent(cardLabel).addComponent(noRadioButton).addComponent(yesRadioButton)
+						.addComponent(cardInfoTextField)));
 
 		orderInfoPanel.setLayout(orderInfoLayout);
 
