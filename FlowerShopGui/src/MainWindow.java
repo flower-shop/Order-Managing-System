@@ -270,10 +270,44 @@ public class MainWindow extends JFrame {
 
 		inventoryPanelLayout.setVerticalGroup(inventoryPanelLayout.createSequentialGroup()
 				.addComponent(inventoryScrollPane).addComponent(inventoryControlButtonsPanel));
+		
+		// ----------------------------------------------------------------------
+		// --------------------Pane 3 - Customers
+		// ----------------------------------------------------------------------
+		
+		JPanel customersPanel = new JPanel();
+		customersPanel.setBackground(BACKGROUND_TAB_COLOR);
+        String[] customersColumnNames = new String[] {
+                "First Name", "Last Name", "Phone Number", "Email"
+        };
+        Object[][] customersContent = new Object[MainWindow.MAX_ROW_COUNT][4];
+        for (int i = 0; i < MAX_ROW_COUNT; i++) {
+            customersContent[i] = new Object[] {"", "", "", "", ""};
+        }
+        JTable customersTable = new JTable(customersContent, customersColumnNames);
+        JScrollPane customersScrollPane = new JScrollPane(customersTable);
+        customersPanel.add(customersScrollPane);
+        GroupLayout customersLayout = new GroupLayout(customersPanel);
+        customersLayout.setHorizontalGroup(
+        	customersLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(customersLayout.createSequentialGroup()
+        			.addComponent(customersScrollPane, GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+        			.addContainerGap())
+        );
+        customersLayout.setVerticalGroup(
+        	customersLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(customersLayout.createSequentialGroup()
+        			.addComponent(customersScrollPane, GroupLayout.PREFERRED_SIZE, 490, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(45, Short.MAX_VALUE))
+        );
+        customersLayout.setAutoCreateGaps(true);
+        customersLayout.setAutoCreateContainerGaps(true);
+        customersPanel.setLayout(customersLayout);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 		tabbedPane.addTab("New Order", newOrderPanel);
 		tabbedPane.addTab("Inventory", inventoryPanel);
+		tabbedPane.addTab("Customers", customersPanel);
 		getContentPane().add(tabbedPane);
 		setResizable(false);
 		getContentPane().setBackground(BACKGROUND_PANEL_COLOR);
