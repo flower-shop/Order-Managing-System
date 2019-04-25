@@ -43,7 +43,7 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 
 		// ----------------------------------------------------------------------
-		// --------------------Tab 1 - New Order
+		// --------------------Pane 1 - New Order
 		// ----------------------------------------------------------------------
 
 		JPanel customerInfoPanel = new JPanel();
@@ -304,15 +304,120 @@ public class MainWindow extends JFrame {
         customersLayout.setAutoCreateContainerGaps(true);
         customersPanel.setLayout(customersLayout);
 
+		// ----------------------------------------------------------------------
+		// --------------------Pane 4 - Orders
+		// ----------------------------------------------------------------------
+        JPanel ordersPanel = new JPanel();
+        ordersPanel.setBackground(BACKGROUND_TAB_COLOR);
+        String[] ordersColumnNames = new String[] {
+                "Order Date", "First Name", "Last Name", "Flower", "Quantity", "Accessory", "Arrangement", "Address", "Delivery Date",  "Total Cost", "Card", "Text", "Paid", "Delivered"
+        };
+        Object[][] ordersContent = new Object[MainWindow.MAX_ROW_COUNT][14];
+        for (int i = 0; i < MAX_ROW_COUNT; i++) {
+            ordersContent[i] = new Object[] {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
+        }
+        JTable ordersTable = new JTable(ordersContent, ordersColumnNames);
+        JScrollPane ordersScrollPane = new JScrollPane(ordersTable);
+
+        JButton ordersCancelButton = new JButton("Cancel");
+        ordersCancelButton.setBackground(BACKGROUND_PANEL_COLOR);
+
+        JButton ordersUpdateButton = new JButton("Update Records");
+        ordersUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
+
+        FlowLayout ordersControlButtonsLayout = new FlowLayout();
+        ordersControlButtonsLayout.setAlignment(FlowLayout.CENTER);
+        ordersControlButtonsLayout.setHgap(100);
+
+        JPanel ordersControlButtonsPanel = new JPanel(ordersControlButtonsLayout);
+        ordersControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
+        ordersControlButtonsPanel.add(ordersCancelButton);
+        
+        Component verticalGlue_2 = Box.createVerticalGlue();
+        ordersControlButtonsPanel.add(verticalGlue_2);
+        ordersControlButtonsPanel.add(ordersUpdateButton);
+
+        GroupLayout ordersLayout = new GroupLayout(ordersPanel);
+        ordersPanel.setLayout(ordersLayout);
+        ordersLayout.setAutoCreateGaps(true);
+        ordersLayout.setAutoCreateContainerGaps(true);
+
+        ordersLayout.setHorizontalGroup(
+                ordersLayout.createParallelGroup()
+                    .addComponent(ordersScrollPane)
+                    .addComponent(ordersControlButtonsPanel)
+        );
+
+        ordersLayout.setVerticalGroup(
+                ordersLayout.createSequentialGroup()
+                    .addComponent(ordersScrollPane)
+                    .addComponent(ordersControlButtonsPanel)
+        );        
+        
+		// ----------------------------------------------------------------------
+		// --------------------Pane 5 - Employees
+		// ----------------------------------------------------------------------   
+        
+        JPanel employeesPanel = new JPanel();
+        employeesPanel.setBackground(BACKGROUND_TAB_COLOR);
+        String[] employeesColumnNames = new String[] {
+                "Last Name", "First Name", "Employee ID", "Password", "Admin Privileges"
+        };
+        Object[][] employeesContent = new Object[MainWindow.MAX_ROW_COUNT][5];
+        for (int i = 0; i < MAX_ROW_COUNT; i++) {
+            employeesContent[i] = new Object[] {"", "", "", "", ""};
+        }
+        JTable employeesTable = new JTable(employeesContent, employeesColumnNames);
+        JScrollPane employeeScrollPane = new JScrollPane(employeesTable);
+
+        JButton employeeCancelButton = new JButton("Cancel");
+        employeeCancelButton.setBackground(BACKGROUND_PANEL_COLOR);
+
+        JButton employeeUpdateButton = new JButton("Update Record");
+        employeeUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
+
+        FlowLayout employeeControlButtonsLayout = new FlowLayout();
+        employeeControlButtonsLayout.setAlignment(FlowLayout.CENTER);
+        employeeControlButtonsLayout.setHgap(100);
+
+        JPanel employeeControlButtonsPanel = new JPanel(employeeControlButtonsLayout);
+        employeeControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
+        employeeControlButtonsPanel.setLayout(employeeControlButtonsLayout);
+
+        employeeControlButtonsPanel.add(employeeCancelButton);
+        
+        Component verticalGlue_3 = Box.createVerticalGlue();
+        employeeControlButtonsPanel.add(verticalGlue_3);
+        employeeControlButtonsPanel.add(employeeUpdateButton);
+
+        GroupLayout employeeLayout = new GroupLayout(employeesPanel);
+        employeesPanel.setLayout(employeeLayout);
+        employeeLayout.setAutoCreateGaps(true);
+        employeeLayout.setAutoCreateContainerGaps(true);
+
+        employeeLayout.setVerticalGroup(
+                employeeLayout.createSequentialGroup()
+                    .addComponent(employeeScrollPane)
+                    .addComponent(employeeControlButtonsPanel)
+        );
+
+        employeeLayout.setHorizontalGroup(
+                employeeLayout.createParallelGroup()
+                    .addComponent(employeeScrollPane)
+                    .addComponent(employeeControlButtonsPanel)
+        );        
+        
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 		tabbedPane.addTab("New Order", newOrderPanel);
 		tabbedPane.addTab("Inventory", inventoryPanel);
 		tabbedPane.addTab("Customers", customersPanel);
+		tabbedPane.addTab("Orders", ordersPanel);
+        tabbedPane.addTab("Employees", employeesPanel);
 		getContentPane().add(tabbedPane);
-		setResizable(false);
+		setResizable(true);
 		getContentPane().setBackground(BACKGROUND_PANEL_COLOR);
 		setTitle("Flower Shop");
-		setSize(800, 600);
+		setSize(1200, 700);
 		setVisible(true);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
