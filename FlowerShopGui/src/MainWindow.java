@@ -27,6 +27,7 @@ import com.toedter.calendar.JDateChooser;
 import dto.AccessoryType;
 import dto.ArrangementTheme;
 import dto.FlowerType;
+import view.EmployeesPanel;
 
 public class MainWindow extends JFrame implements ActionListener {
 
@@ -54,10 +55,6 @@ public class MainWindow extends JFrame implements ActionListener {
 
 	JButton inventoryUpdateButton = new JButton("Update inventory");
 	JButton inventoryCancelButton = new JButton("Cancel");
-
-	JButton employeeUpdateButton = new JButton("Update Record");
-	JButton employeeAddButton = new JButton("Add Record");
-	JTable employeesTable;
 
 	public MainWindow() {
 
@@ -368,57 +365,6 @@ public class MainWindow extends JFrame implements ActionListener {
 		// --------------------Pane 5 - Employees
 		// ----------------------------------------------------------------------
 
-		JPanel employeesPanel = new JPanel();
-		employeesPanel.setBackground(BACKGROUND_TAB_COLOR);
-		String[] employeesColumnNames = new String[]{"Last Name", "First Name", "Employee ID", "Password",
-				"Admin Privileges"};
-		Object[][] employeesContent = new Object[MainWindow.MAX_ROW_COUNT][5];
-		for (int i = 0; i < MAX_ROW_COUNT; i++) {
-			employeesContent[i] = new Object[]{"", "", "", "", ""};
-		}
-
-		employeesTable = new JTable(employeesContent, employeesColumnNames) {
-			private static final long serialVersionUID = 4312131604668103814L;
-
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-
-		// employeesTable = new JTable(employeesContent, employeesColumnNames);
-		JScrollPane employeeScrollPane = new JScrollPane(employeesTable);
-
-		employeeAddButton.setBackground(BACKGROUND_PANEL_COLOR);
-
-		employeeUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
-		employeeUpdateButton.addActionListener(this);
-
-		FlowLayout employeeControlButtonsLayout = new FlowLayout();
-		employeeControlButtonsLayout.setAlignment(FlowLayout.CENTER);
-		employeeControlButtonsLayout.setHgap(100);
-
-		JPanel employeeControlButtonsPanel = new JPanel(employeeControlButtonsLayout);
-		employeeControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
-		employeeControlButtonsPanel.setLayout(employeeControlButtonsLayout);
-
-		employeeControlButtonsPanel.add(employeeAddButton);
-
-		Component verticalGlue_3 = Box.createVerticalGlue();
-		employeeControlButtonsPanel.add(verticalGlue_3);
-		employeeControlButtonsPanel.add(employeeUpdateButton);
-
-		GroupLayout employeeLayout = new GroupLayout(employeesPanel);
-		employeesPanel.setLayout(employeeLayout);
-		employeeLayout.setAutoCreateGaps(true);
-		employeeLayout.setAutoCreateContainerGaps(true);
-
-		employeeLayout.setVerticalGroup(employeeLayout.createSequentialGroup()
-				.addComponent(employeeScrollPane).addComponent(employeeControlButtonsPanel));
-
-		employeeLayout.setHorizontalGroup(employeeLayout.createParallelGroup()
-				.addComponent(employeeScrollPane).addComponent(employeeControlButtonsPanel));
-
 		// ----------------------------------------------------------------------
 		// --------------------Pane 6 - Tabbed Pane
 		// ----------------------------------------------------------------------
@@ -426,7 +372,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		tabbedPane.addTab("Inventory", inventoryPanel);
 		tabbedPane.addTab("Customers", customersPanel);
 		tabbedPane.addTab("Orders", ordersPanel);
-		tabbedPane.addTab("Employees", employeesPanel);
+		tabbedPane.addTab("Employees", new EmployeesPanel());
 		getContentPane().add(tabbedPane);
 		setResizable(true);
 		getContentPane().setBackground(BACKGROUND_PANEL_COLOR);
@@ -439,15 +385,15 @@ public class MainWindow extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(employeeUpdateButton)) {
-			// Read in employee fields
+		// if (e.getSource().equals(employeeUpdateButton)) {
+		// Read in employee fields
 
-			// Validate
-			// Create Employee DTO
-			// Save new Employee in DAO
-			// Finally, update view?
+		// Validate
+		// Create Employee DTO
+		// Save new Employee in DAO
+		// Finally, update view?
 
-			System.out.println("Button works");
-		}
+		System.out.println("Button works");
 	}
+	// }
 }
