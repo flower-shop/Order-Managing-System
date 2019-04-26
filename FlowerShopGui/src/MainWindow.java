@@ -28,6 +28,8 @@ import dto.AccessoryType;
 import dto.ArrangementTheme;
 import dto.FlowerType;
 import view.EmployeesPanel;
+import view.InventoryPanel;
+import view.OrdersPanel;
 
 public class MainWindow extends JFrame implements ActionListener {
 
@@ -52,9 +54,6 @@ public class MainWindow extends JFrame implements ActionListener {
 
 	JButton placeOrder = new JButton("Place Order");
 	JButton cancelOrder = new JButton("Cancel Order");
-
-	JButton inventoryUpdateButton = new JButton("Update inventory");
-	JButton inventoryCancelButton = new JButton("Cancel");
 
 	public MainWindow() {
 
@@ -248,45 +247,6 @@ public class MainWindow extends JFrame implements ActionListener {
 		// ----------------------------------------------------------------------
 		// --------------------Pane 2 - Inventory
 		// ----------------------------------------------------------------------
-		JPanel inventoryPanel = new JPanel();
-		inventoryPanel.setBackground(BACKGROUND_TAB_COLOR);
-		String[] inventoryColumnNames = {"Flower Type", "Price", "Quantity"};
-		Object[][] inventoryContent = new Object[MainWindow.MAX_ROW_COUNT][3];
-		for (int i = 0; i < MAX_ROW_COUNT; i++) {
-			inventoryContent[i] = new Object[]{"", "", ""};
-		}
-		JTable inventoryTable = new JTable(inventoryContent, inventoryColumnNames);
-		JScrollPane inventoryScrollPane = new JScrollPane(inventoryTable);
-
-		FlowLayout inventoryControlButtonsLayout = new FlowLayout();
-		inventoryControlButtonsLayout.setAlignment(FlowLayout.CENTER);
-		inventoryControlButtonsLayout.setHgap(100);
-
-		inventoryCancelButton.setBackground(BACKGROUND_PANEL_COLOR);
-		inventoryCancelButton.addActionListener(this);
-
-		inventoryUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
-		inventoryUpdateButton.addActionListener(this);
-
-		JPanel inventoryControlButtonsPanel = new JPanel();
-		inventoryControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
-		inventoryControlButtonsPanel.setLayout(inventoryControlButtonsLayout);
-		inventoryControlButtonsPanel.add(inventoryCancelButton);
-
-		Component verticalGlue_1 = Box.createVerticalGlue();
-		inventoryControlButtonsPanel.add(verticalGlue_1);
-		inventoryControlButtonsPanel.add(inventoryUpdateButton);
-
-		GroupLayout inventoryPanelLayout = new GroupLayout(inventoryPanel);
-		inventoryPanel.setLayout(inventoryPanelLayout);
-		inventoryPanelLayout.setAutoCreateGaps(true);
-		inventoryPanelLayout.setAutoCreateContainerGaps(true);
-
-		inventoryPanelLayout.setHorizontalGroup(inventoryPanelLayout.createParallelGroup()
-				.addComponent(inventoryScrollPane).addComponent(inventoryControlButtonsPanel));
-
-		inventoryPanelLayout.setVerticalGroup(inventoryPanelLayout.createSequentialGroup()
-				.addComponent(inventoryScrollPane).addComponent(inventoryControlButtonsPanel));
 
 		// ----------------------------------------------------------------------
 		// --------------------Pane 3 - Customers
@@ -320,46 +280,6 @@ public class MainWindow extends JFrame implements ActionListener {
 		// ----------------------------------------------------------------------
 		// --------------------Pane 4 - Orders
 		// ----------------------------------------------------------------------
-		JPanel ordersPanel = new JPanel();
-		ordersPanel.setBackground(BACKGROUND_TAB_COLOR);
-		String[] ordersColumnNames = new String[]{"Order Date", "First Name", "Last Name", "Flower",
-				"Quantity", "Accessory", "Arrangement", "Address", "Delivery Date", "Total Cost", "Card",
-				"Text", "Paid", "Delivered"};
-		Object[][] ordersContent = new Object[MainWindow.MAX_ROW_COUNT][14];
-		for (int i = 0; i < MAX_ROW_COUNT; i++) {
-			ordersContent[i] = new Object[]{"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
-		}
-		JTable ordersTable = new JTable(ordersContent, ordersColumnNames);
-		JScrollPane ordersScrollPane = new JScrollPane(ordersTable);
-
-		JButton ordersCancelButton = new JButton("Cancel");
-		ordersCancelButton.setBackground(BACKGROUND_PANEL_COLOR);
-
-		JButton ordersUpdateButton = new JButton("Update Records");
-		ordersUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
-
-		FlowLayout ordersControlButtonsLayout = new FlowLayout();
-		ordersControlButtonsLayout.setAlignment(FlowLayout.CENTER);
-		ordersControlButtonsLayout.setHgap(100);
-
-		JPanel ordersControlButtonsPanel = new JPanel(ordersControlButtonsLayout);
-		ordersControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
-		ordersControlButtonsPanel.add(ordersCancelButton);
-
-		Component verticalGlue_2 = Box.createVerticalGlue();
-		ordersControlButtonsPanel.add(verticalGlue_2);
-		ordersControlButtonsPanel.add(ordersUpdateButton);
-
-		GroupLayout ordersLayout = new GroupLayout(ordersPanel);
-		ordersPanel.setLayout(ordersLayout);
-		ordersLayout.setAutoCreateGaps(true);
-		ordersLayout.setAutoCreateContainerGaps(true);
-
-		ordersLayout.setHorizontalGroup(ordersLayout.createParallelGroup().addComponent(ordersScrollPane)
-				.addComponent(ordersControlButtonsPanel));
-
-		ordersLayout.setVerticalGroup(ordersLayout.createSequentialGroup().addComponent(ordersScrollPane)
-				.addComponent(ordersControlButtonsPanel));
 
 		// ----------------------------------------------------------------------
 		// --------------------Pane 5 - Employees
@@ -369,9 +289,9 @@ public class MainWindow extends JFrame implements ActionListener {
 		// --------------------Pane 6 - Tabbed Pane
 		// ----------------------------------------------------------------------
 		tabbedPane.addTab("New Order", newOrderPanel);
-		tabbedPane.addTab("Inventory", inventoryPanel);
+		tabbedPane.addTab("Inventory", new InventoryPanel());
 		tabbedPane.addTab("Customers", customersPanel);
-		tabbedPane.addTab("Orders", ordersPanel);
+		tabbedPane.addTab("Orders", new OrdersPanel());
 		tabbedPane.addTab("Employees", new EmployeesPanel());
 		getContentPane().add(tabbedPane);
 		setResizable(true);
