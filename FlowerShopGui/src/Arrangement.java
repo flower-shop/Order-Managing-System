@@ -1,12 +1,18 @@
 import java.util.ArrayList;
 
+import dto.AccessoryDTO;
+import dto.AccessoryType;
+import dto.ArrangementTheme;
+import dto.FlowerDTO;
+import dto.FlowerType;
+
 public class Arrangement {
 	private double cost;
 	private ArrangementTheme theme;
 	private FlowerType flowerType;
 	private int flowerQuantity;
-	private ArrayList<Flower> flowersInArrangement = new ArrayList<>();
-	private Accessory accessory;
+	private ArrayList<FlowerDTO> flowersInArrangement = new ArrayList<>();
+	private AccessoryDTO accessory;
 	private boolean hasCard = false;
 	private String cardText;
 
@@ -15,11 +21,11 @@ public class Arrangement {
 		this.flowerType = flowerType;
 		this.theme = theme;
 		this.hasCard = hasCard;
-		this.accessory = new Accessory(accessoryType);
+		this.accessory = new AccessoryDTO(accessoryType);
 
 		int count = 0;
 
-		for (Flower flower : ShopData.getFlowerInventory())
+		for (FlowerDTO flower : ShopData.getFlowerInventory())
 			if (flower.getType().equals(flowerType)) {
 				flowersInArrangement.add(flower);
 				count++;
@@ -33,7 +39,7 @@ public class Arrangement {
 	}
 
 	public void calculateCost() {
-		for (Flower flower : flowersInArrangement) {
+		for (FlowerDTO flower : flowersInArrangement) {
 			cost += flower.getCost();
 		}
 		cost += accessory.getCost();
@@ -47,11 +53,11 @@ public class Arrangement {
 		return theme;
 	}
 
-	public ArrayList<Flower> getFlowersInArrangement() {
+	public ArrayList<FlowerDTO> getFlowersInArrangement() {
 		return flowersInArrangement;
 	}
 
-	public Accessory getAccessory() {
+	public AccessoryDTO getAccessory() {
 		return accessory;
 	}
 
@@ -71,11 +77,11 @@ public class Arrangement {
 		this.theme = theme;
 	}
 
-	public void setFlowersInArrangement(ArrayList<Flower> flowersInArrangement) {
+	public void setFlowersInArrangement(ArrayList<FlowerDTO> flowersInArrangement) {
 		this.flowersInArrangement = flowersInArrangement;
 	}
 
-	public void setAccessory(Accessory accessory) {
+	public void setAccessory(AccessoryDTO accessory) {
 		this.accessory = accessory;
 	}
 

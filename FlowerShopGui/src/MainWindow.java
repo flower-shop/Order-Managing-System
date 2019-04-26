@@ -1,6 +1,9 @@
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -21,7 +24,11 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-public class MainWindow extends JFrame {
+import dto.AccessoryType;
+import dto.ArrangementTheme;
+import dto.FlowerType;
+
+public class MainWindow extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 3434469359320329958L;
 	private static Color BACKGROUND_PANEL_COLOR = new Color(Integer.parseInt("ffcbbc", 16));
@@ -39,6 +46,18 @@ public class MainWindow extends JFrame {
 	private JComboBox<FlowerType> flowerTypeComboBox = new JComboBox<>(FlowerType.values());
 	private JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
 	private JComboBox<ArrangementTheme> arrangementThemeComboBox = new JComboBox<>(ArrangementTheme.values());
+
+	JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
+
+	JButton placeOrder = new JButton("Place Order");
+	JButton cancelOrder = new JButton("Cancel Order");
+
+	JButton inventoryUpdateButton = new JButton("Update inventory");
+	JButton inventoryCancelButton = new JButton("Cancel");
+
+	JButton employeeUpdateButton = new JButton("Update Record");
+	JButton employeeAddButton = new JButton("Add Record");
+	JTable employeesTable;
 
 	public MainWindow() {
 
@@ -197,17 +216,18 @@ public class MainWindow extends JFrame {
 		controlButtonsLayout.setAlignment(FlowLayout.CENTER);
 		controlButtonsLayout.setHgap(100);
 
-		JButton placeOrder = new JButton("Place Order");
 		placeOrder.setAlignmentX(Component.CENTER_ALIGNMENT);
 		placeOrder.setBackground(BACKGROUND_PANEL_COLOR);
+		placeOrder.addActionListener(this);
 
 		JPanel controlButtonsPanel = new JPanel();
 		controlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
 		controlButtonsPanel.setLayout(controlButtonsLayout);
 
-		JButton cancelOrder = new JButton("Cancel Order");
 		cancelOrder.setAlignmentX(0.5f);
 		cancelOrder.setBackground(BACKGROUND_PANEL_COLOR);
+		cancelOrder.addActionListener(this);
+
 		controlButtonsPanel.add(cancelOrder);
 		Component verticalGlue = Box.createVerticalGlue();
 		controlButtonsPanel.add(verticalGlue);
@@ -245,11 +265,11 @@ public class MainWindow extends JFrame {
 		inventoryControlButtonsLayout.setAlignment(FlowLayout.CENTER);
 		inventoryControlButtonsLayout.setHgap(100);
 
-		JButton inventoryCancelButton = new JButton("Cancel");
 		inventoryCancelButton.setBackground(BACKGROUND_PANEL_COLOR);
+		inventoryCancelButton.addActionListener(this);
 
-		JButton inventoryUpdateButton = new JButton("Update inventory");
 		inventoryUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
+		inventoryUpdateButton.addActionListener(this);
 
 		JPanel inventoryControlButtonsPanel = new JPanel();
 		inventoryControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
@@ -270,149 +290,143 @@ public class MainWindow extends JFrame {
 
 		inventoryPanelLayout.setVerticalGroup(inventoryPanelLayout.createSequentialGroup()
 				.addComponent(inventoryScrollPane).addComponent(inventoryControlButtonsPanel));
-		
+
 		// ----------------------------------------------------------------------
 		// --------------------Pane 3 - Customers
 		// ----------------------------------------------------------------------
-		
+
 		JPanel customersPanel = new JPanel();
 		customersPanel.setBackground(BACKGROUND_TAB_COLOR);
-        String[] customersColumnNames = new String[] {
-                "First Name", "Last Name", "Phone Number", "Email"
-        };
-        Object[][] customersContent = new Object[MainWindow.MAX_ROW_COUNT][4];
-        for (int i = 0; i < MAX_ROW_COUNT; i++) {
-            customersContent[i] = new Object[] {"", "", "", "", ""};
-        }
-        JTable customersTable = new JTable(customersContent, customersColumnNames);
-        JScrollPane customersScrollPane = new JScrollPane(customersTable);
-        customersPanel.add(customersScrollPane);
-        GroupLayout customersLayout = new GroupLayout(customersPanel);
-        customersLayout.setHorizontalGroup(
-        	customersLayout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(customersLayout.createSequentialGroup()
-        			.addComponent(customersScrollPane, GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-        			.addContainerGap())
-        );
-        customersLayout.setVerticalGroup(
-        	customersLayout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(customersLayout.createSequentialGroup()
-        			.addComponent(customersScrollPane, GroupLayout.PREFERRED_SIZE, 490, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(45, Short.MAX_VALUE))
-        );
-        customersLayout.setAutoCreateGaps(true);
-        customersLayout.setAutoCreateContainerGaps(true);
-        customersPanel.setLayout(customersLayout);
+		String[] customersColumnNames = new String[]{"First Name", "Last Name", "Phone Number", "Email"};
+		Object[][] customersContent = new Object[MainWindow.MAX_ROW_COUNT][4];
+		for (int i = 0; i < MAX_ROW_COUNT; i++) {
+			customersContent[i] = new Object[]{"", "", "", "", ""};
+		}
+		JTable customersTable = new JTable(customersContent, customersColumnNames);
+		JScrollPane customersScrollPane = new JScrollPane(customersTable);
+		customersPanel.add(customersScrollPane);
+		GroupLayout customersLayout = new GroupLayout(customersPanel);
+		customersLayout.setHorizontalGroup(customersLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(customersLayout.createSequentialGroup()
+						.addComponent(customersScrollPane, GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+						.addContainerGap()));
+		customersLayout
+				.setVerticalGroup(customersLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(customersLayout
+								.createSequentialGroup().addComponent(customersScrollPane,
+										GroupLayout.PREFERRED_SIZE, 490, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(45, Short.MAX_VALUE)));
+		customersLayout.setAutoCreateGaps(true);
+		customersLayout.setAutoCreateContainerGaps(true);
+		customersPanel.setLayout(customersLayout);
 
 		// ----------------------------------------------------------------------
 		// --------------------Pane 4 - Orders
 		// ----------------------------------------------------------------------
-        JPanel ordersPanel = new JPanel();
-        ordersPanel.setBackground(BACKGROUND_TAB_COLOR);
-        String[] ordersColumnNames = new String[] {
-                "Order Date", "First Name", "Last Name", "Flower", "Quantity", "Accessory", "Arrangement", "Address", "Delivery Date",  "Total Cost", "Card", "Text", "Paid", "Delivered"
-        };
-        Object[][] ordersContent = new Object[MainWindow.MAX_ROW_COUNT][14];
-        for (int i = 0; i < MAX_ROW_COUNT; i++) {
-            ordersContent[i] = new Object[] {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
-        }
-        JTable ordersTable = new JTable(ordersContent, ordersColumnNames);
-        JScrollPane ordersScrollPane = new JScrollPane(ordersTable);
+		JPanel ordersPanel = new JPanel();
+		ordersPanel.setBackground(BACKGROUND_TAB_COLOR);
+		String[] ordersColumnNames = new String[]{"Order Date", "First Name", "Last Name", "Flower",
+				"Quantity", "Accessory", "Arrangement", "Address", "Delivery Date", "Total Cost", "Card",
+				"Text", "Paid", "Delivered"};
+		Object[][] ordersContent = new Object[MainWindow.MAX_ROW_COUNT][14];
+		for (int i = 0; i < MAX_ROW_COUNT; i++) {
+			ordersContent[i] = new Object[]{"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
+		}
+		JTable ordersTable = new JTable(ordersContent, ordersColumnNames);
+		JScrollPane ordersScrollPane = new JScrollPane(ordersTable);
 
-        JButton ordersCancelButton = new JButton("Cancel");
-        ordersCancelButton.setBackground(BACKGROUND_PANEL_COLOR);
+		JButton ordersCancelButton = new JButton("Cancel");
+		ordersCancelButton.setBackground(BACKGROUND_PANEL_COLOR);
 
-        JButton ordersUpdateButton = new JButton("Update Records");
-        ordersUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
+		JButton ordersUpdateButton = new JButton("Update Records");
+		ordersUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
 
-        FlowLayout ordersControlButtonsLayout = new FlowLayout();
-        ordersControlButtonsLayout.setAlignment(FlowLayout.CENTER);
-        ordersControlButtonsLayout.setHgap(100);
+		FlowLayout ordersControlButtonsLayout = new FlowLayout();
+		ordersControlButtonsLayout.setAlignment(FlowLayout.CENTER);
+		ordersControlButtonsLayout.setHgap(100);
 
-        JPanel ordersControlButtonsPanel = new JPanel(ordersControlButtonsLayout);
-        ordersControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
-        ordersControlButtonsPanel.add(ordersCancelButton);
-        
-        Component verticalGlue_2 = Box.createVerticalGlue();
-        ordersControlButtonsPanel.add(verticalGlue_2);
-        ordersControlButtonsPanel.add(ordersUpdateButton);
+		JPanel ordersControlButtonsPanel = new JPanel(ordersControlButtonsLayout);
+		ordersControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
+		ordersControlButtonsPanel.add(ordersCancelButton);
 
-        GroupLayout ordersLayout = new GroupLayout(ordersPanel);
-        ordersPanel.setLayout(ordersLayout);
-        ordersLayout.setAutoCreateGaps(true);
-        ordersLayout.setAutoCreateContainerGaps(true);
+		Component verticalGlue_2 = Box.createVerticalGlue();
+		ordersControlButtonsPanel.add(verticalGlue_2);
+		ordersControlButtonsPanel.add(ordersUpdateButton);
 
-        ordersLayout.setHorizontalGroup(
-                ordersLayout.createParallelGroup()
-                    .addComponent(ordersScrollPane)
-                    .addComponent(ordersControlButtonsPanel)
-        );
+		GroupLayout ordersLayout = new GroupLayout(ordersPanel);
+		ordersPanel.setLayout(ordersLayout);
+		ordersLayout.setAutoCreateGaps(true);
+		ordersLayout.setAutoCreateContainerGaps(true);
 
-        ordersLayout.setVerticalGroup(
-                ordersLayout.createSequentialGroup()
-                    .addComponent(ordersScrollPane)
-                    .addComponent(ordersControlButtonsPanel)
-        );        
-        
+		ordersLayout.setHorizontalGroup(ordersLayout.createParallelGroup().addComponent(ordersScrollPane)
+				.addComponent(ordersControlButtonsPanel));
+
+		ordersLayout.setVerticalGroup(ordersLayout.createSequentialGroup().addComponent(ordersScrollPane)
+				.addComponent(ordersControlButtonsPanel));
+
 		// ----------------------------------------------------------------------
 		// --------------------Pane 5 - Employees
-		// ----------------------------------------------------------------------   
-        
-        JPanel employeesPanel = new JPanel();
-        employeesPanel.setBackground(BACKGROUND_TAB_COLOR);
-        String[] employeesColumnNames = new String[] {
-                "Last Name", "First Name", "Employee ID", "Password", "Admin Privileges"
-        };
-        Object[][] employeesContent = new Object[MainWindow.MAX_ROW_COUNT][5];
-        for (int i = 0; i < MAX_ROW_COUNT; i++) {
-            employeesContent[i] = new Object[] {"", "", "", "", ""};
-        }
-        JTable employeesTable = new JTable(employeesContent, employeesColumnNames);
-        JScrollPane employeeScrollPane = new JScrollPane(employeesTable);
+		// ----------------------------------------------------------------------
 
-        JButton employeeCancelButton = new JButton("Cancel");
-        employeeCancelButton.setBackground(BACKGROUND_PANEL_COLOR);
+		JPanel employeesPanel = new JPanel();
+		employeesPanel.setBackground(BACKGROUND_TAB_COLOR);
+		String[] employeesColumnNames = new String[]{"Last Name", "First Name", "Employee ID", "Password",
+				"Admin Privileges"};
+		Object[][] employeesContent = new Object[MainWindow.MAX_ROW_COUNT][5];
+		for (int i = 0; i < MAX_ROW_COUNT; i++) {
+			employeesContent[i] = new Object[]{"", "", "", "", ""};
+		}
 
-        JButton employeeUpdateButton = new JButton("Update Record");
-        employeeUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
+		employeesTable = new JTable(employeesContent, employeesColumnNames) {
+			private static final long serialVersionUID = 4312131604668103814L;
 
-        FlowLayout employeeControlButtonsLayout = new FlowLayout();
-        employeeControlButtonsLayout.setAlignment(FlowLayout.CENTER);
-        employeeControlButtonsLayout.setHgap(100);
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 
-        JPanel employeeControlButtonsPanel = new JPanel(employeeControlButtonsLayout);
-        employeeControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
-        employeeControlButtonsPanel.setLayout(employeeControlButtonsLayout);
+		// employeesTable = new JTable(employeesContent, employeesColumnNames);
+		JScrollPane employeeScrollPane = new JScrollPane(employeesTable);
 
-        employeeControlButtonsPanel.add(employeeCancelButton);
-        
-        Component verticalGlue_3 = Box.createVerticalGlue();
-        employeeControlButtonsPanel.add(verticalGlue_3);
-        employeeControlButtonsPanel.add(employeeUpdateButton);
+		employeeAddButton.setBackground(BACKGROUND_PANEL_COLOR);
 
-        GroupLayout employeeLayout = new GroupLayout(employeesPanel);
-        employeesPanel.setLayout(employeeLayout);
-        employeeLayout.setAutoCreateGaps(true);
-        employeeLayout.setAutoCreateContainerGaps(true);
+		employeeUpdateButton.setBackground(BACKGROUND_PANEL_COLOR);
+		employeeUpdateButton.addActionListener(this);
 
-        employeeLayout.setVerticalGroup(
-                employeeLayout.createSequentialGroup()
-                    .addComponent(employeeScrollPane)
-                    .addComponent(employeeControlButtonsPanel)
-        );
+		FlowLayout employeeControlButtonsLayout = new FlowLayout();
+		employeeControlButtonsLayout.setAlignment(FlowLayout.CENTER);
+		employeeControlButtonsLayout.setHgap(100);
 
-        employeeLayout.setHorizontalGroup(
-                employeeLayout.createParallelGroup()
-                    .addComponent(employeeScrollPane)
-                    .addComponent(employeeControlButtonsPanel)
-        );        
-        
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
+		JPanel employeeControlButtonsPanel = new JPanel(employeeControlButtonsLayout);
+		employeeControlButtonsPanel.setBackground(BACKGROUND_TAB_COLOR);
+		employeeControlButtonsPanel.setLayout(employeeControlButtonsLayout);
+
+		employeeControlButtonsPanel.add(employeeAddButton);
+
+		Component verticalGlue_3 = Box.createVerticalGlue();
+		employeeControlButtonsPanel.add(verticalGlue_3);
+		employeeControlButtonsPanel.add(employeeUpdateButton);
+
+		GroupLayout employeeLayout = new GroupLayout(employeesPanel);
+		employeesPanel.setLayout(employeeLayout);
+		employeeLayout.setAutoCreateGaps(true);
+		employeeLayout.setAutoCreateContainerGaps(true);
+
+		employeeLayout.setVerticalGroup(employeeLayout.createSequentialGroup()
+				.addComponent(employeeScrollPane).addComponent(employeeControlButtonsPanel));
+
+		employeeLayout.setHorizontalGroup(employeeLayout.createParallelGroup()
+				.addComponent(employeeScrollPane).addComponent(employeeControlButtonsPanel));
+
+		// ----------------------------------------------------------------------
+		// --------------------Pane 6 - Tabbed Pane
+		// ----------------------------------------------------------------------
 		tabbedPane.addTab("New Order", newOrderPanel);
 		tabbedPane.addTab("Inventory", inventoryPanel);
 		tabbedPane.addTab("Customers", customersPanel);
 		tabbedPane.addTab("Orders", ordersPanel);
-        tabbedPane.addTab("Employees", employeesPanel);
+		tabbedPane.addTab("Employees", employeesPanel);
 		getContentPane().add(tabbedPane);
 		setResizable(true);
 		getContentPane().setBackground(BACKGROUND_PANEL_COLOR);
@@ -421,5 +435,19 @@ public class MainWindow extends JFrame {
 		setVisible(true);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(employeeUpdateButton)) {
+			// Read in employee fields
+
+			// Validate
+			// Create Employee DTO
+			// Save new Employee in DAO
+			// Finally, update view?
+
+			System.out.println("Button works");
+		}
 	}
 }
