@@ -1,3 +1,4 @@
+package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,18 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import view.CustomersPanel;
-import view.EmployeesPanel;
-import view.InventoryPanel;
-import view.NewOrderPanel;
-import view.OrdersPanel;
-import view.ViewConstants;
-
 public class MainWindow extends JFrame implements ActionListener {
-
 	private static final long serialVersionUID = 3434469359320329958L;
 
-	JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
+	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 
 	public MainWindow() {
 		tabbedPane.addTab("New Order", new NewOrderPanel());
@@ -24,6 +17,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		tabbedPane.addTab("Customers", new CustomersPanel());
 		tabbedPane.addTab("Orders", new OrdersPanel());
 		tabbedPane.addTab("Employees", new EmployeesPanel());
+
 		getContentPane().add(tabbedPane);
 		setResizable(true);
 		getContentPane().setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
