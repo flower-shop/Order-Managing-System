@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import dao.EmployeeDAO;
 import dto.EmployeeDTO;
@@ -29,18 +31,13 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 
 		employeeDAO.update(new EmployeeDTO("Smith", "James", "123", "food", true));
-		List<EmployeeDTO> employees = employeeDAO.findAll();
 
 		String[] employeesColumnNames = new String[]{"Last Name", "First Name", "Employee ID", "Password",
 				"Admin Privileges"};
-		Object[][] employeesContent = new Object[employees.size()][5];
-		for (int i = 0; i < employees.size(); i++) {
-			EmployeeDTO employee = employees.get(i);
-			employeesContent[i] = new Object[]{employee.getLastName(), employee.getFirstName(),
-					employee.getEmployeeId(), employee.getPassword(), employee.isAdmin()};
-		}
 
-		employeesTable = new JTable(employeesContent, employeesColumnNames) {
+		TableModel tableModel = new DefaultTableModel(employeesColumnNames, 0);
+
+		employeesTable = new JTable(tableModel) {
 			private static final long serialVersionUID = 4312131604668103814L;
 
 			@Override
@@ -49,7 +46,8 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 			}
 		};
 
-		// employeesTable = new JTable(employeesContent, employeesColumnNames);
+		populateTable();
+
 		JScrollPane employeeScrollPane = new JScrollPane(employeesTable);
 
 		employeeAddButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
@@ -83,9 +81,27 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 		employeeLayout.setHorizontalGroup(employeeLayout.createParallelGroup()
 				.addComponent(employeeScrollPane).addComponent(employeeControlButtonsPanel));
 	}
+
+	public void populateTable() {
+		List<EmployeeDTO> employees = employeeDAO.findAll();
+
+		DefaultTableModel tableModel = (DefaultTableModel) this.employeesTable.getModel();
+		tableModel.setRowCount(0);
+
+		for (int i = 0; i < employees.size(); i++) {
+			EmployeeDTO employee = employees.get(i);
+			Object[] employeeContent = new Object[]{employee.getLastName(), employee.getFirstName(),
+					employee.getEmployeeId(), employee.getPassword(), employee.isAdmin()};
+
+			tableModel.addRow(employeeContent);
+		}
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(employeeAddButton)) {
+
+		} else {
 
 		}
 	}

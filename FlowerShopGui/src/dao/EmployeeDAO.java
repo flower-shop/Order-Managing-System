@@ -115,7 +115,6 @@ public class EmployeeDAO {
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
-
 		}
 	}
 }
