@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.GroupLayout;
@@ -12,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import dao.EmployeeDAO;
+import dto.EmployeeDTO;
+
 public class EmployeesPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 5803744138819090040L;
 
@@ -19,13 +23,20 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	private JButton employeeAddButton = new JButton("Add Record");
 	private JTable employeesTable;
 
+	private EmployeeDAO employeeDAO = new EmployeeDAO();
+
 	public EmployeesPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
+
+		List<EmployeeDTO> employees = employeeDAO.findAll();
+
 		String[] employeesColumnNames = new String[]{"Last Name", "First Name", "Employee ID", "Password",
 				"Admin Privileges"};
-		Object[][] employeesContent = new Object[ViewConstants.MAX_ROW_COUNT][5];
-		for (int i = 0; i < ViewConstants.MAX_ROW_COUNT; i++) {
-			employeesContent[i] = new Object[]{"", "", "", "", ""};
+		Object[][] employeesContent = new Object[employees.size()][5];
+		for (int i = 0; i < employees.size(); i++) {
+			EmployeeDTO employee = employees.get(i);
+			employeesContent[i] = new Object[]{employee.getLastName(), employee.getFirstName(),
+					employee.getEmployeeId(), employee.getPassword(), employee.isAdmin()};
 		}
 
 		employeesTable = new JTable(employeesContent, employeesColumnNames) {
@@ -41,6 +52,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 		JScrollPane employeeScrollPane = new JScrollPane(employeesTable);
 
 		employeeAddButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
+		employeeAddButton.addActionListener(this);
 
 		employeeUpdateButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
 		employeeUpdateButton.addActionListener(this);
@@ -72,6 +84,9 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(employeeAddButton)) {
+
+		}
 
 	}
 }
