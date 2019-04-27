@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 import dto.AccessoryDTO;
-import dto.AccessoryType;
-import dto.ArrangementTheme;
 import dto.FlowerDTO;
-import dto.FlowerType;
+import enums.AccessoryType;
+import enums.ArrangementTheme;
+import enums.FlowerType;
 
 public class Arrangement {
 	private double cost;

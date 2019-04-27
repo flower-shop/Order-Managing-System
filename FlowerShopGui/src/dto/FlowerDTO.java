@@ -1,5 +1,7 @@
 package dto;
 
+import enums.FlowerType;
+
 public class FlowerDTO {
 	private double cost;
 	private FlowerType type;

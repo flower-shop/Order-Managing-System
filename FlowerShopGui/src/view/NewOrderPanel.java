@@ -20,9 +20,9 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import dto.AccessoryType;
-import dto.ArrangementTheme;
-import dto.FlowerType;
+import enums.AccessoryType;
+import enums.ArrangementTheme;
+import enums.FlowerType;
 
 public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;

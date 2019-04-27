@@ -1,5 +1,7 @@
 package dto;
 
+import enums.AccessoryType;
+
 public class AccessoryDTO {
 	private double cost;
 	private AccessoryType type;
