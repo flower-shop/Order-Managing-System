@@ -79,7 +79,7 @@ public class EmployeeDAO {
 		return employees;
 	}
 
-	public void save(EmployeeDTO pendingEmployee) {
+	public void insertEmployee(EmployeeDTO pendingEmployee) {
 		String sql = "INSERT INTO Employee (lastName, firstName, employeeId, password, isAdmin) VALUES('"
 				+ pendingEmployee.getLastName() + "', '" + pendingEmployee.getFirstName() + "', '"
 				+ pendingEmployee.getEmployeeId() + "', '" + pendingEmployee.getPassword() + "', '"
@@ -99,7 +99,7 @@ public class EmployeeDAO {
 		}
 	}
 
-	public void update(EmployeeDTO employee) {
+	public void updateEmployee(EmployeeDTO employee) {
 		String sql = "UPDATE Employee SET lastName='" + employee.getLastName() + "', firstName='"
 				+ employee.getFirstName() + "', employeeId='" + employee.getEmployeeId() + "', password='"
 				+ employee.getPassword() + "', isAdmin='" + employee.isAdmin() + "' WHERE employeeId='"
