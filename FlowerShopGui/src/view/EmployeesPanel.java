@@ -83,7 +83,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	}
 
 	public void populateTable() {
-		List<EmployeeDTO> employees = employeeDAO.findAll();
+		List<EmployeeDTO> employees = employeeDAO.selectAll();
 
 		DefaultTableModel tableModel = (DefaultTableModel) this.employeesTable.getModel();
 		tableModel.setRowCount(0);

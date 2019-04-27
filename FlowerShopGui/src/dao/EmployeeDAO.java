@@ -24,7 +24,7 @@ public class EmployeeDAO {
 		}
 	}
 
-	public EmployeeDTO find(String employeeId) {
+	public EmployeeDTO select(String employeeId) {
 		String query = "SELECT * FROM Employee WHERE employeeId=" + employeeId;
 
 		try {
@@ -51,7 +51,7 @@ public class EmployeeDAO {
 		}
 	}
 
-	public List<EmployeeDTO> findAll() {
+	public List<EmployeeDTO> selectAll() {
 		List<EmployeeDTO> employees = new ArrayList<>();
 
 		String query = "SELECT * FROM Employee";
