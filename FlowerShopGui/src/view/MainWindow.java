@@ -1,12 +1,9 @@
 package view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-public class MainWindow extends JFrame implements ActionListener {
+public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 3434469359320329958L;
 
 	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
@@ -26,17 +23,5 @@ public class MainWindow extends JFrame implements ActionListener {
 		setVisible(true);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// if (e.getSource().equals(employeeUpdateButton)) {
-		// Read in employee fields
-
-		// Validate
-		// Create Employee DTO
-		// Save new Employee in DAO
-		// Finally, update view?
-
 	}
 }
