@@ -28,7 +28,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	public EmployeesPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 
-		employeeDAO.save(new EmployeeDTO("DeBenedictis", "Gauge", "123", "food", true));
+		employeeDAO.update(new EmployeeDTO("Smith", "James", "123", "food", true));
 		List<EmployeeDTO> employees = employeeDAO.findAll();
 
 		String[] employeesColumnNames = new String[]{"Last Name", "First Name", "Employee ID", "Password",
@@ -88,6 +88,5 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 		if (e.getSource().equals(employeeAddButton)) {
 
 		}
-
 	}
 }

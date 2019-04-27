@@ -98,4 +98,24 @@ public class EmployeeDAO {
 
 		}
 	}
+
+	public void update(EmployeeDTO employee) {
+		String sql = "UPDATE Employee SET lastName='" + employee.getLastName() + "', firstName='"
+				+ employee.getFirstName() + "', employeeId='" + employee.getEmployeeId() + "', password='"
+				+ employee.getPassword() + "', isAdmin='" + employee.isAdmin() + "' WHERE employeeId='"
+				+ employee.getEmployeeId() + "'";
+
+		System.out.println(sql);
+
+		try {
+			int rowCount = stmt.executeUpdate(sql);
+
+			if (rowCount == 0) {
+				System.out.println("Employee update failed");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
 }
