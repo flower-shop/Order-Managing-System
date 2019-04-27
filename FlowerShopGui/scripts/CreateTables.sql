@@ -3,8 +3,7 @@ lastName VARCHAR (20) NOT NULL,
 firstName VARCHAR(20) NOT NULL,
 employeeId VARCHAR (15) NOT NULL,
 password VARCHAR (15) NOT NULL,
-isAdmin VARCHAR(3) NOT NULL,
-CONSTRAINT admin CHECK(isAdmin IN('yes', 'no')),
+isAdmin BOOLEAN NOT NULL,
 PRIMARY KEY (employeeId));
 
 CREATE TABLE Customer (

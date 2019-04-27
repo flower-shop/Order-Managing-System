@@ -35,11 +35,11 @@ public class EmployeeDAO {
 			}
 
 			if (resultSet.next()) {
-				String firstName = resultSet.getString(0);
-				String lastName = resultSet.getString(1);
-				String empId = resultSet.getString(2);
-				String password = resultSet.getString(3);
-				boolean isAdmin = resultSet.getBoolean(4);
+				String firstName = resultSet.getString(1);
+				String lastName = resultSet.getString(2);
+				String empId = resultSet.getString(3);
+				String password = resultSet.getString(4);
+				boolean isAdmin = resultSet.getBoolean(5);
 
 				return new EmployeeDTO(firstName, lastName, empId, password, isAdmin);
 			} else {
@@ -79,7 +79,23 @@ public class EmployeeDAO {
 		return employees;
 	}
 
-	// public EmployeeDTO save(EmployeeDTO pendingEmployee) {
-	//
-	// }
+	public void save(EmployeeDTO pendingEmployee) {
+		String sql = "INSERT INTO Employee (lastName, firstName, employeeId, password, isAdmin) VALUES('"
+				+ pendingEmployee.getLastName() + "', '" + pendingEmployee.getFirstName() + "', '"
+				+ pendingEmployee.getEmployeeId() + "', '" + pendingEmployee.getPassword() + "', '"
+				+ pendingEmployee.isAdmin() + "')";
+
+		System.out.println(sql);
+
+		try {
+			int rowCount = stmt.executeUpdate(sql);
+
+			if (rowCount == 0) {
+				System.out.println("Employee insert failed");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
 }
