@@ -1,40 +1,24 @@
 package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class ConnectionFactory {
+	private static final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
+	private static final String DB_URL = "jdbc:derby:FlowershopData;create=true";
 
-	Connection con = null;
-	Statement stmt = null;
-	ResultSet rs = null;
-	boolean flag = false;
+	private static Connection conn = null;
 
-	static final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
-	static final String DB_URL = "jdbc:derby:FlowershopData;create=true";
-
-	public ConnectionFactory() {
+	public static Connection getConnection() {
 		try {
 			Class.forName(JDBC_DRIVER);
-			con = DriverManager.getConnection(DB_URL);
+			conn = DriverManager.getConnection(DB_URL);
 
-			if (con != null)
+			if (conn != null)
 				System.out.println("Connected");
 
-			stmt = con.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	public Connection getConnection() {
-		try {
-			Class.forName(JDBC_DRIVER);
-			con = DriverManager.getConnection(DB_URL);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return con;
+		return conn;
 	}
 }

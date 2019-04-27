@@ -17,7 +17,7 @@ public class EmployeeDAO {
 
 	public EmployeeDAO() {
 		try {
-			con = new ConnectionFactory().getConnection();
+			con = ConnectionFactory.getConnection();
 			stmt = con.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
