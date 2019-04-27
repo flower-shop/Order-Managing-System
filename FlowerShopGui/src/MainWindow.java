@@ -1,5 +1,4 @@
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,13 +10,11 @@ import view.EmployeesPanel;
 import view.InventoryPanel;
 import view.NewOrderPanel;
 import view.OrdersPanel;
+import view.ViewConstants;
 
 public class MainWindow extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 3434469359320329958L;
-	private static Color BACKGROUND_PANEL_COLOR = new Color(Integer.parseInt("ffcbbc", 16));
-	private static Color BACKGROUND_TAB_COLOR = new Color(Integer.parseInt("bee8d9", 16));
-	private static Integer MAX_ROW_COUNT = 256;
 
 	JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 
@@ -29,7 +26,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		tabbedPane.addTab("Employees", new EmployeesPanel());
 		getContentPane().add(tabbedPane);
 		setResizable(true);
-		getContentPane().setBackground(BACKGROUND_PANEL_COLOR);
+		getContentPane().setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
 		setTitle("Flower Shop");
 		setSize(1200, 700);
 		setVisible(true);

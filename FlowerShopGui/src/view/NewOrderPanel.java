@@ -43,7 +43,6 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	JButton cancelOrder = new JButton("Cancel Order");
 
 	public NewOrderPanel() {
-
 		JPanel customerInfoPanel = new JPanel();
 		customerInfoPanel.setBorder(BorderFactory.createTitledBorder("Customer info"));
 		customerInfoPanel.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
@@ -212,20 +211,19 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		controlButtonsPanel.add(verticalGlue);
 		controlButtonsPanel.add(placeOrder);
 
-		JPanel newOrderPanel = new JPanel();
-		newOrderPanel.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
-		BoxLayout newOrderLayout = new BoxLayout(newOrderPanel, BoxLayout.Y_AXIS);
-		newOrderPanel.add(Box.createVerticalGlue());
-		newOrderPanel.add(customerInfoPanel);
-		newOrderPanel.add(Box.createVerticalGlue());
-		newOrderPanel.add(deliveryInfoPanel);
-		newOrderPanel.add(Box.createVerticalGlue());
-		newOrderPanel.add(orderInfoPanel);
-		newOrderPanel.add(Box.createVerticalGlue());
-		newOrderPanel.add(orderTotalPanel);
-		newOrderPanel.add(controlButtonsPanel);
-		newOrderPanel.add(Box.createVerticalGlue());
-		newOrderPanel.setLayout(newOrderLayout);
+		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
+		BoxLayout newOrderLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
+		this.add(Box.createVerticalGlue());
+		this.add(customerInfoPanel);
+		this.add(Box.createVerticalGlue());
+		this.add(deliveryInfoPanel);
+		this.add(Box.createVerticalGlue());
+		this.add(orderInfoPanel);
+		this.add(Box.createVerticalGlue());
+		this.add(orderTotalPanel);
+		this.add(controlButtonsPanel);
+		this.add(Box.createVerticalGlue());
+		this.setLayout(newOrderLayout);
 	}
 
 	@Override
