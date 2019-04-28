@@ -1,3 +1,5 @@
+--Does not work yet
+
 SET FOREIGN_KEY_CHECKS = 0;
 
 TRUNCATE TABLE Orders;

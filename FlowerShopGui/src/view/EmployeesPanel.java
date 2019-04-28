@@ -30,7 +30,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	public EmployeesPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 
-		employeeDAO.insertEmployee(new EmployeeDTO("DeBenedictis", "James", "123", "1234", true));
+		employeeDAO.insertEmployee(new EmployeeDTO("DeBenedictis", "James", "123", "1234", "true"));
 
 		String[] employeesColumnNames = new String[]{"Last Name", "First Name", "Employee ID", "Password",
 				"Admin Privileges"};
@@ -45,6 +45,8 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 				return false;
 			}
 		};
+
+		employeesTable.getSelectedRow();
 
 		populateTable();
 

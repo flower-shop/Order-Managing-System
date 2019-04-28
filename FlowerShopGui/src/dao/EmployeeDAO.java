@@ -39,7 +39,7 @@ public class EmployeeDAO {
 				String lastName = resultSet.getString(2);
 				String empId = resultSet.getString(3);
 				String password = resultSet.getString(4);
-				boolean isAdmin = resultSet.getBoolean(5);
+				String isAdmin = resultSet.getString(5);
 
 				return new EmployeeDTO(firstName, lastName, empId, password, isAdmin);
 			} else {
@@ -68,7 +68,7 @@ public class EmployeeDAO {
 				String lastName = resultSet.getString(2);
 				String empId = resultSet.getString(3);
 				String password = resultSet.getString(4);
-				boolean isAdmin = resultSet.getBoolean(5);
+				String isAdmin = resultSet.getString(5);
 
 				employees.add(new EmployeeDTO(firstName, lastName, empId, password, isAdmin));
 			}

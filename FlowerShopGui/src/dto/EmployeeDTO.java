@@ -5,10 +5,10 @@ public class EmployeeDTO {
 	private String lastName;
 	private String employeeId;
 	private String password;
-	private boolean isAdmin = false;
+	private String isAdmin;
 
 	public EmployeeDTO(String lastName, String firstName, String employeeId, String password,
-			boolean isAdmin) {
+			String isAdmin) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.employeeId = employeeId;
@@ -32,7 +32,7 @@ public class EmployeeDTO {
 		return password;
 	}
 
-	public boolean isAdmin() {
+	public String isAdmin() {
 		return isAdmin;
 	}
 
@@ -52,7 +52,7 @@ public class EmployeeDTO {
 		this.password = password;
 	}
 
-	public void setAdminStatus(boolean isAdmin) {
+	public void setAdminStatus(String isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 }

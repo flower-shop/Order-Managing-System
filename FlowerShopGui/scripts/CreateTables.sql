@@ -3,7 +3,7 @@ lastName VARCHAR (20) NOT NULL,
 firstName VARCHAR(20) NOT NULL,
 employeeId VARCHAR (15) NOT NULL,
 password VARCHAR (15) NOT NULL,
-isAdmin BOOLEAN NOT NULL,
+isAdmin VARCHAR (5) NOT NULL,
 PRIMARY KEY (employeeId));
 
 CREATE TABLE Customer (
