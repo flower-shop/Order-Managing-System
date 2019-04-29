@@ -32,11 +32,33 @@ public class LoginPanel {
 
     private void adminCheck(){
         
-        /*need code here to check the db to see if it containt a user with Admin rights
+        /*check the db to see if Employee table contains entries.
         if yes then go to mainWindow(), if no then go to setUpAccount()
         */
-    }
-    
+                Connection conn = null;
+	   
+	   try {
+			conn = ConnectionFactory.getConnection();
+		Statement stmt = conn.createStatement();
+		
+	    String query = "SELECT * FROM Employee ";
+        ResultSet rs = stmt.executeQuery(query);
+
+			if (rs == null) {
+				return null;
+			}
+
+			if (rs.next()=false) {
+				setUpAccount();
+
+			} else {
+				mainWindow();
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			return null;
+		}
+        
     private void setUpAccount(){
 
                         //Create Main window
@@ -177,6 +199,6 @@ public class LoginPanel {
      */
     public static void main(String[] args) {
         LoginPanel begin = new LoginPanel();
-        begin.adminCheck();
+        begin.userCheck();
     }    
 }
