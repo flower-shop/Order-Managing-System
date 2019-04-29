@@ -1,2 +1,0 @@
-# Order-Managing-System
-Capstone
