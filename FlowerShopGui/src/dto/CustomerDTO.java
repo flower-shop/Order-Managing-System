@@ -9,10 +9,10 @@ public class CustomerDTO {
 	private String email;
 	private ArrayList<OrderDTO> orderHistory = new ArrayList<>();
 
-	public CustomerDTO(String lastName, String firstName, String address, int phoneNumber, String email) {
+	public CustomerDTO(String lastName, String firstName, /*String address, */int phoneNumber, String email) {
 		this.lastName = lastName;
 		this.firstName = firstName;
-		this.address = address;
+		/*this.address = address;*/
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 	}
