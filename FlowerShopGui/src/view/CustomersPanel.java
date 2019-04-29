@@ -42,6 +42,12 @@ public class CustomersPanel extends JPanel {
 		
 		populateTable();
 		
+		/*Object[][] customersContent = new Object[ViewConstants.MAX_ROW_COUNT][4];
+		for (int i = 0; i < ViewConstants.MAX_ROW_COUNT; i++) {
+			customersContent[i] = new Object[]{"", "", "", "", ""};
+		}
+		
+		JTable customersTable = new JTable(customersContent, customersColumnNames);*/
 		
 		JScrollPane customersScrollPane = new JScrollPane(customersTable);
 		this.add(customersScrollPane);
