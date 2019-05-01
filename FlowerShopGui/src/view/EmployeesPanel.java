@@ -1,17 +1,27 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -26,6 +36,8 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	private JTable employeesTable;
 
 	private EmployeeDAO employeeDAO = new EmployeeDAO();
+
+	private boolean addEmployeeWindowExists = false;
 
 	public EmployeesPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
@@ -103,8 +115,111 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(employeeAddButton)) {
 
-		} else {
+			if (!addEmployeeWindowExists) {
+				new AddEmployeeWindow();
+			}
+		} else if (e.getSource().equals(employeeUpdateButton)) {
 
+		}
+	}
+
+	class AddEmployeeWindow extends JFrame {
+		private static final long serialVersionUID = 1379630163981843824L;
+
+		public AddEmployeeWindow() {
+			addEmployeeWindowExists = true;
+
+			try {
+				for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+					if ("Nimbus".equals(info.getName())) {
+						UIManager.setLookAndFeel(info.getClassName());
+						break;
+					}
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+
+			this.setLayout(new BorderLayout());
+
+			JPanel fieldsPanel = new JPanel();
+			fieldsPanel.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
+
+			fieldsPanel.setLayout(new GridBagLayout());
+			GridBagConstraints c = new GridBagConstraints();
+			c.weighty = 1;
+			c.weightx = 1;
+
+			JLabel lastNameLabel = new JLabel("Last name:");
+			c.gridx = 0;
+			c.gridy = 0;
+			fieldsPanel.add(lastNameLabel);
+
+			JLabel firstNameLabel = new JLabel("First name:");
+			c.gridx = 0;
+			c.gridy = 1;
+			fieldsPanel.add(firstNameLabel, c);
+
+			JLabel employeeIdLabel = new JLabel("Employee ID:");
+			c.gridx = 0;
+			c.gridy = 2;
+			fieldsPanel.add(employeeIdLabel, c);
+
+			JLabel passwordLabel = new JLabel("Password");
+			c.gridx = 0;
+			c.gridy = 3;
+			fieldsPanel.add(passwordLabel, c);
+
+			JLabel isAdminLabel = new JLabel("Administrator:");
+			c.gridx = 0;
+			c.gridy = 4;
+			fieldsPanel.add(isAdminLabel, c);
+
+			JTextField lastNameTextField = new JTextField(15);
+			c.gridx = 1;
+			c.gridy = 0;
+			fieldsPanel.add(lastNameTextField, c);
+
+			JTextField firstNameTextField = new JTextField(15);
+			c.gridx = 1;
+			c.gridy = 1;
+			fieldsPanel.add(firstNameTextField, c);
+
+			JTextField employeeIdTextField = new JTextField(15);
+			c.gridx = 1;
+			c.gridy = 2;
+			fieldsPanel.add(employeeIdTextField, c);
+
+			JTextField passwordTextField = new JTextField(15);
+			c.gridx = 1;
+			c.gridy = 3;
+			fieldsPanel.add(passwordTextField, c);
+
+			JTextField isAdminTextField = new JTextField(15);
+			c.gridx = 1;
+			c.gridy = 4;
+			fieldsPanel.add(isAdminTextField, c);
+
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
+			JButton addButton = new JButton("Add");
+			addButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
+			buttonPanel.add(addButton);
+
+			this.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent windowEvent) {
+					addEmployeeWindowExists = false;
+				}
+			});
+
+			this.add(fieldsPanel, BorderLayout.CENTER);
+			this.add(buttonPanel, BorderLayout.SOUTH);
+			this.setTitle("Add Employee");
+			this.getContentPane().setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
+			this.setSize(350, 400);
+			this.setResizable(false);
+			this.setVisible(true);
+			this.setLocationRelativeTo(null);
 		}
 	}
 }
