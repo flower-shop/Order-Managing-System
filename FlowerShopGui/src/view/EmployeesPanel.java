@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -37,10 +38,17 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 	private boolean popupWindowExists = false;
 
+	JTextField lastNameTextField;
+	JTextField firstNameTextField;
+	JTextField employeeIdTextField;
+	JTextField passwordTextField;
+	JTextField isAdminTextField;
+
 	public EmployeesPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 
-		employeeDAO.insertEmployee(new EmployeeDTO("DeBenedictis", "James", "123", "1234", "true"));
+		// employeeDAO.insertEmployee(new EmployeeDTO("DeBenedictis", "James",
+		// "123", "1234", "true"));
 
 		String[] employeesColumnNames = new String[]{"Last Name", "First Name", "Employee ID", "Password",
 				"Admin Privileges"};
@@ -114,17 +122,19 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 		if (e.getSource().equals(employeeAddButton)) {
 
 			if (!popupWindowExists) {
-				new AddEmployeeWindow();
+				new PopupWindow("Add Employee", true, "Add");
 			}
 		} else if (e.getSource().equals(employeeUpdateButton)) {
-
+			if (!popupWindowExists) {
+				new PopupWindow("Update Employee", false, "Update");
+			}
 		}
 	}
 
-	class AddEmployeeWindow extends JFrame {
+	class PopupWindow extends JFrame {
 		private static final long serialVersionUID = 1379630163981843824L;
 
-		public AddEmployeeWindow() {
+		public PopupWindow(String title, boolean employeeIdIsEditable, String buttonLabel) {
 			popupWindowExists = true;
 
 			this.setLayout(new BorderLayout());
@@ -162,37 +172,44 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 			c.gridy = 4;
 			fieldsPanel.add(isAdminLabel, c);
 
-			JTextField lastNameTextField = new JTextField(15);
+			lastNameTextField = new JTextField(15);
 			c.gridx = 1;
 			c.gridy = 0;
 			fieldsPanel.add(lastNameTextField, c);
 
-			JTextField firstNameTextField = new JTextField(15);
+			firstNameTextField = new JTextField(15);
 			c.gridx = 1;
 			c.gridy = 1;
 			fieldsPanel.add(firstNameTextField, c);
 
-			JTextField employeeIdTextField = new JTextField(15);
+			employeeIdTextField = new JTextField(15);
 			c.gridx = 1;
 			c.gridy = 2;
 			fieldsPanel.add(employeeIdTextField, c);
 
-			JTextField passwordTextField = new JTextField(15);
+			passwordTextField = new JTextField(15);
 			c.gridx = 1;
 			c.gridy = 3;
 			fieldsPanel.add(passwordTextField, c);
 
-			JTextField isAdminTextField = new JTextField(15);
+			isAdminTextField = new JTextField(15);
 			c.gridx = 1;
 			c.gridy = 4;
 			fieldsPanel.add(isAdminTextField, c);
 
+			if (!employeeIdIsEditable) {
+				employeeIdTextField.setEditable(false);
+				employeeIdTextField.setFocusable(false);
+				employeeIdTextField.setBackground(new Color(224, 224, 224));
+			}
+
 			JPanel buttonPanel = new JPanel();
 			buttonPanel.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
-			JButton addButton = new JButton("Add");
+			JButton addButton = new JButton(buttonLabel);
 			addButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
 			buttonPanel.add(addButton);
 
+			// Set popup flag to false if window is closed
 			this.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent windowEvent) {
 					popupWindowExists = false;
@@ -201,7 +218,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 			this.add(fieldsPanel, BorderLayout.CENTER);
 			this.add(buttonPanel, BorderLayout.SOUTH);
-			this.setTitle("Add Employee");
+			this.setTitle(title);
 			this.setAlwaysOnTop(true);
 			this.getContentPane().setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 			this.setSize(350, 400);
