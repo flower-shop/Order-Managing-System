@@ -35,7 +35,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 	private EmployeeDAO employeeDAO = new EmployeeDAO();
 
-	private boolean addEmployeeWindowExists = false;
+	private boolean popupWindowExists = false;
 
 	public EmployeesPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
@@ -113,7 +113,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(employeeAddButton)) {
 
-			if (!addEmployeeWindowExists) {
+			if (!popupWindowExists) {
 				new AddEmployeeWindow();
 			}
 		} else if (e.getSource().equals(employeeUpdateButton)) {
@@ -125,7 +125,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 		private static final long serialVersionUID = 1379630163981843824L;
 
 		public AddEmployeeWindow() {
-			addEmployeeWindowExists = true;
+			popupWindowExists = true;
 
 			this.setLayout(new BorderLayout());
 
@@ -195,13 +195,14 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 			this.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent windowEvent) {
-					addEmployeeWindowExists = false;
+					popupWindowExists = false;
 				}
 			});
 
 			this.add(fieldsPanel, BorderLayout.CENTER);
 			this.add(buttonPanel, BorderLayout.SOUTH);
 			this.setTitle("Add Employee");
+			this.setAlwaysOnTop(true);
 			this.getContentPane().setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 			this.setSize(350, 400);
 			this.setResizable(false);
