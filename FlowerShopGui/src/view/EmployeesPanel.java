@@ -95,11 +95,11 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 		employeeLayout.setAutoCreateGaps(true);
 		employeeLayout.setAutoCreateContainerGaps(true);
 
-		employeeLayout.setVerticalGroup(employeeLayout.createSequentialGroup()
-				.addComponent(employeeScrollPane).addComponent(employeeControlButtonsPanel));
+		employeeLayout.setVerticalGroup(employeeLayout.createSequentialGroup().addComponent(employeeScrollPane)
+				.addComponent(employeeControlButtonsPanel));
 
-		employeeLayout.setHorizontalGroup(employeeLayout.createParallelGroup()
-				.addComponent(employeeScrollPane).addComponent(employeeControlButtonsPanel));
+		employeeLayout.setHorizontalGroup(employeeLayout.createParallelGroup().addComponent(employeeScrollPane)
+				.addComponent(employeeControlButtonsPanel));
 	}
 
 	public void populateTable() {
@@ -205,9 +205,22 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 			JPanel buttonPanel = new JPanel();
 			buttonPanel.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
-			JButton addButton = new JButton(buttonLabel);
-			addButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
-			buttonPanel.add(addButton);
+			JButton actionButton = new JButton(buttonLabel);
+			actionButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
+
+			actionButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String lastName = lastNameTextField.getText();
+					String firstName = firstNameTextField.getText();
+					String employeeId = employeeIdTextField.getText();
+					String password = passwordTextField.getText();
+					String isAdmin = isAdminTextField.getText();
+
+					employeeDAO.insertEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
+				}
+			});
+
+			buttonPanel.add(actionButton);
 
 			// Set popup flag to false if window is closed
 			this.addWindowListener(new WindowAdapter() {
