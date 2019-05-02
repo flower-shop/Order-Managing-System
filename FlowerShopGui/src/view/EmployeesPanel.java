@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -100,25 +99,9 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 				.addComponent(employeeControlButtonsPanel));
 	}
 
-	public void populateTable() {
-		List<EmployeeDTO> employees = employeeDAO.selectAll();
-
-		DefaultTableModel tableModel = (DefaultTableModel) this.employeesTable.getModel();
-		tableModel.setRowCount(0);
-
-		for (int i = 0; i < employees.size(); i++) {
-			EmployeeDTO employee = employees.get(i);
-			Object[] employeeContent = new Object[]{employee.getLastName(), employee.getFirstName(),
-					employee.getEmployeeId(), employee.getPassword(), employee.isAdmin()};
-
-			tableModel.addRow(employeeContent);
-		}
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(employeeAddButton)) {
-
 			if (!popupWindowExists) {
 				new PopupWindow(true);
 			}
@@ -227,6 +210,8 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 				title = "Update Employee";
 				actionButton.setText("Update");
 
+				System.out.println(employeesTable.getSelectedColumns().length);
+
 				actionButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String lastName = lastNameTextField.getText();
@@ -241,9 +226,9 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 					}
 				});
 
-				employeeIdTextField.setEditable(false);
-				employeeIdTextField.setFocusable(false);
-				employeeIdTextField.setBackground(new Color(224, 224, 224));
+				// employeeIdTextField.setEditable(false);
+				// employeeIdTextField.setFocusable(false);
+				// employeeIdTextField.setBackground(new Color(224, 224, 224));
 			}
 
 			buttonPanel.add(actionButton);
@@ -267,6 +252,21 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 			this.setResizable(false);
 			this.setVisible(true);
 			this.setLocationRelativeTo(null);
+		}
+	}
+
+	public void populateTable() {
+		List<EmployeeDTO> employees = employeeDAO.selectAll();
+
+		DefaultTableModel tableModel = (DefaultTableModel) this.employeesTable.getModel();
+		tableModel.setRowCount(0);
+
+		for (int i = 0; i < employees.size(); i++) {
+			EmployeeDTO employee = employees.get(i);
+			Object[] employeeContent = new Object[]{employee.getLastName(), employee.getFirstName(),
+					employee.getEmployeeId(), employee.getPassword(), employee.isAdmin()};
+
+			tableModel.addRow(employeeContent);
 		}
 	}
 }
