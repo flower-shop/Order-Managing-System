@@ -1,7 +1,6 @@
 .metadata
-.settings
-.classpath
+.settings/
 
-/bin/
+bin/
 
 /FlowershopData/*
