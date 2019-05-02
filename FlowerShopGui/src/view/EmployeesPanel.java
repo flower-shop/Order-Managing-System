@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -37,17 +38,14 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 	private boolean popupWindowExists = false;
 
-	JTextField lastNameTextField;
-	JTextField firstNameTextField;
-	JTextField employeeIdTextField;
-	JTextField passwordTextField;
-	JTextField isAdminTextField;
+	private JTextField lastNameTextField;
+	private JTextField firstNameTextField;
+	private JTextField employeeIdTextField;
+	private JTextField passwordTextField;
+	private JTextField isAdminTextField;
 
 	public EmployeesPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
-
-		// employeeDAO.insertEmployee(new EmployeeDTO("DeBenedictis", "James",
-		// "123", "1234", "true"));
 
 		String[] employeesColumnNames = new String[]{"Last Name", "First Name", "Employee ID", "Password",
 				"Admin Privileges"};
@@ -63,7 +61,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 			}
 		};
 
-		employeesTable.getSelectedRow();
+		populateTable();
 
 		JScrollPane employeeScrollPane = new JScrollPane(employeesTable);
 
@@ -135,9 +133,6 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 			popupWindowExists = true;
 
 			String title;
-			String buttonLabel;
-
-			this.setLayout(new BorderLayout());
 
 			// ----------------------------------------------------------------------------------------------------
 			// -------------------- Fields Panel
@@ -243,9 +238,9 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 					}
 				});
 
-				// employeeIdTextField.setEditable(false);
-				// employeeIdTextField.setFocusable(false);
-				// employeeIdTextField.setBackground(new Color(224, 224, 224));
+				employeeIdTextField.setEditable(false);
+				employeeIdTextField.setFocusable(false);
+				employeeIdTextField.setBackground(new Color(224, 224, 224));
 			}
 
 			buttonPanel.add(actionButton);
@@ -259,6 +254,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 				}
 			});
 
+			this.setLayout(new BorderLayout());
 			this.add(fieldsPanel, BorderLayout.CENTER);
 			this.add(buttonPanel, BorderLayout.SOUTH);
 			this.setTitle(title);
