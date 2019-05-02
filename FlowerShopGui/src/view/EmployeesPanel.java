@@ -235,6 +235,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 			this.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent windowEvent) {
 					popupWindowExists = false;
+					MainWindow.getTabbedPane().setEnabled(true);
 				}
 			});
 
@@ -262,7 +263,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 				employeeDAO.insertEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
 
 				populateTable();
-
+				MainWindow.getTabbedPane().setEnabled(true);
 				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			} else {
 				String lastName = lastNameTextField.getText();
@@ -275,6 +276,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 				populateTable();
 
+				MainWindow.getTabbedPane().setEnabled(true);
 				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			}
 		}
