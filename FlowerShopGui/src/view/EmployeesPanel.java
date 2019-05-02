@@ -65,8 +65,6 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 		employeesTable.getSelectedRow();
 
-		populateTable();
-
 		JScrollPane employeeScrollPane = new JScrollPane(employeesTable);
 
 		employeeAddButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
@@ -223,6 +221,8 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 						String isAdmin = isAdminTextField.getText();
 
 						employeeDAO.insertEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
+
+						populateTable();
 					}
 				});
 			} else {
@@ -238,6 +238,8 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 						String isAdmin = isAdminTextField.getText();
 
 						employeeDAO.updateEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
+
+						populateTable();
 					}
 				});
 
