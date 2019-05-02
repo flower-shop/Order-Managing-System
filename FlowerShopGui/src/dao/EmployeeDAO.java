@@ -1,6 +1,5 @@
 package dao;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,10 +9,8 @@ import java.util.List;
 import dto.EmployeeDTO;
 
 public class EmployeeDAO {
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	Statement stmt = null;
-	ResultSet rs = null;
+	private Connection con = null;
+	private Statement stmt = null;
 
 	public EmployeeDAO() {
 		try {

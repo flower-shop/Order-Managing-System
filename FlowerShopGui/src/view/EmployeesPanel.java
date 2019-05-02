@@ -131,13 +131,17 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	class PopupWindow extends JFrame {
+	class PopupWindow extends JFrame implements ActionListener {
 		private static final long serialVersionUID = 1379630163981843824L;
+		private String title;
+		private boolean isInsertWindow;
+		private JButton actionButton;
 
 		public PopupWindow(boolean isInsertWindow) {
-			popupWindowExists = true;
 
-			String title;
+			this.isInsertWindow = isInsertWindow;
+
+			popupWindowExists = true;
 
 			// ----------------------------------------------------------------------------------------------------
 			// -------------------- Fields Panel
@@ -206,45 +210,17 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 			JPanel buttonPanel = new JPanel();
 			buttonPanel.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
-			JButton actionButton = new JButton();
+			actionButton = new JButton();
 			actionButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
+
+			actionButton.addActionListener(this);
 
 			if (isInsertWindow) {
 				title = "Add Employee";
 				actionButton.setText("Add");
-				actionButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						String lastName = lastNameTextField.getText();
-						String firstName = firstNameTextField.getText();
-						String employeeId = employeeIdTextField.getText();
-						String password = passwordTextField.getText();
-						String isAdmin = isAdminTextField.getText();
-
-						employeeDAO.insertEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
-
-						populateTable();
-					}
-				});
 			} else {
 				title = "Update Employee";
 				actionButton.setText("Update");
-
-				System.out.println(employeesTable.getSelectedColumns().length);
-
-				actionButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-
-						String lastName = lastNameTextField.getText();
-						String firstName = firstNameTextField.getText();
-						String employeeId = employeeIdTextField.getText();
-						String password = passwordTextField.getText();
-						String isAdmin = isAdminTextField.getText();
-
-						employeeDAO.updateEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
-
-						populateTable();
-					}
-				});
 			}
 
 			buttonPanel.add(actionButton);
@@ -263,11 +239,41 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 			this.add(buttonPanel, BorderLayout.SOUTH);
 			this.setTitle(title);
 			this.setAlwaysOnTop(true);
+
 			this.getContentPane().setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 			this.setSize(350, 400);
 			this.setResizable(false);
 			this.setVisible(true);
 			this.setLocationRelativeTo(null);
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if (isInsertWindow) {
+
+				String lastName = lastNameTextField.getText();
+				String firstName = firstNameTextField.getText();
+				String employeeId = employeeIdTextField.getText();
+				String password = passwordTextField.getText();
+				String isAdmin = isAdminTextField.getText();
+
+				employeeDAO.insertEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
+
+				populateTable();
+
+				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			} else {
+				String lastName = lastNameTextField.getText();
+				String firstName = firstNameTextField.getText();
+				String employeeId = employeeIdTextField.getText();
+				String password = passwordTextField.getText();
+				String isAdmin = isAdminTextField.getText();
+
+				employeeDAO.updateEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
+
+				populateTable();
+
+				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			}
 		}
 	}
 
