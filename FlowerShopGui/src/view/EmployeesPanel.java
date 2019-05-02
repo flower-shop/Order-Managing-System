@@ -105,12 +105,16 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(employeeAddButton)) {
 			if (!popupWindowExists) {
+				MainWindow.getTabbedPane().setEnabled(false);
+
 				new PopupWindow(true);
 			}
 		} else if (e.getSource().equals(employeeUpdateButton)) {
 			if (!popupWindowExists) {
 
 				if (employeesTable.getSelectedRow() > -1) {
+					MainWindow.getTabbedPane().setEnabled(false);
+
 					new PopupWindow(false);
 
 					int selectedRow = employeesTable.getSelectedRow();
@@ -249,7 +253,6 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			if (isInsertWindow) {
-
 				String lastName = lastNameTextField.getText();
 				String firstName = firstNameTextField.getText();
 				String employeeId = employeeIdTextField.getText();

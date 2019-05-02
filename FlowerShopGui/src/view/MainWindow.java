@@ -6,7 +6,7 @@ import javax.swing.JTabbedPane;
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 3434469359320329958L;
 
-	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
+	private static JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 
 	public MainWindow() {
 		tabbedPane.addTab("New Order", new NewOrderPanel());
@@ -23,5 +23,9 @@ public class MainWindow extends JFrame {
 		setVisible(true);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public static JTabbedPane getTabbedPane() {
+		return tabbedPane;
 	}
 }
