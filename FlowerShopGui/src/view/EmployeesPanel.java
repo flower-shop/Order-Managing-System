@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -16,6 +17,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -107,7 +109,24 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 			}
 		} else if (e.getSource().equals(employeeUpdateButton)) {
 			if (!popupWindowExists) {
-				new PopupWindow(false);
+
+				if (employeesTable.getSelectedRow() > -1) {
+					new PopupWindow(false);
+
+					int selectedRow = employeesTable.getSelectedRow();
+
+					lastNameTextField.setText((String) employeesTable.getValueAt(selectedRow, 0));
+					firstNameTextField.setText((String) employeesTable.getValueAt(selectedRow, 1));
+					employeeIdTextField.setText((String) employeesTable.getValueAt(selectedRow, 2));
+					passwordTextField.setText((String) employeesTable.getValueAt(selectedRow, 3));
+					isAdminTextField.setText((String) employeesTable.getValueAt(selectedRow, 4));
+
+					employeeIdTextField.setEditable(false);
+					employeeIdTextField.setFocusable(false);
+					employeeIdTextField.setBackground(new Color(224, 224, 224));
+				} else {
+					JOptionPane.showMessageDialog(null, "Please select a row");
+				}
 			}
 		}
 	}
@@ -214,6 +233,7 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 				actionButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+
 						String lastName = lastNameTextField.getText();
 						String firstName = firstNameTextField.getText();
 						String employeeId = employeeIdTextField.getText();
@@ -225,10 +245,6 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 						populateTable();
 					}
 				});
-
-				// employeeIdTextField.setEditable(false);
-				// employeeIdTextField.setFocusable(false);
-				// employeeIdTextField.setBackground(new Color(224, 224, 224));
 			}
 
 			buttonPanel.add(actionButton);
