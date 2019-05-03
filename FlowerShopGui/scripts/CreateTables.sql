@@ -15,7 +15,7 @@ PRIMARY KEY(phoneNumber));
 
 CREATE TABLE Flower (
 flowerType VARCHAR(15) NOT NULL, 
-flowerCost DECIMAL,
+flowerCost DECIMAL (5,2),
 flowerQty INT,
 PRIMARY KEY(flowerType));
 
