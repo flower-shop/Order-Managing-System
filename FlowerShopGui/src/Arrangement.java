@@ -26,7 +26,7 @@ public class Arrangement {
 		int count = 0;
 
 		for (FlowerDTO flower : ShopData.getFlowerInventory())
-			if (flower.getType().equals(flowerType)) {
+			if (flower.getFlowerType().equals(flowerType)) {
 				flowersInArrangement.add(flower);
 				count++;
 			}
@@ -40,7 +40,7 @@ public class Arrangement {
 
 	public void calculateCost() {
 		for (FlowerDTO flower : flowersInArrangement) {
-			cost += flower.getCost();
+			cost += flower.getFlowerCost();
 		}
 		cost += accessory.getCost();
 	}

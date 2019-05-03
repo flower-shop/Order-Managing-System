@@ -1,16 +1,18 @@
 package dto;
 
-import enums.FlowerType;
+/*import enums.FlowerType;*/
 
 public class FlowerDTO {
-	private double cost;
-	private FlowerType type;
-	private int flowerQuantity;
+	private double flowerCost;
+	private String flowerType;
+	private int flowerQty;
 
-	public FlowerDTO(FlowerType type) {
-		this.type = type;
+	public FlowerDTO(String flowerType, double flowerCost, int flowerQty) {
+		this.flowerType = flowerType;
+		this.flowerCost = flowerCost;
+		this.flowerQty = flowerQty;
 
-		switch (type) {
+		/*switch (type) {
 			case Tulip :
 				cost = 2.00;
 				break;
@@ -22,30 +24,30 @@ public class FlowerDTO {
 				break;
 			default :
 				break;
-		}
+		}*/
 	}
 
-	public double getCost() {
-		return cost;
+	public double getFlowerCost() {
+		return flowerCost;
 	}
 
-	public FlowerType getType() {
-		return type;
+	public String getFlowerType() {
+		return flowerType;
 	}
 
-	public int getFlowerQuantity() {
-		return flowerQuantity;
+	public int getFlowerQty() {
+		return flowerQty;
 	}
 
-	public void setCost(double cost) {
-		this.cost = cost;
+	public void setFlowerCost(double flowerCost) {
+		this.flowerCost = flowerCost;
 	}
 
-	public void setType(FlowerType type) {
-		this.type = type;
+	public void setFlowerType(String flowerType) {
+		this.flowerType = flowerType;
 	}
 
-	public void setFlowerQuantity(int flowerQuantity) {
-		this.flowerQuantity = flowerQuantity;
+	public void setFlowerQuantity(int flowerQty) {
+		this.flowerQty = flowerQty;
 	}
 }
