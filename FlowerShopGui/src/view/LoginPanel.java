@@ -29,7 +29,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-//import dao.ConnectionFactory;
+import dao.ConnectionFactory;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -367,6 +367,12 @@ public class LoginPanel implements ActionListener {
            background.setLayout(new BoxLayout(background, BoxLayout.Y_AXIS));
            return background;  
       }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 
 	/**
 	 * @param args
