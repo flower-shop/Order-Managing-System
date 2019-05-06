@@ -23,7 +23,7 @@ public class FlowerDAO {
 	}
 	
 	public FlowerDTO select(String flowerType) {
-		String query = "SELECT * FROM Employee WHERE flowerType=" + flowerType;
+		String query = "SELECT * FROM Flower WHERE flowerType=" + flowerType;
 
 		try {
 			ResultSet resultSet = stmt.executeQuery(query);
