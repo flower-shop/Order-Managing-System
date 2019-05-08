@@ -6,13 +6,6 @@ password VARCHAR (15) NOT NULL,
 isAdmin VARCHAR (5) NOT NULL,
 PRIMARY KEY (employeeId));
 
-CREATE TABLE Customer (
-lastName VARCHAR (20) NOT NULL,
-firstName VARCHAR(20) NOT NULL,
-phoneNumber VARCHAR(15) NOT NULL, 
-email VARCHAR(35) NOT NULL,
-PRIMARY KEY(phoneNumber));
-
 CREATE TABLE Flower (
 flowerType VARCHAR(15) NOT NULL, 
 flowerCost DECIMAL (5,2),
@@ -33,7 +26,10 @@ PRIMARY KEY(arrangementTheme));
 
 CREATE TABLE Orders (
 orderID INT NOT NULL,
+lastName VARCHAR (20) NOT NULL,
+firstName VARCHAR(20) NOT NULL,
 phoneNumber VARCHAR(15) NOT NULL,
+email VARCHAR(35) NOT NULL,
 orderDate DATE NOT NULL,
 flowerType VARCHAR(15) NOT NULL,
 quantity INT NOT NULL,
@@ -46,7 +42,4 @@ hasCard VARCHAR(5),
 cardText VARCHAR(50),
 isPaid VARCHAR(5),
 isDelivered VARCHAR(5),
-PRIMARY KEY(orderID),
-FOREIGN KEY(arrangementTheme) REFERENCES Arrangement(arrangementTheme),
-FOREIGN KEY(phoneNumber) REFERENCES Customer(phoneNumber),
-FOREIGN KEY(accessoryType) REFERENCES Accessory(accessoryType));
+PRIMARY KEY(orderID));

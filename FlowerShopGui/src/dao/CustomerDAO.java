@@ -28,7 +28,7 @@ public class CustomerDAO {
 	public List<CustomerDTO> selectAll() {
 		List<CustomerDTO> customers = new ArrayList<>();
 
-		String query = "SELECT lastName, firstName, phoneNumber, email FROM Customer";
+		String query = "SELECT lastName, firstName, phoneNumber, email FROM Orders GROUP BY email, lastName, firstName, phoneNumber";
 
 		try {
 			ResultSet resultSet = stmt.executeQuery(query);
