@@ -32,7 +32,6 @@ public class OrdersPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 2666270557360720356L;
 
 	private JButton ordersUpdateButton = new JButton("Update Record");
-	private JButton ordersAddButton = new JButton("Add Record");
 	private JTable ordersTable;
 
 	private OrderDAO orderDAO = new OrderDAO();
@@ -81,9 +80,6 @@ public class OrdersPanel extends JPanel implements ActionListener {
 
 		JScrollPane ordersScrollPane = new JScrollPane(ordersTable);
 
-		ordersAddButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
-		ordersAddButton.addActionListener(this);
-
 		ordersUpdateButton.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
 		ordersUpdateButton.addActionListener(this);
 
@@ -93,7 +89,6 @@ public class OrdersPanel extends JPanel implements ActionListener {
 
 		JPanel ordersControlButtonsPanel = new JPanel(ordersControlButtonsLayout);
 		ordersControlButtonsPanel.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
-		ordersControlButtonsPanel.add(ordersAddButton);
 
 		Component verticalGlue_2 = Box.createVerticalGlue();
 		ordersControlButtonsPanel.add(verticalGlue_2);
@@ -113,19 +108,13 @@ public class OrdersPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(ordersAddButton)) {
-			if (!popupWindowExists) {
-				MainWindow.getTabbedPane().setEnabled(false);
-
-				new PopupWindow(true);
-			}
-		} else if (e.getSource().equals(ordersUpdateButton)) {
+		if (e.getSource().equals(ordersUpdateButton)) {
 			if (!popupWindowExists) {
 
 				if (ordersTable.getSelectedRow() > -1) {
 					MainWindow.getTabbedPane().setEnabled(false);
 
-					new PopupWindow(false);
+					new PopupWindow();
 
 					int selectedRow = ordersTable.getSelectedRow();
 
@@ -161,12 +150,9 @@ public class OrdersPanel extends JPanel implements ActionListener {
 	class PopupWindow extends JFrame implements ActionListener {
 		private static final long serialVersionUID = 4497145662567262927L;
 		private String title;
-		private boolean isInsertWindow;
 		private JButton actionButton;
 
-		public PopupWindow(boolean isInsertWindow) {
-
-			this.isInsertWindow = isInsertWindow;
+		public PopupWindow() {
 
 			popupWindowExists = true;
 
@@ -362,13 +348,8 @@ public class OrdersPanel extends JPanel implements ActionListener {
 
 			actionButton.addActionListener(this);
 
-			if (isInsertWindow) {
-				title = "Add Order";
-				actionButton.setText("Add");
-			} else {
-				title = "Update Order";
-				actionButton.setText("Update");
-			}
+			title = "Update Order";
+			actionButton.setText("Update");
 
 			buttonPanel.add(actionButton);
 
@@ -396,60 +377,32 @@ public class OrdersPanel extends JPanel implements ActionListener {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			if (isInsertWindow) {
-				int orderNumber = Integer.parseInt(orderNumberTextField.getText());
-				String orderDate = orderDateTextField.getText();
-				String lastName = lastNameTextField.getText();
-				String firstName = firstNameTextField.getText();
-				String phoneNumber = phoneNumberTextField.getText();
-				String email = emailTextField.getText();
-				String flowerType = flowerTypeTextField.getText();
-				int quantity = Integer.parseInt(quantityTextField.getText());
-				String accessoryType = accessoryTypeTextField.getText();
-				String arrangementTheme = arrangementThemeTextField.getText();
-				String address = addressTextField.getText();
-				String deliveryDate = deliveryDateTextField.getText();
-				double totalCost = Double.parseDouble(totalCostTextField.getText());
-				String hasCard = hasCardTextField.getText();
-				String cardText = cardTextTextField.getText();
-				String isPaid = isPaidTextField.getText();
-				String isDelivered = isDeliveredTextField.getText();
+			int orderNumber = Integer.parseInt(orderNumberTextField.getText());
+			String orderDate = orderDateTextField.getText();
+			String lastName = lastNameTextField.getText();
+			String firstName = firstNameTextField.getText();
+			String phoneNumber = phoneNumberTextField.getText();
+			String email = emailTextField.getText();
+			String flowerType = flowerTypeTextField.getText();
+			int quantity = Integer.parseInt(quantityTextField.getText());
+			String accessoryType = accessoryTypeTextField.getText();
+			String arrangementTheme = arrangementThemeTextField.getText();
+			String address = addressTextField.getText();
+			String deliveryDate = deliveryDateTextField.getText();
+			double totalCost = Double.parseDouble(totalCostTextField.getText());
+			String hasCard = hasCardTextField.getText();
+			String cardText = cardTextTextField.getText();
+			String isPaid = isPaidTextField.getText();
+			String isDelivered = isDeliveredTextField.getText();
 
-				orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
-						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
-						hasCard, cardText, isPaid, isDelivered));
+			orderDAO.updateOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
+					flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost, hasCard,
+					cardText, isPaid, isDelivered));
 
-				populateTable();
-				MainWindow.getTabbedPane().setEnabled(true);
-				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-			} else {
-				int orderNumber = Integer.parseInt(orderNumberTextField.getText());
-				String orderDate = orderDateTextField.getText();
-				String lastName = lastNameTextField.getText();
-				String firstName = firstNameTextField.getText();
-				String phoneNumber = phoneNumberTextField.getText();
-				String email = emailTextField.getText();
-				String flowerType = flowerTypeTextField.getText();
-				int quantity = Integer.parseInt(quantityTextField.getText());
-				String accessoryType = accessoryTypeTextField.getText();
-				String arrangementTheme = arrangementThemeTextField.getText();
-				String address = addressTextField.getText();
-				String deliveryDate = deliveryDateTextField.getText();
-				double totalCost = Double.parseDouble(totalCostTextField.getText());
-				String hasCard = hasCardTextField.getText();
-				String cardText = cardTextTextField.getText();
-				String isPaid = isPaidTextField.getText();
-				String isDelivered = isDeliveredTextField.getText();
+			populateTable();
 
-				orderDAO.updateOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
-						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
-						hasCard, cardText, isPaid, isDelivered));
-
-				populateTable();
-
-				MainWindow.getTabbedPane().setEnabled(true);
-				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-			}
+			MainWindow.getTabbedPane().setEnabled(true);
+			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}
 	}
 
