@@ -2,50 +2,60 @@ package dto;
 import java.util.Date;
 
 public class OrderDTO {
-	private double totalCost;
-	private CustomerDTO customer;
-	private FlowerDTO flower;
-	private AccessoryDTO accessory;
-	private String arrangementTheme;
-	private String address;
 	private int orderNumber;
+	private double totalCost;
+	private String phoneNumber;
+	private String flowerType;
+	private String address;
 	private Date dateOfOrder;
 	private Date dateOfDelivery;
-	private boolean isDelivered;
-	private boolean hasCard;
+	private String isDelivered;
 	private String cardText;
-	private boolean isPaidFor;
+	private String isPaidFor;
 
-	public OrderDTO() {
-
+	public OrderDTO(int orderNumber, double totalCost, String phoneNumber, String flowerType, 
+			String address, Date dateOfOrder, Date dateOfDelivery, String isDelivered, String cardText, 
+			String isPaidFor) {
+		this.orderNumber = orderNumber;
+		this.totalCost = totalCost;
+		this.phoneNumber = phoneNumber;
+		this.flowerType = flowerType;
+		this.address = address;
+		this.dateOfOrder = dateOfOrder;
+		this.dateOfDelivery = dateOfDelivery;
+		this.isDelivered = isDelivered;
+		this.cardText = cardText;
+		this.isPaidFor = isPaidFor;
 	}
-
+	
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+	
 	public double getTotalCost() {
 		return totalCost;
 	}
 
-	public CustomerDTO getCustomer() {
-		return customer;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 	
-	public FlowerDTO getFlower() {
-		return flower;
+	public String getFlowerType() {
+		return flowerType;
 	}
 	
-	public AccessoryDTO  getAccessory() {
+	/*public AccessoryDTO  getAccessory() {
 		return accessory;
 	}
 	
 	public String getArrangementTheme() {
 		return arrangementTheme;
-	}
+	}*/
 	public String getAddress() {
 		return address;
 	}
 
-	public int getOrderNumber() {
-		return orderNumber;
-	}
+	
 
 	public Date getDateOfOrder() {
 		return dateOfOrder;
@@ -55,47 +65,42 @@ public class OrderDTO {
 		return dateOfDelivery;
 	}
 
-	public boolean isDelivered() {
+	public String getIsDelivered() {
 		return isDelivered;
-	}
-	
-	public boolean hasCard() {
-		return hasCard;
 	}
 	
 	public String getCardText() {
 		return cardText;
 	}
 
-	public boolean isPaidFor() {
+	public String getIsPaidFor() {
 		return isPaidFor;
+	}
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
 
-	public void setCustomer(CustomerDTO customer) {
-		this.customer = customer;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	
-	public void setFlower(FlowerDTO flower) {
-		this.flower = flower;
+	public void setFlowerType(String flowerType) {
+		this.flowerType = flowerType;
 	}
 	
-	public void setAccessory(AccessoryDTO accessory) {
+	/*public void setAccessory(AccessoryDTO accessory) {
 		this.accessory = accessory;
 	}
 	
 	public void setArrangementTheme(String arrangementTheme) {
 		this.arrangementTheme = arrangementTheme;
-	}
+	}*/
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public void setOrderNumber(int orderNumber) {
-		this.orderNumber = orderNumber;
 	}
 
 	public void setDateOfOrder(Date dateOfOrder) {
@@ -106,19 +111,15 @@ public class OrderDTO {
 		this.dateOfDelivery = dateOfDelivery;
 	}
 
-	public void isDelivered(boolean hasBeenDelivered) {
-		this.isDelivered = hasBeenDelivered;
+	public void setisDelivered(String isDelivered) {
+		this.isDelivered = isDelivered;
 	}
-	
-	public void hasCard(boolean orderHasCard) {
-		this.hasCard = orderHasCard;
-    }
 	
 	public void setCardText(String orderCardText) {
 		this.cardText = orderCardText;
 	}
 
-	public void setPaidFor(boolean isPaidFor) {
+	public void setPaidFor(String isPaidFor) {
 		this.isPaidFor = isPaidFor;
 	}
 }
