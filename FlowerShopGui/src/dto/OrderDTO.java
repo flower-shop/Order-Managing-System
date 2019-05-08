@@ -70,6 +70,7 @@ public class OrderDTO {
 	public String getAddress() {
 		return address;
 	}
+
 	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
@@ -85,9 +86,11 @@ public class OrderDTO {
 	public String getCardText() {
 		return cardText;
 	}
+
 	public String getIsPaidFor() {
 		return isPaidFor;
 	}
+
 	public String getIsDelivered() {
 		return isDelivered;
 	}
@@ -99,6 +102,7 @@ public class OrderDTO {
 	public void setDateOfOrder(Date dateOfOrder) {
 		this.dateOfOrder = dateOfOrder;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
