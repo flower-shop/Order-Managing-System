@@ -109,16 +109,14 @@ public class OrderDAO {
 	// TO_DATE('06/06/2006', 'mm/dd/yyyy')
 	// )
 
-	public void insertOrder(OrderDTO pendingOrder) {
+	public void insertOrder(OrderDTO order) {
 		String sql = "INSERT INTO Orders (orderID, orderDate, lastName, firstName, phoneNumber, email, flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost, hasCard, cardText, isPaid, isDelivered) VALUES("
-				+ pendingOrder.getOrderNumber() + ", '" + pendingOrder.getOrderDate() + "', '"
-				+ pendingOrder.getLastName() + "', '" + pendingOrder.getFirstName() + "', '"
-				+ pendingOrder.getPhoneNumber() + "', '" + pendingOrder.getEmail() + "', '"
-				+ pendingOrder.getFlowerType() + "', " + pendingOrder.getFlowerQty() + ", '"
-				+ pendingOrder.getAccessory() + "', '" + pendingOrder.getArrangementType() + "', '"
-				+ pendingOrder.getAddress() + "', '" + pendingOrder.getDeliveryDate() + "', "
-				+ pendingOrder.getTotalCost() + ", '" + pendingOrder.getHasCard() + "', '" + pendingOrder.getCardText()
-				+ "', '" + pendingOrder.getIsPaidFor() + "', '" + pendingOrder.getIsDelivered() + "')";
+				+ order.getOrderNumber() + ", '" + order.getOrderDate() + "', '" + order.getLastName() + "', '"
+				+ order.getFirstName() + "', '" + order.getPhoneNumber() + "', '" + order.getEmail() + "', '"
+				+ order.getFlowerType() + "', " + order.getFlowerQty() + ", '" + order.getAccessory() + "', '"
+				+ order.getArrangementType() + "', '" + order.getAddress() + "', '" + order.getDeliveryDate() + "', "
+				+ order.getTotalCost() + ", '" + order.getHasCard() + "', '" + order.getCardText() + "', '"
+				+ order.getIsPaidFor() + "', '" + order.getIsDelivered() + "')";
 
 		System.out.println(sql);
 
@@ -126,7 +124,30 @@ public class OrderDAO {
 			int rowCount = stmt.executeUpdate(sql);
 
 			if (rowCount == 0) {
-				System.out.println("Employee insert failed");
+				System.out.println("Order insert failed");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
+
+	public void updateOrder(OrderDTO order) {
+		String sql = "UPDATE Orders SET orderNumber=" + order.getOrderNumber() + "', orderDate='" + order.getOrderDate()
+				+ ", lastName ='" + order.getLastName() + "', firstName='" + order.getFirstName() + "', phoneNumber='"
+				+ order.getPhoneNumber() + "', email='" + order.getEmail() + "', flowerType='" + order.getFlowerType()
+				+ "', quantity=" + order.getFlowerQty() + ", accessoryType='" + order.getAccessory()
+				+ "', arrangementTheme='" + order.getArrangementType() + "', address='" + order.getAddress()
+				+ "', deliveryDate='" + order.getDeliveryDate() + "', totalCost=" + order.getTotalCost() + ", hasCard='"
+				+ order.getHasCard() + "', cardText='" + order.getCardText() + "', isPaid='" + order.getIsPaidFor()
+				+ "', isDelivered='" + order.getIsDelivered() + "'";
+
+		System.out.println(sql);
+
+		try {
+			int rowCount = stmt.executeUpdate(sql);
+
+			if (rowCount == 0) {
+				System.out.println("Order update failed");
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
