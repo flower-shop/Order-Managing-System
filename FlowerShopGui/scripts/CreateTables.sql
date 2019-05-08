@@ -33,9 +33,11 @@ PRIMARY KEY(arrangementTheme));
 
 CREATE TABLE Orders (
 orderID INT NOT NULL,
-arrangementTheme VARCHAR(10) NOT NULL,
+totalCost INT,
+arrangementTheme VARCHAR(10) ,
 phoneNumber VARCHAR(15) NOT NULL,
 flowerType VARCHAR(15) NOT NULL,
+address VARCHAR(50),
 accessoryType VARCHAR (15),
 hasCard VARCHAR(3),
 CONSTRAINT hCard CHECK(hasCard IN ('yes','no')),
@@ -51,9 +53,3 @@ FOREIGN KEY(arrangementTheme) REFERENCES Arrangement(arrangementTheme),
 FOREIGN KEY(phoneNumber) REFERENCES Customer(phoneNumber),
 FOREIGN KEY(flowerType) REFERENCES Flower(flowerType),
 FOREIGN KEY(accessoryType) REFERENCES Accessory(accessoryType));
-
-
-
-
-
-
