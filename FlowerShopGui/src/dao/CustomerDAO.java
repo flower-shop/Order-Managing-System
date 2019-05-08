@@ -15,7 +15,7 @@ public class CustomerDAO {
 	PreparedStatement pstmt = null;
 	Statement stmt = null;
 	ResultSet rs = null;
-	
+
 	public CustomerDAO() {
 		try {
 			con = ConnectionFactory.getConnection();
@@ -24,7 +24,7 @@ public class CustomerDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<CustomerDTO> selectAll() {
 		List<CustomerDTO> customers = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class CustomerDAO {
 			while (resultSet.next()) {
 				String lastName = resultSet.getString(1);
 				String firstName = resultSet.getString(2);
-				int phoneNumber = resultSet.getInt(3);
+				String phoneNumber = resultSet.getString(3);
 				String email = resultSet.getString(4);
 
 				customers.add(new CustomerDTO(lastName, firstName, phoneNumber, email));
@@ -51,5 +51,23 @@ public class CustomerDAO {
 		}
 		return customers;
 	}
-	
+
+	public void insertCustomer(CustomerDTO pendingCustomer) {
+		String sql = "INSERT INTO Customer (lastName, firstName, phoneNumber, email) VALUES('"
+				+ pendingCustomer.getLastName() + "', '" + pendingCustomer.getFirstName() + "', '"
+				+ pendingCustomer.getPhoneNumber() + "', '" + pendingCustomer.getEmail() + "')";
+
+		System.out.println(sql);
+
+		try {
+			int rowCount = stmt.executeUpdate(sql);
+
+			if (rowCount == 0) {
+				System.out.println("Customer insert failed");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
 }
