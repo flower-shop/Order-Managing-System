@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -136,10 +137,9 @@ public class OrdersPanel extends JPanel implements ActionListener {
 					isPaidTextField.setText((String) ordersTable.getValueAt(selectedRow, 15));
 					isDeliveredTextField.setText((String) ordersTable.getValueAt(selectedRow, 16));
 
-					// orderNumberTextField.setEditable(false);
-					// orderNumberTextField.setFocusable(false);
-					// orderNumberTextField.setBackground(new Color(224, 224,
-					// 224));
+					orderNumberTextField.setEditable(false);
+					orderNumberTextField.setFocusable(false);
+					orderNumberTextField.setBackground(new Color(224, 224, 224));
 				} else {
 					JOptionPane.showMessageDialog(null, "Please select a row");
 				}

@@ -103,12 +103,6 @@ public class OrderDAO {
 		return orders;
 	}
 
-	// INSERT INTO TABLE_NAME(
-	// date_column
-	// )values(
-	// TO_DATE('06/06/2006', 'mm/dd/yyyy')
-	// )
-
 	public void insertOrder(OrderDTO order) {
 		String sql = "INSERT INTO Orders (orderID, orderDate, lastName, firstName, phoneNumber, email, flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost, hasCard, cardText, isPaid, isDelivered) VALUES("
 				+ order.getOrderNumber() + ", '" + order.getOrderDate() + "', '" + order.getLastName() + "', '"
@@ -132,8 +126,8 @@ public class OrderDAO {
 	}
 
 	public void updateOrder(OrderDTO order) {
-		String sql = "UPDATE Orders SET orderNumber=" + order.getOrderNumber() + "', orderDate='" + order.getOrderDate()
-				+ ", lastName ='" + order.getLastName() + "', firstName='" + order.getFirstName() + "', phoneNumber='"
+		String sql = "UPDATE Orders SET orderID=" + order.getOrderNumber() + ", orderDate='" + order.getOrderDate()
+				+ "', lastName ='" + order.getLastName() + "', firstName='" + order.getFirstName() + "', phoneNumber='"
 				+ order.getPhoneNumber() + "', email='" + order.getEmail() + "', flowerType='" + order.getFlowerType()
 				+ "', quantity=" + order.getFlowerQty() + ", accessoryType='" + order.getAccessory()
 				+ "', arrangementTheme='" + order.getArrangementType() + "', address='" + order.getAddress()
