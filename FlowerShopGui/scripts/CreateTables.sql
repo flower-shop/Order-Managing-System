@@ -22,34 +22,31 @@ PRIMARY KEY(flowerType));
 CREATE TABLE Accessory (
 accessoryType VARCHAR (15),
 CONSTRAINT aType CHECK(accessoryType IN ('Vase','Wreath','Bouquet','None')),
-accessoryCost DECIMAL,
+accessoryCost DECIMAL (5,2),
 PRIMARY KEY(accessoryType));
 
 CREATE TABLE Arrangement (
 arrangementTheme VARCHAR(10) NOT NULL,
 CONSTRAINT aTheme CHECK(arrangementTheme IN ('Birthday','Funeral','Romantic','None')),
-arrangementCost DECIMAL,
+arrangementCost DECIMAL (5,2),
 PRIMARY KEY(arrangementTheme));
 
 CREATE TABLE Orders (
 orderID INT NOT NULL,
-totalCost INT,
-arrangementTheme VARCHAR(10) ,
 phoneNumber VARCHAR(15) NOT NULL,
-flowerType VARCHAR(15) NOT NULL,
-address VARCHAR(50),
-accessoryType VARCHAR (15),
-hasCard VARCHAR(3),
-CONSTRAINT hCard CHECK(hasCard IN ('yes','no')),
-cardText VARCHAR(50),
 orderDate DATE NOT NULL,
+flowerType VARCHAR(15) NOT NULL,
+quantity INT NOT NULL,
+accessoryType VARCHAR (15),
+arrangementTheme VARCHAR(10),
+address VARCHAR(50),
 deliveryDate DATE,
-isPaid VARCHAR(3), 
-CONSTRAINT opaid CHECK(isPaid IN ('yes','no')),
-isDelivered VARCHAR(3),
-CONSTRAINT odeliv CHECK(isDelivered IN ('yes','no')),
+totalCost DECIMAL (5,2),
+hasCard VARCHAR(5),
+cardText VARCHAR(50),
+isPaid VARCHAR(5),
+isDelivered VARCHAR(5),
 PRIMARY KEY(orderID),
 FOREIGN KEY(arrangementTheme) REFERENCES Arrangement(arrangementTheme),
 FOREIGN KEY(phoneNumber) REFERENCES Customer(phoneNumber),
-FOREIGN KEY(flowerType) REFERENCES Flower(flowerType),
 FOREIGN KEY(accessoryType) REFERENCES Accessory(accessoryType));
