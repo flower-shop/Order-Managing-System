@@ -124,8 +124,8 @@ public class OrdersPanel extends JPanel implements ActionListener {
 
 					orderNumberTextField.setText(ordersTable.getValueAt(selectedRow, 0).toString());
 					orderDateTextField.setText((String) ordersTable.getValueAt(selectedRow, 1));
-					lastNameTextField.setText((String) ordersTable.getValueAt(selectedRow, 2));
-					firstNameTextField.setText((String) ordersTable.getValueAt(selectedRow, 3));
+					firstNameTextField.setText((String) ordersTable.getValueAt(selectedRow, 2));
+					lastNameTextField.setText((String) ordersTable.getValueAt(selectedRow, 3));
 					phoneNumberTextField.setText((String) ordersTable.getValueAt(selectedRow, 4));
 					emailTextField.setText((String) ordersTable.getValueAt(selectedRow, 5));
 					flowerTypeTextField.setText((String) ordersTable.getValueAt(selectedRow, 6));
