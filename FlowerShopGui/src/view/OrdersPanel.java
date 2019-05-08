@@ -92,7 +92,7 @@ public class OrdersPanel extends JPanel implements ActionListener {
 
 		Component verticalGlue_2 = Box.createVerticalGlue();
 		ordersControlButtonsPanel.add(verticalGlue_2);
-		ordersControlButtonsPanel.add(ordersUpdateButton);
+		ordersControlButtonsPanel.add(ordersUpdateButton, FlowLayout.CENTER);
 
 		GroupLayout ordersLayout = new GroupLayout(this);
 		this.setLayout(ordersLayout);
@@ -213,43 +213,43 @@ public class OrdersPanel extends JPanel implements ActionListener {
 			fieldsPanel.add(accessoryLabel, c);
 
 			JLabel arrangementLabel = new JLabel("Arrangement:");
-			c.gridx = 0;
-			c.gridy = 9;
+			c.gridx = 2;
+			c.gridy = 0;
 			fieldsPanel.add(arrangementLabel, c);
 
 			JLabel addressLabel = new JLabel("Address:");
-			c.gridx = 0;
-			c.gridy = 10;
+			c.gridx = 2;
+			c.gridy = 1;
 			fieldsPanel.add(addressLabel, c);
 
 			JLabel deliveryDateLabel = new JLabel("Delivery Date:");
-			c.gridx = 0;
-			c.gridy = 11;
+			c.gridx = 2;
+			c.gridy = 2;
 			fieldsPanel.add(deliveryDateLabel, c);
 
 			JLabel totalCostLabel = new JLabel("Total Cost:");
-			c.gridx = 0;
-			c.gridy = 12;
+			c.gridx = 2;
+			c.gridy = 3;
 			fieldsPanel.add(totalCostLabel, c);
 
 			JLabel hasCardLabel = new JLabel("Card:");
-			c.gridx = 0;
-			c.gridy = 13;
+			c.gridx = 2;
+			c.gridy = 4;
 			fieldsPanel.add(hasCardLabel, c);
 
 			JLabel cardTextLabel = new JLabel("Card Text:");
-			c.gridx = 0;
-			c.gridy = 14;
+			c.gridx = 2;
+			c.gridy = 5;
 			fieldsPanel.add(cardTextLabel, c);
 
 			JLabel isPaidLabel = new JLabel("Paid:");
-			c.gridx = 0;
-			c.gridy = 15;
+			c.gridx = 2;
+			c.gridy = 6;
 			fieldsPanel.add(isPaidLabel, c);
 
 			JLabel isDeliveredLabel = new JLabel("Delivered:");
-			c.gridx = 0;
-			c.gridy = 16;
+			c.gridx = 2;
+			c.gridy = 7;
 			fieldsPanel.add(isDeliveredLabel, c);
 
 			orderNumberTextField = new JTextField(15);
@@ -298,43 +298,43 @@ public class OrdersPanel extends JPanel implements ActionListener {
 			fieldsPanel.add(accessoryTypeTextField, c);
 
 			arrangementThemeTextField = new JTextField(15);
-			c.gridx = 1;
-			c.gridy = 9;
+			c.gridx = 3;
+			c.gridy = 0;
 			fieldsPanel.add(arrangementThemeTextField, c);
 
 			addressTextField = new JTextField(15);
-			c.gridx = 1;
-			c.gridy = 10;
+			c.gridx = 3;
+			c.gridy = 1;
 			fieldsPanel.add(addressTextField, c);
 
 			deliveryDateTextField = new JTextField(15);
-			c.gridx = 1;
-			c.gridy = 11;
+			c.gridx = 3;
+			c.gridy = 2;
 			fieldsPanel.add(deliveryDateTextField, c);
 
 			totalCostTextField = new JTextField(15);
-			c.gridx = 1;
-			c.gridy = 12;
+			c.gridx = 3;
+			c.gridy = 3;
 			fieldsPanel.add(totalCostTextField, c);
 
 			hasCardTextField = new JTextField(15);
-			c.gridx = 1;
-			c.gridy = 13;
+			c.gridx = 3;
+			c.gridy = 4;
 			fieldsPanel.add(hasCardTextField, c);
 
 			cardTextTextField = new JTextField(15);
-			c.gridx = 1;
-			c.gridy = 14;
+			c.gridx = 3;
+			c.gridy = 5;
 			fieldsPanel.add(cardTextTextField, c);
 
 			isPaidTextField = new JTextField(15);
-			c.gridx = 1;
-			c.gridy = 15;
+			c.gridx = 3;
+			c.gridy = 6;
 			fieldsPanel.add(isPaidTextField, c);
 
 			isDeliveredTextField = new JTextField(15);
-			c.gridx = 1;
-			c.gridy = 16;
+			c.gridx = 3;
+			c.gridy = 7;
 			fieldsPanel.add(isDeliveredTextField, c);
 
 			// ----------------------------------------------------------------------------------------------------
@@ -370,7 +370,7 @@ public class OrdersPanel extends JPanel implements ActionListener {
 			this.setAlwaysOnTop(true);
 
 			this.getContentPane().setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
-			this.setSize(400, 1000);
+			this.setSize(700, 500);
 			this.setResizable(false);
 			this.setVisible(true);
 			this.setLocationRelativeTo(null);
