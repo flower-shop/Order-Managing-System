@@ -2,7 +2,7 @@ package dto;
 import java.util.Date;
 
 public class OrderDTO {
-	private Date dateOfOrder;
+	private Date orderDate;
 	private String firstName;
 	private String lastName;
 	private String flowerType;
@@ -22,7 +22,7 @@ public class OrderDTO {
 			String accessory, String arrangementType, String address, Date deliveryDate, double totalCost,
 			String hasCard, String cardText, String isPaidFor, String isDelivered, int orderNumber) {
 
-		this.dateOfOrder = dateOfOrder;
+		this.orderDate = dateOfOrder;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.flowerType = flowerType;
@@ -40,7 +40,7 @@ public class OrderDTO {
 	}
 
 	public Date getDateOfOrder() {
-		return dateOfOrder;
+		return orderDate;
 	}
 
 	public String getFirstName() {
@@ -100,7 +100,7 @@ public class OrderDTO {
 	}
 
 	public void setDateOfOrder(Date dateOfOrder) {
-		this.dateOfOrder = dateOfOrder;
+		this.orderDate = dateOfOrder;
 	}
 
 	public void setFirstName(String firstName) {
