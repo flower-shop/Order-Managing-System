@@ -9,8 +9,8 @@ public class OrderDTO {
 	private String email;
 	private String flowerType;
 	private int flowerQty;
-	private String accessory;
-	private String arrangementType;
+	private String accessoryType;
+	private String arrangementTheme;
 	private String address;
 	private String deliveryDate;
 	private double totalCost;
@@ -18,8 +18,9 @@ public class OrderDTO {
 	private String cardText;
 	private String isPaidFor;
 	private String isDelivered;
+
 	public OrderDTO(int orderNumber, String orderDate, String firstName, String lastName, String phoneNumber,
-			String email, String flowerType, int flowerQty, String accessory, String arrangementType, String address,
+			String email, String flowerType, int flowerQty, String accessoryType, String arrangementTheme, String address,
 			String deliveryDate, double totalCost, String hasCard, String cardText, String isPaidFor,
 			String isDelivered) {
 
@@ -31,8 +32,8 @@ public class OrderDTO {
 		this.email = email;
 		this.flowerType = flowerType;
 		this.flowerQty = flowerQty;
-		this.accessory = accessory;
-		this.arrangementType = arrangementType;
+		this.accessoryType = accessoryType;
+		this.arrangementTheme = arrangementTheme;
 		this.address = address;
 		this.deliveryDate = deliveryDate;
 		this.totalCost = totalCost;
@@ -65,11 +66,11 @@ public class OrderDTO {
 	public int getFlowerQty() {
 		return flowerQty;
 	}
-	public String getAccessory() {
-		return accessory;
+	public String getAccessoryType() {
+		return accessoryType;
 	}
-	public String getArrangementType() {
-		return arrangementType;
+	public String getArrangementTheme() {
+		return arrangementTheme;
 	}
 	public String getAddress() {
 		return address;
@@ -117,10 +118,10 @@ public class OrderDTO {
 		this.flowerQty = flowerQty;
 	}
 	public void setAccessory(String accessory) {
-		this.accessory = accessory;
+		this.accessoryType = accessory;
 	}
 	public void setArrangementType(String arrangementType) {
-		this.arrangementType = arrangementType;
+		this.arrangementTheme = arrangementType;
 	}
 	public void setAddress(String address) {
 		this.address = address;

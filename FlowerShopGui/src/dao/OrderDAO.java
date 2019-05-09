@@ -107,8 +107,8 @@ public class OrderDAO {
 		String sql = "INSERT INTO Orders (orderID, orderDate, lastName, firstName, phoneNumber, email, flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost, hasCard, cardText, isPaid, isDelivered) VALUES("
 				+ order.getOrderNumber() + ", '" + order.getOrderDate() + "', '" + order.getLastName() + "', '"
 				+ order.getFirstName() + "', '" + order.getPhoneNumber() + "', '" + order.getEmail() + "', '"
-				+ order.getFlowerType() + "', " + order.getFlowerQty() + ", '" + order.getAccessory() + "', '"
-				+ order.getArrangementType() + "', '" + order.getAddress() + "', '" + order.getDeliveryDate() + "', "
+				+ order.getFlowerType() + "', " + order.getFlowerQty() + ", '" + order.getAccessoryType() + "', '"
+				+ order.getArrangementTheme() + "', '" + order.getAddress() + "', '" + order.getDeliveryDate() + "', "
 				+ order.getTotalCost() + ", '" + order.getHasCard() + "', '" + order.getCardText() + "', '"
 				+ order.getIsPaidFor() + "', '" + order.getIsDelivered() + "')";
 
@@ -129,8 +129,8 @@ public class OrderDAO {
 		String sql = "UPDATE Orders SET orderID=" + order.getOrderNumber() + ", orderDate='" + order.getOrderDate()
 				+ "', lastName ='" + order.getLastName() + "', firstName='" + order.getFirstName() + "', phoneNumber='"
 				+ order.getPhoneNumber() + "', email='" + order.getEmail() + "', flowerType='" + order.getFlowerType()
-				+ "', quantity=" + order.getFlowerQty() + ", accessoryType='" + order.getAccessory()
-				+ "', arrangementTheme='" + order.getArrangementType() + "', address='" + order.getAddress()
+				+ "', quantity=" + order.getFlowerQty() + ", accessoryType='" + order.getAccessoryType()
+				+ "', arrangementTheme='" + order.getArrangementTheme() + "', address='" + order.getAddress()
 				+ "', deliveryDate='" + order.getDeliveryDate() + "', totalCost=" + order.getTotalCost() + ", hasCard='"
 				+ order.getHasCard() + "', cardText='" + order.getCardText() + "', isPaid='" + order.getIsPaidFor()
 				+ "', isDelivered='" + order.getIsDelivered() + "'";
