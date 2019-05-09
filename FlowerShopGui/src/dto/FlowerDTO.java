@@ -11,20 +11,6 @@ public class FlowerDTO {
 		this.flowerType = flowerType;
 		this.flowerCost = flowerCost;
 		this.flowerQty = flowerQty;
-
-		/*switch (type) {
-			case Tulip :
-				cost = 2.00;
-				break;
-			case Rose :
-				cost = 2.50;
-				break;
-			case Gardenia :
-				cost = 1.00;
-				break;
-			default :
-				break;
-		}*/
 	}
 
 	public double getFlowerCost() {

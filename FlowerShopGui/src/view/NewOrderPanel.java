@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import dao.FlowerDAO;
+import dto.FlowerDTO;
 import enums.AccessoryType;
 import enums.ArrangementTheme;
 
@@ -35,6 +36,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	private JTextField deliveryAddressTextField = new JTextField();
 	private JTextField quantityTextField = new JTextField();
 	private JTextField cardInfoTextField = new JTextField();
+	JTextField unitPriceTextField = new JTextField();
 	private JDateChooser dateChooser = new JDateChooser();
 	private static JComboBox<String> flowerTypeComboBox = new JComboBox<>();
 	private JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
@@ -125,7 +127,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		JLabel flowerTypeLabel = new JLabel("Flower type");
 
 		JLabel unitPriceLabel = new JLabel("Unit price");
-		JTextField unitPriceTextField = new JTextField();
+
 		unitPriceTextField.setEditable(false);
 		unitPriceTextField.setFocusable(false);
 
@@ -203,6 +205,8 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		cancelOrder.setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
 		cancelOrder.addActionListener(this);
 
+		flowerTypeComboBox.addActionListener(this);
+
 		controlButtonsPanel.add(cancelOrder);
 		Component verticalGlue = Box.createVerticalGlue();
 		controlButtonsPanel.add(verticalGlue);
@@ -235,6 +239,13 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(flowerTypeComboBox)) {
+			FlowerDAO flowerDAO = new FlowerDAO();
+			String selectedItem = flowerTypeComboBox.getSelectedItem().toString();
 
+			FlowerDTO flowerDTO = flowerDAO.select(selectedItem);
+
+			unitPriceTextField.setText(Double.toString(flowerDTO.getFlowerCost()));
+		}
 	}
 }
