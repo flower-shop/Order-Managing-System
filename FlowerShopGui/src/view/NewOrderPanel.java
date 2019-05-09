@@ -22,10 +22,8 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import dao.FlowerDAO;
-import dto.FlowerDTO;
 import enums.AccessoryType;
 import enums.ArrangementTheme;
-import enums.FlowerType;
 
 public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;
@@ -38,12 +36,11 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	private JTextField quantityTextField = new JTextField();
 	private JTextField cardInfoTextField = new JTextField();
 	private JDateChooser dateChooser = new JDateChooser();
-	private JComboBox<String> flowerTypeComboBox = new JComboBox<>();
+	private static JComboBox<String> flowerTypeComboBox = new JComboBox<>();
 	private JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
 	private JComboBox<ArrangementTheme> arrangementThemeComboBox = new JComboBox<>(ArrangementTheme.values());
-	
-	private FlowerDAO flowerDAO = new FlowerDAO();
 
+	private static FlowerDAO flowerDAO = new FlowerDAO();
 
 	JButton placeOrder = new JButton("Place Order");
 	JButton cancelOrder = new JButton("Cancel Order");
@@ -78,11 +75,11 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 		customerInfoLayout.setVerticalGroup(customerInfoLayout.createSequentialGroup()
 				.addGroup(customerInfoLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(firstNameLabel).addComponent(firstNameInputField)
-						.addComponent(lastNameLabel).addComponent(lastNameInputField))
+						.addComponent(firstNameLabel).addComponent(firstNameInputField).addComponent(lastNameLabel)
+						.addComponent(lastNameInputField))
 				.addGroup(customerInfoLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(phoneNumberLabel).addComponent(phoneNumberTextField)
-						.addComponent(emailLabel).addComponent(emailTextField)));
+						.addComponent(phoneNumberLabel).addComponent(phoneNumberTextField).addComponent(emailLabel)
+						.addComponent(emailTextField)));
 
 		JPanel deliveryInfoPanel = new JPanel();
 		deliveryInfoPanel.setBorder(BorderFactory.createTitledBorder("Delivery info"));
@@ -102,23 +99,21 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 						.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(deliveryAddressTextField, GroupLayout.PREFERRED_SIZE, 641,
 										GroupLayout.PREFERRED_SIZE)
-								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 166,
-										GroupLayout.PREFERRED_SIZE))
+								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE))
 						.addGap(106)));
-		deliveryInfoLayout
-				.setVerticalGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(deliveryInfoLayout.createSequentialGroup()
-								.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(deliveryAddressLabel)
-										.addComponent(deliveryAddressTextField, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGap(6)
-								.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(deliveryDateLabel, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addContainerGap()));
+		deliveryInfoLayout.setVerticalGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(deliveryInfoLayout.createSequentialGroup()
+						.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(deliveryAddressLabel).addComponent(deliveryAddressTextField,
+										GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addGap(6)
+						.addGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(deliveryDateLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
+								.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE))
+						.addContainerGap()));
 		deliveryInfoLayout.setAutoCreateGaps(true);
 		deliveryInfoLayout.setAutoCreateContainerGaps(true);
 		deliveryInfoPanel.setLayout(deliveryInfoLayout);
@@ -157,27 +152,23 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 		orderInfoLayout.setHorizontalGroup(orderInfoLayout.createParallelGroup()
 				.addGroup(orderInfoLayout.createSequentialGroup().addComponent(flowerTypeLabel)
-						.addComponent(flowerTypeComboBox).addComponent(unitPriceLabel)
-						.addComponent(unitPriceTextField).addComponent(quantityLabel)
-						.addComponent(quantityTextField))
+						.addComponent(flowerTypeComboBox).addComponent(unitPriceLabel).addComponent(unitPriceTextField)
+						.addComponent(quantityLabel).addComponent(quantityTextField))
 				.addGroup(orderInfoLayout.createSequentialGroup().addComponent(accessoryTypeLabel)
 						.addComponent(accessoryTypeComboBox).addComponent(arrangementThemeLabel)
 						.addComponent(arrangementThemeComboBox))
-				.addGroup(orderInfoLayout.createSequentialGroup().addComponent(cardLabel)
-						.addComponent(noRadioButton).addComponent(yesRadioButton)
-						.addComponent(cardInfoTextField)));
+				.addGroup(orderInfoLayout.createSequentialGroup().addComponent(cardLabel).addComponent(noRadioButton)
+						.addComponent(yesRadioButton).addComponent(cardInfoTextField)));
 
 		orderInfoLayout.setVerticalGroup(orderInfoLayout.createSequentialGroup()
 				.addGroup(orderInfoLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(flowerTypeLabel).addComponent(flowerTypeComboBox)
-						.addComponent(unitPriceLabel).addComponent(unitPriceTextField)
-						.addComponent(quantityLabel).addComponent(quantityTextField))
+						.addComponent(flowerTypeLabel).addComponent(flowerTypeComboBox).addComponent(unitPriceLabel)
+						.addComponent(unitPriceTextField).addComponent(quantityLabel).addComponent(quantityTextField))
 				.addGroup(orderInfoLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(accessoryTypeLabel).addComponent(accessoryTypeComboBox)
 						.addComponent(arrangementThemeLabel).addComponent(arrangementThemeComboBox))
-				.addGroup(orderInfoLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(cardLabel).addComponent(noRadioButton).addComponent(yesRadioButton)
-						.addComponent(cardInfoTextField)));
+				.addGroup(orderInfoLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(cardLabel)
+						.addComponent(noRadioButton).addComponent(yesRadioButton).addComponent(cardInfoTextField)));
 
 		orderInfoPanel.setLayout(orderInfoLayout);
 
@@ -230,11 +221,13 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		this.add(controlButtonsPanel);
 		this.add(Box.createVerticalGlue());
 		this.setLayout(newOrderLayout);
-		
+
 		populateFlowerTypeComboBox();
 	}
-	
-	public void populateFlowerTypeComboBox() {
+
+	public static void populateFlowerTypeComboBox() {
+		flowerTypeComboBox.removeAllItems();
+
 		List<String> flowersInStock = flowerDAO.selectInStock();
 		for (int i = 0; i < flowersInStock.size(); i++)
 			flowerTypeComboBox.addItem(flowersInStock.get(i));
