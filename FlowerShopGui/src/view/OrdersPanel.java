@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,7 +11,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 
-import javax.swing.Box;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -93,10 +91,8 @@ public class OrdersPanel extends JPanel implements ActionListener {
 
 		JPanel ordersControlButtonsPanel = new JPanel(ordersControlButtonsLayout);
 		ordersControlButtonsPanel.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
+		ordersControlButtonsPanel.add(ordersUpdateButton);
 
-		Component verticalGlue_2 = Box.createVerticalGlue();
-		ordersControlButtonsPanel.add(verticalGlue_2);
-		ordersControlButtonsPanel.add(ordersUpdateButton, FlowLayout.CENTER);
 
 		GroupLayout ordersLayout = new GroupLayout(this);
 		this.setLayout(ordersLayout);
