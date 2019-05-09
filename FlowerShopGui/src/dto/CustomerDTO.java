@@ -1,5 +1,4 @@
 package dto;
-import java.util.ArrayList;
 
 public class CustomerDTO {
 	private String firstName;
@@ -7,7 +6,6 @@ public class CustomerDTO {
 	private String address;
 	private String phoneNumber;
 	private String email;
-	private ArrayList<OrderDTO> orderHistory = new ArrayList<>();
 
 	public CustomerDTO(String lastName, String firstName, /* String address, */String phoneNumber, String email) {
 		this.lastName = lastName;
@@ -37,10 +35,6 @@ public class CustomerDTO {
 		return email;
 	}
 
-	public ArrayList<OrderDTO> getOrderHistory() {
-		return orderHistory;
-	}
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -59,9 +53,5 @@ public class CustomerDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public void setOrderHistory(ArrayList<OrderDTO> orderHistory) {
-		this.orderHistory = orderHistory;
 	}
 }
