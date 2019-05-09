@@ -230,7 +230,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	}
 
 	public static void populateFlowerTypeComboBox() {
-		flowerTypeComboBox.removeAllItems();
+		// flowerTypeComboBox.removeAllItems();
 
 		List<String> flowersInStock = flowerDAO.selectInStock();
 		for (int i = 0; i < flowersInStock.size(); i++)

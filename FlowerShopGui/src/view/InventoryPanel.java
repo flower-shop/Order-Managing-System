@@ -252,6 +252,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
 				int flowerQty = Integer.valueOf(flowerQtyTextField.getText());
 
 				flowerDAO.updateFlower(new FlowerDTO(flowerType, flowerCost, flowerQty));
+				NewOrderPanel.populateFlowerTypeComboBox();
 
 				populateTable();
 
