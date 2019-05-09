@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -20,6 +21,8 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import dao.FlowerDAO;
+import dto.FlowerDTO;
 import enums.AccessoryType;
 import enums.ArrangementTheme;
 import enums.FlowerType;
@@ -35,9 +38,12 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	private JTextField quantityTextField = new JTextField();
 	private JTextField cardInfoTextField = new JTextField();
 	private JDateChooser dateChooser = new JDateChooser();
-	private JComboBox<FlowerType> flowerTypeComboBox = new JComboBox<>(FlowerType.values());
+	private JComboBox<String> flowerTypeComboBox = new JComboBox<>();
 	private JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
 	private JComboBox<ArrangementTheme> arrangementThemeComboBox = new JComboBox<>(ArrangementTheme.values());
+	
+	private FlowerDAO flowerDAO = new FlowerDAO();
+
 
 	JButton placeOrder = new JButton("Place Order");
 	JButton cancelOrder = new JButton("Cancel Order");
@@ -224,6 +230,14 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		this.add(controlButtonsPanel);
 		this.add(Box.createVerticalGlue());
 		this.setLayout(newOrderLayout);
+		
+		populateFlowerTypeComboBox();
+	}
+	
+	public void populateFlowerTypeComboBox() {
+		List<String> flowersInStock = flowerDAO.selectInStock();
+		for (int i = 0; i < flowersInStock.size(); i++)
+			flowerTypeComboBox.addItem(flowersInStock.get(i));
 	}
 
 	@Override

@@ -73,6 +73,30 @@ public class FlowerDAO {
 		return flowers;
 	}
 	
+	public List<String> selectInStock() {
+		List<String> flowersInStock = new ArrayList<>();
+
+		String query = "SELECT flowerType FROM Flower WHERE flowerQty != 0";
+
+		try {
+			ResultSet resultSet = stmt.executeQuery(query);
+
+			if (resultSet == null) {
+				return new ArrayList<>();
+			}
+
+			while (resultSet.next()) {
+				String type = resultSet.getString(1);
+
+				flowersInStock.add(new String(type));
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			return new ArrayList<>();
+		}
+		return flowersInStock;
+	}
+	
 	public void insertFlower(FlowerDTO pendingFlower) {
 		String sql = "INSERT INTO Flower (flowerType, flowerCost, flowerQty) VALUES('"
 				+ pendingFlower.getFlowerType() + "', " + pendingFlower.getFlowerCost() + ", "
