@@ -9,10 +9,9 @@ import java.util.List;
 import dto.FlowerDTO;
 
 public class FlowerDAO {
-	
 	private Connection con = null;
 	private Statement stmt = null;
-	
+
 	public FlowerDAO() {
 		try {
 			con = ConnectionFactory.getConnection();
@@ -21,7 +20,7 @@ public class FlowerDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public FlowerDTO select(String flowerType) {
 		String query = "SELECT * FROM Flower WHERE flowerType=" + flowerType;
 
@@ -31,7 +30,7 @@ public class FlowerDAO {
 			if (resultSet == null) {
 				return null;
 			}
-			
+
 			if (resultSet.next()) {
 				String type = resultSet.getString(1);
 				double flowerCost = resultSet.getDouble(2);
@@ -72,7 +71,7 @@ public class FlowerDAO {
 		}
 		return flowers;
 	}
-	
+
 	public List<String> selectInStock() {
 		List<String> flowersInStock = new ArrayList<>();
 
@@ -96,11 +95,10 @@ public class FlowerDAO {
 		}
 		return flowersInStock;
 	}
-	
+
 	public void insertFlower(FlowerDTO pendingFlower) {
-		String sql = "INSERT INTO Flower (flowerType, flowerCost, flowerQty) VALUES('"
-				+ pendingFlower.getFlowerType() + "', " + pendingFlower.getFlowerCost() + ", "
-				+ pendingFlower.getFlowerQty() + ")";
+		String sql = "INSERT INTO Flower (flowerType, flowerCost, flowerQty) VALUES('" + pendingFlower.getFlowerType()
+				+ "', " + pendingFlower.getFlowerCost() + ", " + pendingFlower.getFlowerQty() + ")";
 
 		System.out.println(sql);
 
@@ -115,11 +113,11 @@ public class FlowerDAO {
 
 		}
 	}
-	
+
 	public void updateFlower(FlowerDTO flower) {
 		String sql = "UPDATE Flower SET flowerType='" + flower.getFlowerType() + "', flowerCost="
-				+ flower.getFlowerCost() + ", flowerQty=" + flower.getFlowerQty() + 
-				" WHERE flowerType='" + flower.getFlowerType() + " ' ";
+				+ flower.getFlowerCost() + ", flowerQty=" + flower.getFlowerQty() + " WHERE flowerType='"
+				+ flower.getFlowerType() + " ' ";
 		System.out.println(sql);
 
 		try {
@@ -132,5 +130,5 @@ public class FlowerDAO {
 			System.out.println(e);
 		}
 	}
-	
+
 }
