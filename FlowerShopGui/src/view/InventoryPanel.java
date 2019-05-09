@@ -29,34 +29,34 @@ import javax.swing.table.TableModel;
 import dao.FlowerDAO;
 import dto.FlowerDTO;
 
-
 public class InventoryPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -3718843315216000622L;
 
 	private JButton inventoryUpdateButton = new JButton("Update Inventory");
 	private JButton inventoryAddButton = new JButton("Add Record");
 	private JTable inventoryTable;
-	
+
 	private FlowerDAO flowerDAO = new FlowerDAO();
-	
+
 	private boolean popupWindowExists = false;
-	
+
 	private JTextField flowerTypeTextField;
 	private JTextField flowerCostTextField;
 	private JTextField flowerQtyTextField;
 
-
 	public InventoryPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 		String[] inventoryColumnNames = {"Flower Type", "Price", "Quantity"};
-		
+
 		TableModel tableModel = new DefaultTableModel(inventoryColumnNames, 0);
-		
-		/*Object[][] inventoryContent = new Object[ViewConstants.MAX_ROW_COUNT][3];
-		for (int i = 0; i < ViewConstants.MAX_ROW_COUNT; i++) {
-			inventoryContent[i] = new Object[]{"", "", ""};
-		}*/
-		
+
+		/*
+		 * Object[][] inventoryContent = new
+		 * Object[ViewConstants.MAX_ROW_COUNT][3]; for (int i = 0; i <
+		 * ViewConstants.MAX_ROW_COUNT; i++) { inventoryContent[i] = new
+		 * Object[]{"", "", ""}; }
+		 */
+
 		inventoryTable = new JTable(tableModel) {
 			private static final long serialVersionUID = -3773892189214217159L;
 
@@ -65,12 +65,11 @@ public class InventoryPanel extends JPanel implements ActionListener {
 				return false;
 			}
 		};
-		
+
 		inventoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		populateTable();
 
-		
 		JScrollPane inventoryScrollPane = new JScrollPane(inventoryTable);
 
 		FlowLayout inventoryControlButtonsLayout = new FlowLayout();
@@ -125,7 +124,6 @@ public class InventoryPanel extends JPanel implements ActionListener {
 					flowerTypeTextField.setText((String) inventoryTable.getValueAt(selectedRow, 0));
 					flowerCostTextField.setText((String) String.valueOf(inventoryTable.getValueAt(selectedRow, 1)));
 					flowerQtyTextField.setText((String) String.valueOf(inventoryTable.getValueAt(selectedRow, 2)));
-				
 
 					flowerTypeTextField.setEditable(false);
 					flowerTypeTextField.setFocusable(false);
@@ -134,9 +132,9 @@ public class InventoryPanel extends JPanel implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Please select a row");
 				}
 			}
-         }
-     }
-	
+		}
+	}
+
 	class PopupWindow extends JFrame implements ActionListener {
 		private static final long serialVersionUID = -1987360885661467194L;
 
@@ -176,7 +174,6 @@ public class InventoryPanel extends JPanel implements ActionListener {
 			c.gridy = 2;
 			fieldsPanel.add(flowerQtyLabel, c);
 
-			
 			flowerTypeTextField = new JTextField(15);
 			c.gridx = 1;
 			c.gridy = 0;
@@ -186,7 +183,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
 			c.gridx = 1;
 			c.gridy = 1;
 			fieldsPanel.add(flowerCostTextField, c);
-			
+
 			flowerQtyTextField = new JTextField(15);
 			c.gridx = 1;
 			c.gridy = 2;
@@ -244,8 +241,9 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
 				flowerDAO.insertFlower(new FlowerDTO(flowerType, flowerCost, flowerQty));
 
+				NewOrderPanel.populateFlowerTypeComboBox();
 				populateTable();
-				
+
 				MainWindow.getTabbedPane().setEnabled(true);
 				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			} else {
