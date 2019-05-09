@@ -117,7 +117,7 @@ public class FlowerDAO {
 	public void updateFlower(FlowerDTO flower) {
 		String sql = "UPDATE Flower SET flowerType='" + flower.getFlowerType() + "', flowerCost="
 				+ flower.getFlowerCost() + ", flowerQty=" + flower.getFlowerQty() + " WHERE flowerType='"
-				+ flower.getFlowerType() + " ' ";
+				+ flower.getFlowerType() + "'";
 		System.out.println(sql);
 
 		try {
