@@ -22,7 +22,7 @@ public class EmployeeDAO {
 	}
 
 	public EmployeeDTO select(String employeeId) {
-		String query = "SELECT * FROM Employee WHERE employeeId=" + employeeId;
+		String query = "SELECT * FROM Employee WHERE employeeId='" + employeeId + "'";
 
 		try {
 			ResultSet resultSet = stmt.executeQuery(query);
