@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -40,7 +42,6 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	JTextField unitPriceTextField = new JTextField();
 	private JDateChooser dateChooser = new JDateChooser();
 	private static JComboBox<String> flowerTypeComboBox = new JComboBox<>();
-	private static JComboBox<String> newFlowerTypeComboBox = new JComboBox<>();
 	private JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
 	private JComboBox<ArrangementTheme> arrangementThemeComboBox = new JComboBox<>(ArrangementTheme.values());
 
@@ -187,6 +188,20 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		orderTotalTextField.setFocusable(false);
 		orderTotalTextField.setColumns(4);
 		orderTotalTextField.setEditable(false);
+		
+		quantityTextField.addKeyListener(new KeyAdapter() {
+		      public void keyReleased(KeyEvent e) { 
+		    	  String quantity = quantityTextField.getText();
+		    	  String price = unitPriceTextField.getText();
+		    	  if (quantityTextField.getText().isEmpty()) {
+		    		  orderTotalTextField.setText(String.valueOf(0));
+		    	  }
+		    	  else {
+		    	  Double totalcost = (Double.valueOf(price)* Double.valueOf(quantity));
+		    	  orderTotalTextField.setText(String.valueOf(totalcost));  
+		         }
+		      }
+		 });
 
 		orderTotalPanel.add(orderTotalLabel);
 		orderTotalPanel.add(orderTotalTextField);

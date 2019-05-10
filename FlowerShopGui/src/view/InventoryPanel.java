@@ -51,13 +51,6 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
 		TableModel tableModel = new DefaultTableModel(inventoryColumnNames, 0);
 
-		/*
-		 * Object[][] inventoryContent = new
-		 * Object[ViewConstants.MAX_ROW_COUNT][3]; for (int i = 0; i <
-		 * ViewConstants.MAX_ROW_COUNT; i++) { inventoryContent[i] = new
-		 * Object[]{"", "", ""}; }
-		 */
-
 		inventoryTable = new JTable(tableModel) {
 			private static final long serialVersionUID = -3773892189214217159L;
 
