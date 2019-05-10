@@ -34,7 +34,6 @@ import dto.FlowerDTO;
 import dto.OrderDTO;
 import enums.AccessoryType;
 import enums.ArrangementTheme;
-import util.CurrencyFormatter;
 
 public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;
@@ -210,7 +209,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 					orderTotalTextField.setText(String.valueOf(0));
 				} else {
 					Double totalcost = (Double.valueOf(price) * Double.valueOf(quantity));
-					orderTotalTextField.setText(CurrencyFormatter.formatDouble(totalcost));
+					orderTotalTextField.setText(totalcost.toString());
 				}
 			}
 		});
