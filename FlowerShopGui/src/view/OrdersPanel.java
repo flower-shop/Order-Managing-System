@@ -75,9 +75,6 @@ public class OrdersPanel extends JPanel implements ActionListener {
 
 		ordersTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		orderDAO.insertOrder(new OrderDTO(1, "5/8/2019", "DeBenedictis", "James", "4103009587", "James@gmail.com",
-				"Rose", 4, "Vase", "Romantic", "Jessup", "5/8/2019", 22.50, "yes", "For you", "yes", "yes"));
-
 		populateTable();
 
 		JScrollPane ordersScrollPane = new JScrollPane(ordersTable);
