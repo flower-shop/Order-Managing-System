@@ -362,9 +362,7 @@ public class LoginPanel implements ActionListener {
 
 				EmployeeDTO employeeDTO = employeeDAO.select(inTxtl);
 
-				System.out.println(employeeDTO.toString());
-
-				if (employeeDTO.getEmployeeId().equals(inTxtl) && employeeDTO.getPassword().equals(passTxt)) {
+				if (employeeDTO != null && employeeDTO.getPassword().equals(passTxt)) {
 					check = true;
 				}
 
