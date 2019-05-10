@@ -360,9 +360,9 @@ public class LoginPanel implements ActionListener {
 				String inTxtl = inputTxtl.getText();
 				String passTxt = passwordTxtl.getText();
 
-				EmployeeDTO employeeDTO = employeeDAO.select(inTxtl);
+				EmployeeDTO user = employeeDAO.select(inTxtl);
 
-				if (employeeDTO != null && employeeDTO.getPassword().equals(passTxt)) {
+				if (user != null && user.getPassword().equals(passTxt)) {
 					check = true;
 				}
 
@@ -373,7 +373,7 @@ public class LoginPanel implements ActionListener {
 					instructionPanel.setVisible(true);
 				} else if (check == true) {
 					window.setVisible(false);
-					new MainWindow();
+					new MainWindow(user);
 				} else if (check == false) {
 					infoText = "Your User Name and/or password are incorrect";
 					instructionText.setText(null);
@@ -406,10 +406,10 @@ public class LoginPanel implements ActionListener {
 			}
 		} catch (Exception e) {
 		}
-		// LoginPanel begin = new LoginPanel();
-		// begin.adminCheck();
+		LoginPanel begin = new LoginPanel();
+		begin.adminCheck();
 
-		new MainWindow();
+		// new MainWindow();
 	}
 
 	@Override
