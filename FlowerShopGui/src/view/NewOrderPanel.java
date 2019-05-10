@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -39,6 +40,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	JTextField unitPriceTextField = new JTextField();
 	private JDateChooser dateChooser = new JDateChooser();
 	private static JComboBox<String> flowerTypeComboBox = new JComboBox<>();
+	private static JComboBox<String> newFlowerTypeComboBox = new JComboBox<>();
 	private JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
 	private JComboBox<ArrangementTheme> arrangementThemeComboBox = new JComboBox<>(ArrangementTheme.values());
 
@@ -230,11 +232,12 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	}
 
 	public static void populateFlowerTypeComboBox() {
-		// flowerTypeComboBox.removeAllItems();
+		flowerTypeComboBox.setModel(new DefaultComboBoxModel<String> ());
 
 		List<String> flowersInStock = flowerDAO.selectInStock();
 		for (int i = 0; i < flowersInStock.size(); i++)
-			flowerTypeComboBox.addItem(flowersInStock.get(i));
+		flowerTypeComboBox.addItem(flowersInStock.get(i));
+
 	}
 
 	@Override
