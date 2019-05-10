@@ -31,9 +31,9 @@ public class OrdersPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 2666270557360720356L;
 
 	private JButton ordersUpdateButton = new JButton("Update Record");
-	private JTable ordersTable;
+	private static JTable ordersTable;
 
-	private OrderDAO orderDAO = new OrderDAO();
+	private static OrderDAO orderDAO = new OrderDAO();
 
 	private boolean popupWindowExists = false;
 
@@ -92,7 +92,6 @@ public class OrdersPanel extends JPanel implements ActionListener {
 		JPanel ordersControlButtonsPanel = new JPanel(ordersControlButtonsLayout);
 		ordersControlButtonsPanel.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 		ordersControlButtonsPanel.add(ordersUpdateButton);
-
 
 		GroupLayout ordersLayout = new GroupLayout(this);
 		this.setLayout(ordersLayout);
@@ -405,10 +404,10 @@ public class OrdersPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	public void populateTable() {
+	public static void populateTable() {
 		List<OrderDTO> orders = orderDAO.selectAll();
 
-		DefaultTableModel tableModel = (DefaultTableModel) this.ordersTable.getModel();
+		DefaultTableModel tableModel = (DefaultTableModel) ordersTable.getModel();
 		tableModel.setRowCount(0);
 
 		for (int i = 0; i < orders.size(); i++) {

@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -25,13 +27,16 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import dao.FlowerDAO;
+import dao.OrderDAO;
 import dto.FlowerDTO;
+import dto.OrderDTO;
 import enums.AccessoryType;
 import enums.ArrangementTheme;
 
 public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;
 
+	int orderNumber = 0;
 	private JTextField firstNameInputField = new JTextField();
 	private JTextField lastNameInputField = new JTextField();
 	private JTextField phoneNumberTextField = new JTextField();
@@ -39,14 +44,17 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	private JTextField deliveryAddressTextField = new JTextField();
 	private JTextField quantityTextField = new JTextField();
 	private JTextField cardInfoTextField = new JTextField();
-	JTextField orderTotalTextField = new JTextField();
-	JTextField unitPriceTextField = new JTextField();
+	private JTextField orderTotalTextField = new JTextField();
+	private JTextField unitPriceTextField = new JTextField();
 	private JDateChooser dateChooser = new JDateChooser();
+	private JRadioButton noRadioButton = new JRadioButton("No", true);
+	private JRadioButton yesRadioButton = new JRadioButton("Yes");
 	private static JComboBox<String> flowerTypeComboBox = new JComboBox<>();
 	private JComboBox<AccessoryType> accessoryTypeComboBox = new JComboBox<>(AccessoryType.values());
 	private JComboBox<ArrangementTheme> arrangementThemeComboBox = new JComboBox<>(ArrangementTheme.values());
 
 	private static FlowerDAO flowerDAO = new FlowerDAO();
+	private OrderDAO orderDAO = new OrderDAO();
 
 	JButton placeOrder = new JButton("Place Order");
 	JButton cancelOrder = new JButton("Cancel Order");
@@ -142,9 +150,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		JLabel arrangementThemeLabel = new JLabel("Arrangement theme");
 
 		JLabel cardLabel = new JLabel("Card");
-		JRadioButton noRadioButton = new JRadioButton("No", true);
 
-		JRadioButton yesRadioButton = new JRadioButton("Yes");
 		ButtonGroup cardOptionsButtonGroup = new ButtonGroup();
 
 		cardOptionsButtonGroup.add(noRadioButton);
@@ -185,24 +191,23 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		orderTotalPanel.setLayout(orderTotalLayout);
 
 		JLabel orderTotalLabel = new JLabel("Order total");
-		
+
 		orderTotalTextField.setFocusable(false);
 		orderTotalTextField.setColumns(4);
 		orderTotalTextField.setEditable(false);
-		
+
 		quantityTextField.addKeyListener(new KeyAdapter() {
-		      public void keyReleased(KeyEvent e) { 
-		    	  String quantity = quantityTextField.getText();
-		    	  String price = unitPriceTextField.getText();
-		    	  if (quantityTextField.getText().isEmpty()) {
-		    		  orderTotalTextField.setText(String.valueOf(0));
-		    	  }
-		    	  else {
-		    	  Double totalcost = (Double.valueOf(price)* Double.valueOf(quantity));
-		    	  orderTotalTextField.setText(String.valueOf(totalcost));  
-		         }
-		      }
-		 });
+			public void keyReleased(KeyEvent e) {
+				String quantity = quantityTextField.getText();
+				String price = unitPriceTextField.getText();
+				if (quantityTextField.getText().isEmpty()) {
+					orderTotalTextField.setText(String.valueOf(0));
+				} else {
+					Double totalcost = (Double.valueOf(price) * Double.valueOf(quantity));
+					orderTotalTextField.setText(String.valueOf(totalcost));
+				}
+			}
+		});
 
 		orderTotalPanel.add(orderTotalLabel);
 		orderTotalPanel.add(orderTotalTextField);
@@ -248,11 +253,11 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	}
 
 	public static void populateFlowerTypeComboBox() {
-		flowerTypeComboBox.setModel(new DefaultComboBoxModel<String> ());
+		flowerTypeComboBox.setModel(new DefaultComboBoxModel<String>());
 
 		List<String> flowersInStock = flowerDAO.selectInStock();
 		for (int i = 0; i < flowersInStock.size(); i++)
-		flowerTypeComboBox.addItem(flowersInStock.get(i));
+			flowerTypeComboBox.addItem(flowersInStock.get(i));
 
 	}
 
@@ -267,7 +272,38 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			unitPriceTextField.setText(Double.toString(flowerDTO.getFlowerCost()));
 			orderTotalTextField.setText(String.valueOf(0));
 			quantityTextField.setText(String.valueOf(0));
-			
+
+		} else if (e.getSource().equals(placeOrder)) {
+			Date todayDate = new Date();
+			String orderDate = DateFormat.getDateInstance().format(todayDate);;
+			String lastName = lastNameInputField.getText();
+			String firstName = firstNameInputField.getText();
+			String phoneNumber = phoneNumberTextField.getText();
+			String email = emailTextField.getText();
+			String flowerType = flowerTypeComboBox.getSelectedItem().toString();
+			int quantity = Integer.parseInt(quantityTextField.getText());
+			String accessoryType = accessoryTypeComboBox.getSelectedItem().toString();
+			String arrangementTheme = arrangementThemeComboBox.getSelectedItem().toString();
+			String address = deliveryAddressTextField.getText();
+			String deliveryDate = DateFormat.getDateInstance().format(dateChooser.getDate());
+			double totalCost = Double.parseDouble(orderTotalTextField.getText());
+			String hasCard = "";
+
+			if (yesRadioButton.isSelected()) {
+				hasCard = "yes";
+			} else {
+				hasCard = "no";
+			}
+
+			String cardText = cardInfoTextField.getText();
+			String isPaid = "no";
+			String isDelivered = "no";
+
+			orderDAO.insertOrder(new OrderDTO(3, orderDate, lastName, firstName, phoneNumber, email, flowerType,
+					quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost, hasCard, cardText,
+					isPaid, isDelivered));
+
+			OrdersPanel.populateTable();
 		}
 	}
 }
