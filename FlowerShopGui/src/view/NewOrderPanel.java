@@ -275,6 +275,15 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 		} else if (e.getSource().equals(placeOrder)) {
 			Date todayDate = new Date();
+			List<OrderDTO> orders = orderDAO.selectAll();
+
+			if (orders.isEmpty()) {
+				orderNumber = 0;
+			} else {
+				orderNumber = orders.get(orders.size() - 1).getOrderNumber();
+				orderNumber++;
+			}
+
 			String orderDate = DateFormat.getDateInstance().format(todayDate);;
 			String lastName = lastNameInputField.getText();
 			String firstName = firstNameInputField.getText();
@@ -299,9 +308,9 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			String isPaid = "no";
 			String isDelivered = "no";
 
-			orderDAO.insertOrder(new OrderDTO(3, orderDate, lastName, firstName, phoneNumber, email, flowerType,
-					quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost, hasCard, cardText,
-					isPaid, isDelivered));
+			orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
+					flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost, hasCard,
+					cardText, isPaid, isDelivered));
 
 			OrdersPanel.populateTable();
 		}
