@@ -34,6 +34,7 @@ import dto.FlowerDTO;
 import dto.OrderDTO;
 import enums.AccessoryType;
 import enums.ArrangementTheme;
+import util.CurrencyFormatter;
 
 public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;
@@ -204,7 +205,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		quantityTextField.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				String quantity = quantityTextField.getText();
-				String price = unitPriceTextField.getText();
+				String price = unitPriceTextField.getText().replace('$', Character.MIN_VALUE);
 				if (quantityTextField.getText().isEmpty()) {
 					orderTotalTextField.setText(String.valueOf(0));
 				} else {
@@ -273,7 +274,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 			FlowerDTO flowerDTO = flowerDAO.select(selectedItem);
 
-			unitPriceTextField.setText(Double.toString(flowerDTO.getFlowerCost()));
+			unitPriceTextField.setText(CurrencyFormatter.formatDouble(flowerDTO.getFlowerCost()));
 			orderTotalTextField.setText(String.valueOf(0));
 			quantityTextField.setText(String.valueOf(0));
 
