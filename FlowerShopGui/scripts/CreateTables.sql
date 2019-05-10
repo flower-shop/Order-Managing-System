@@ -12,18 +12,6 @@ flowerCost DECIMAL (5,2),
 flowerQty INT,
 PRIMARY KEY(flowerType));
 
-CREATE TABLE Accessory (
-accessoryType VARCHAR (15),
-CONSTRAINT aType CHECK(accessoryType IN ('Vase','Wreath','Bouquet','None')),
-accessoryCost DECIMAL (5,2),
-PRIMARY KEY(accessoryType));
-
-CREATE TABLE Arrangement (
-arrangementTheme VARCHAR(10) NOT NULL,
-CONSTRAINT aTheme CHECK(arrangementTheme IN ('Birthday','Funeral','Romantic','None')),
-arrangementCost DECIMAL (5,2),
-PRIMARY KEY(arrangementTheme));
-
 CREATE TABLE Orders (
 orderID INT NOT NULL,
 orderDate VARCHAR (20) NOT NULL,
