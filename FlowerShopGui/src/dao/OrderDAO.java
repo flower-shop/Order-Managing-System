@@ -133,7 +133,7 @@ public class OrderDAO {
 				+ "', arrangementTheme='" + order.getArrangementTheme() + "', address='" + order.getAddress()
 				+ "', deliveryDate='" + order.getDeliveryDate() + "', totalCost=" + order.getTotalCost() + ", hasCard='"
 				+ order.getHasCard() + "', cardText='" + order.getCardText() + "', isPaid='" + order.getIsPaidFor()
-				+ "', isDelivered='" + order.getIsDelivered() + "'";
+				+ "', isDelivered='" + order.getIsDelivered() + "' WHERE orderID=" + order.getOrderNumber();
 
 		System.out.println(sql);
 

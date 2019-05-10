@@ -375,32 +375,34 @@ public class OrdersPanel extends JPanel implements ActionListener {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			int orderNumber = Integer.parseInt(orderNumberTextField.getText());
-			String orderDate = orderDateTextField.getText();
-			String lastName = lastNameTextField.getText();
-			String firstName = firstNameTextField.getText();
-			String phoneNumber = phoneNumberTextField.getText();
-			String email = emailTextField.getText();
-			String flowerType = flowerTypeTextField.getText();
-			int quantity = Integer.parseInt(quantityTextField.getText());
-			String accessoryType = accessoryTypeTextField.getText();
-			String arrangementTheme = arrangementThemeTextField.getText();
-			String address = addressTextField.getText();
-			String deliveryDate = deliveryDateTextField.getText();
-			double totalCost = Double.parseDouble(totalCostTextField.getText());
-			String hasCard = hasCardTextField.getText();
-			String cardText = cardTextTextField.getText();
-			String isPaid = isPaidTextField.getText();
-			String isDelivered = isDeliveredTextField.getText();
+			if (e.getSource().equals(actionButton)) {
+				int orderNumber = Integer.parseInt(orderNumberTextField.getText());
+				String orderDate = orderDateTextField.getText();
+				String lastName = lastNameTextField.getText();
+				String firstName = firstNameTextField.getText();
+				String phoneNumber = phoneNumberTextField.getText();
+				String email = emailTextField.getText();
+				String flowerType = flowerTypeTextField.getText();
+				int quantity = Integer.parseInt(quantityTextField.getText());
+				String accessoryType = accessoryTypeTextField.getText();
+				String arrangementTheme = arrangementThemeTextField.getText();
+				String address = addressTextField.getText();
+				String deliveryDate = deliveryDateTextField.getText();
+				double totalCost = Double.parseDouble(totalCostTextField.getText());
+				String hasCard = hasCardTextField.getText();
+				String cardText = cardTextTextField.getText();
+				String isPaid = isPaidTextField.getText();
+				String isDelivered = isDeliveredTextField.getText();
 
-			orderDAO.updateOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
-					flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost, hasCard,
-					cardText, isPaid, isDelivered));
+				orderDAO.updateOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
+						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
+						hasCard, cardText, isPaid, isDelivered));
 
-			populateTable();
+				populateTable();
 
-			MainWindow.getTabbedPane().setEnabled(true);
-			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+				MainWindow.getTabbedPane().setEnabled(true);
+				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			}
 		}
 	}
 
