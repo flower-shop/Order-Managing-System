@@ -38,6 +38,9 @@ public class EmployeeDAO {
 				String password = resultSet.getString(4);
 				String isAdmin = resultSet.getString(5);
 
+				con.close();
+				stmt.close();
+
 				return new EmployeeDTO(firstName, lastName, empId, password, isAdmin);
 			} else {
 				return null;
@@ -97,6 +100,7 @@ public class EmployeeDAO {
 	}
 
 	public void updateEmployee(EmployeeDTO employee) {
+
 		String sql = "UPDATE Employee SET lastName='" + employee.getLastName() + "', firstName='"
 				+ employee.getFirstName() + "', employeeId='" + employee.getEmployeeId() + "', password='"
 				+ employee.getPassword() + "', isAdmin='" + employee.isAdmin() + "' WHERE employeeId='"

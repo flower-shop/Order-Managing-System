@@ -36,6 +36,9 @@ public class FlowerDAO {
 				double flowerCost = resultSet.getDouble(2);
 				int flowerQty = resultSet.getInt(3);
 
+				con.close();
+				stmt.close();
+
 				return new FlowerDTO(type, flowerCost, flowerQty);
 			} else {
 				return null;
