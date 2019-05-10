@@ -63,7 +63,6 @@ public class CustomerDAO {
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
-
 		}
 	}
 }
