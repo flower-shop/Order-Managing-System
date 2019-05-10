@@ -127,7 +127,8 @@ public class OrdersPanel extends JPanel implements ActionListener {
 					arrangementThemeTextField.setText((String) ordersTable.getValueAt(selectedRow, 9));
 					addressTextField.setText((String) ordersTable.getValueAt(selectedRow, 10));
 					deliveryDateTextField.setText((String) ordersTable.getValueAt(selectedRow, 11));
-					totalCostTextField.setText(ordersTable.getValueAt(selectedRow, 12).toString());
+					totalCostTextField.setText(
+							ordersTable.getValueAt(selectedRow, 12).toString().replace('$', Character.MIN_VALUE));
 					hasCardTextField.setText((String) ordersTable.getValueAt(selectedRow, 13));
 					cardTextTextField.setText((String) ordersTable.getValueAt(selectedRow, 14));
 					isPaidTextField.setText((String) ordersTable.getValueAt(selectedRow, 15));

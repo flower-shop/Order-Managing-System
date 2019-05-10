@@ -116,7 +116,8 @@ public class InventoryPanel extends JPanel implements ActionListener {
 					int selectedRow = inventoryTable.getSelectedRow();
 
 					flowerTypeTextField.setText((String) inventoryTable.getValueAt(selectedRow, 0));
-					flowerCostTextField.setText((String) String.valueOf(inventoryTable.getValueAt(selectedRow, 1)));
+					flowerCostTextField.setText((String) String.valueOf(inventoryTable.getValueAt(selectedRow, 1))
+							.replace('$', Character.MIN_VALUE));
 					flowerQtyTextField.setText((String) String.valueOf(inventoryTable.getValueAt(selectedRow, 2)));
 
 					flowerTypeTextField.setEditable(false);
