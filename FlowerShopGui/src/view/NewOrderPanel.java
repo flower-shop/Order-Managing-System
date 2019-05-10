@@ -206,7 +206,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 					orderTotalTextField.setText(String.valueOf(0));
 				} else {
 					Double totalcost = (Double.valueOf(price) * Double.valueOf(quantity));
-					orderTotalTextField.setText(String.valueOf(totalcost));
+					orderTotalTextField.setText(CurrencyFormatter.formatDouble(totalcost));
 				}
 			}
 		});
