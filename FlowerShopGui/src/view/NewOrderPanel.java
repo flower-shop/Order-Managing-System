@@ -20,6 +20,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -104,6 +105,8 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		JLabel deliveryDateLabel = new JLabel("Delivery date");
 
 		dateChooser.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
+		dateChooser.setDate(new Date());
+
 		JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
 		editor.setEditable(false);
 
@@ -289,15 +292,15 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			}
 
 			String orderDate = DateFormat.getDateInstance().format(todayDate);;
-			String lastName = lastNameInputField.getText();
-			String firstName = firstNameInputField.getText();
-			String phoneNumber = phoneNumberTextField.getText();
-			String email = emailTextField.getText();
+			String lastName = lastNameInputField.getText().trim();
+			String firstName = firstNameInputField.getText().trim();
+			String phoneNumber = phoneNumberTextField.getText().trim();
+			String email = emailTextField.getText().trim();
 			String flowerType = flowerTypeComboBox.getSelectedItem().toString();
 			int quantity = Integer.parseInt(quantityTextField.getText());
 			String accessoryType = accessoryTypeComboBox.getSelectedItem().toString();
 			String arrangementTheme = arrangementThemeComboBox.getSelectedItem().toString();
-			String address = deliveryAddressTextField.getText();
+			String address = deliveryAddressTextField.getText().trim();
 			String deliveryDate = DateFormat.getDateInstance().format(dateChooser.getDate());
 			double totalCost = Double.parseDouble(orderTotalTextField.getText());
 			String hasCard = "";
@@ -312,13 +315,19 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			String isPaid = "no";
 			String isDelivered = "no";
 
-			orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
-					flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost, hasCard,
-					cardText, isPaid, isDelivered));
+			if (lastName.isEmpty() || firstName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()
+					|| address.isEmpty() || deliveryDate.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Please fill out all fields");
+			} else {
 
-			OrdersPanel.populateTable();
-			CustomersPanel.populateTable();
-			cancelOrder.doClick();
+				orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
+						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
+						hasCard, cardText, isPaid, isDelivered));
+
+				OrdersPanel.populateTable();
+				CustomersPanel.populateTable();
+				cancelOrder.doClick();
+			}
 
 		} else if (e.getSource().equals(cancelOrder)) {
 			firstNameInputField.setText("");
