@@ -314,6 +314,16 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 			OrdersPanel.populateTable();
 			CustomersPanel.populateTable();
+		} else if (e.getSource().equals(cancelOrder)) {
+			firstNameInputField.setText("");
+			lastNameInputField.setText("");
+			phoneNumberTextField.setText("");
+			emailTextField.setText("");
+			deliveryAddressTextField.setText("");
+			quantityTextField.setText("0");
+			cardInfoTextField.setText("");
+			orderTotalTextField.setText("");
+			dateChooser.setDateFormatString("");
 		}
 	}
 }
