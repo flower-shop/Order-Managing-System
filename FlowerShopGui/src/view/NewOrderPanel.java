@@ -270,7 +270,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 			FlowerDTO flowerDTO = flowerDAO.select(selectedItem);
 
-			unitPriceTextField.setText(CurrencyFormatter.formatDouble(flowerDTO.getFlowerCost()));
+			unitPriceTextField.setText(Double.toString(flowerDTO.getFlowerCost()));
 			orderTotalTextField.setText(String.valueOf(0));
 			quantityTextField.setText(String.valueOf(0));
 
