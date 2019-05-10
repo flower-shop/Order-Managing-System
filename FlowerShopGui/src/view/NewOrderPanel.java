@@ -36,7 +36,6 @@ import enums.ArrangementTheme;
 public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;
 
-	int orderNumber = 0;
 	private JTextField firstNameInputField = new JTextField();
 	private JTextField lastNameInputField = new JTextField();
 	private JTextField phoneNumberTextField = new JTextField();
@@ -258,7 +257,6 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		List<String> flowersInStock = flowerDAO.selectInStock();
 		for (int i = 0; i < flowersInStock.size(); i++)
 			flowerTypeComboBox.addItem(flowersInStock.get(i));
-
 	}
 
 	@Override
@@ -276,6 +274,8 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		} else if (e.getSource().equals(placeOrder)) {
 			Date todayDate = new Date();
 			List<OrderDTO> orders = orderDAO.selectAll();
+
+			int orderNumber;
 
 			if (orders.isEmpty()) {
 				orderNumber = 0;
