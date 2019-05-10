@@ -313,6 +313,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 					cardText, isPaid, isDelivered));
 
 			OrdersPanel.populateTable();
+			CustomersPanel.populateTable();
 		}
 	}
 }

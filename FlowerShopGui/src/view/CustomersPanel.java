@@ -16,9 +16,9 @@ import dto.CustomerDTO;
 public class CustomersPanel extends JPanel {
 	private static final long serialVersionUID = 3722861926434523695L;
 
-	private JTable customersTable;
+	private static JTable customersTable;
 
-	private CustomerDAO customerDAO = new CustomerDAO();
+	private static CustomerDAO customerDAO = new CustomerDAO();
 
 	public CustomersPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
@@ -55,10 +55,10 @@ public class CustomersPanel extends JPanel {
 		this.setLayout(customersLayout);
 	}
 
-	public void populateTable() {
+	public static void populateTable() {
 		List<CustomerDTO> customers = customerDAO.selectAll();
 
-		DefaultTableModel tableModel = (DefaultTableModel) this.customersTable.getModel();
+		DefaultTableModel tableModel = (DefaultTableModel)customersTable.getModel();
 		tableModel.setRowCount(0);
 
 		for (int i = 0; i < customers.size(); i++) {

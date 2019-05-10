@@ -4,6 +4,5 @@ DROP TABLE Arrangement;
 ------------------------------------------------------
 
 DROP TABLE Employee;
-DROP TABLE Customer;
 DROP TABLE Flower;
 DROP TABLE Accessory;
