@@ -9,7 +9,6 @@ import java.util.List;
 import dto.CustomerDTO;
 
 public class CustomerDAO {
-
 	private Connection con = null;
 	private Statement stmt = null;
 
