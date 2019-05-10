@@ -26,6 +26,7 @@ import javax.swing.table.TableModel;
 
 import dao.OrderDAO;
 import dto.OrderDTO;
+import util.CurrencyFormatter;
 
 public class OrdersPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 2666270557360720356L;

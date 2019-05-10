@@ -28,6 +28,7 @@ import javax.swing.table.TableModel;
 
 import dao.FlowerDAO;
 import dto.FlowerDTO;
+import util.CurrencyFormatter;
 
 public class InventoryPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -3718843315216000622L;

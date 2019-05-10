@@ -33,6 +33,7 @@ import dto.FlowerDTO;
 import dto.OrderDTO;
 import enums.AccessoryType;
 import enums.ArrangementTheme;
+import util.CurrencyFormatter;
 
 public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;
