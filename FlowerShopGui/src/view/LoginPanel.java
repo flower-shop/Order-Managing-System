@@ -406,8 +406,10 @@ public class LoginPanel implements ActionListener {
 			}
 		} catch (Exception e) {
 		}
-		LoginPanel begin = new LoginPanel();
-		begin.adminCheck();
+		// LoginPanel begin = new LoginPanel();
+		// begin.adminCheck();
+
+		new MainWindow();
 	}
 
 	@Override
