@@ -25,6 +25,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 
 import dao.FlowerDAO;
 import dao.OrderDAO;
@@ -102,6 +103,8 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		JLabel deliveryDateLabel = new JLabel("Delivery date");
 
 		dateChooser.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
+		JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
+		editor.setEditable(false);
 
 		GroupLayout deliveryInfoLayout = new GroupLayout(deliveryInfoPanel);
 		deliveryInfoLayout.setHorizontalGroup(deliveryInfoLayout.createParallelGroup(Alignment.LEADING)
