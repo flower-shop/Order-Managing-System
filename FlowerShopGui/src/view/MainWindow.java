@@ -23,7 +23,7 @@ public class MainWindow extends JFrame {
 		getContentPane().add(tabbedPane);
 		setResizable(true);
 		getContentPane().setBackground(ViewConstants.BACKGROUND_PANEL_COLOR);
-		setTitle("Flower Shop");
+		setTitle("Flower Shop Management Program: Logged in as " + user.getLastName() + ", " + user.getFirstName());
 		setSize(1200, 700);
 		setVisible(true);
 		setLocationRelativeTo(null);
