@@ -5,6 +5,7 @@ package view;
  * and open the template in the editor.
  */
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -30,6 +31,10 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import dao.ConnectionFactory;
+import dao.EmployeeDAO;
+
+import dto.EmployeeDTO;
+import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -38,10 +43,11 @@ import javax.swing.UIManager.LookAndFeelInfo;
 public class LoginPanel implements ActionListener {
 	JTextField inputTxt, inputTxtl;
 	JTextField inputTxt2;
-	JTextField passwordTxt, passwordTxtl;
+	JTextField passwordTxt, passwordTxtl, firstNameTxt, lastNameTxt;
 	JTextField passwordTxt2;
-        String introText, inTxt1, inTxt2, inTxtl, passTxt, passTxt2, passTxtl, infoText;
+        String introText, inTxt1, inTxt2, inTxtl, passTxt, passTxt2, passTxtl, infoText, firstTxt, lastTxt;
         boolean check;
+        EmployeeDAO employeeDAO = new EmployeeDAO();
         
 	private void adminCheck() {
 
@@ -49,29 +55,16 @@ public class LoginPanel implements ActionListener {
 		 * check the db to see if Employee table contains entries. if yes then
 		 * go to mainWindow(), if no then go to setUpAccount()
 		 */
-		Connection conn = null;
+                List<EmployeeDTO> employees = employeeDAO.selectAll(); 
+                if (employees.isEmpty()) {
 
-		try {
-			conn = ConnectionFactory.getConnection();
-			Statement stmt = conn.createStatement();
+                        setUpAccount();
 
-			String query = "SELECT * FROM Employee ";
-			ResultSet rs = stmt.executeQuery(query);
+                } else {
 
-			if (rs == null) {
+                        mainWindow();
 
-			}
-
-			if (rs.next() == false) {
-				setUpAccount();
-
-			} else {
-				mainWindow();
-			}
-		} catch (SQLException e) {
-			System.out.println(e);
-
-		}
+                }
 	}
 
 	private void setUpAccount() {
@@ -85,6 +78,7 @@ public class LoginPanel implements ActionListener {
 		JPanel logInPanel = new JPanel();
 		JPanel userName = new JPanel();
 		JPanel password = new JPanel();
+                JPanel dataPanel = new JPanel();
                 JPanel buffer1 = new JPanel();
                 JPanel buffer2 = new JPanel();
 
@@ -109,10 +103,20 @@ public class LoginPanel implements ActionListener {
                 passwordLabel2.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		passwordTxt2 = new JPasswordField(null, 20);
                 passwordTxt2.setEditable(false);
+                JLabel firstName = new JLabel("     First Name");
+                firstName.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		firstNameTxt = new JTextField(null, 20);
+                JLabel lastName = new JLabel("     Last Name");
+                lastName.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lastNameTxt = new JTextField(null, 20);
+
+                
 		JButton enterBttn = new JButton("Confirm User Name");
                 JButton passwordBttn = new JButton("Confirm Password");
+                JButton dataBttn = new JButton("Confirm Data");
                 enterBttn.setFont(new Font("Times New Roman", Font.BOLD, 14));
                 passwordBttn.setFont(new Font("Times New Roman", Font.BOLD, 14));
+                dataBttn.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		// Username Data entry validation
 		// password match validation
 		//
@@ -132,6 +136,8 @@ public class LoginPanel implements ActionListener {
                 inputTxt.setBackground(color);
                 inputTxt2.setBackground(color);
                 passwordTxt.setBackground(color);
+                firstNameTxt.setBackground(color);
+                lastNameTxt.setBackground(color);
                 passwordTxt2.setBackground(color);
 
 		// Add components to panels
@@ -162,8 +168,17 @@ public class LoginPanel implements ActionListener {
 
 		logInPanel.add(userName);
                 logInPanel.add(password);
-
                 logInPanel.setOpaque(false);
+                
+                dataPanel.setLayout(new FlowLayout());
+                dataPanel.add(firstName);
+                dataPanel.add(firstNameTxt);
+                dataPanel.add(lastName);
+                dataPanel.add(lastNameTxt);
+                dataPanel.add(buffer1);
+                dataPanel.add(dataBttn);
+                dataPanel.setOpaque(false);
+                dataPanel.setVisible(false);
 
 
 		// insert panells to Window
@@ -172,7 +187,7 @@ public class LoginPanel implements ActionListener {
 		mainPanel.setLayout(new GridLayout(2,2));
                 mainPanel.add(buffer1);
                 mainPanel.add(instructionPanel);
-                mainPanel.add(buffer2);
+                mainPanel.add(dataPanel);
 		mainPanel.add(logInPanel);
                 mainPanel.setOpaque(false);
                 background.add(mainPanel);
@@ -231,15 +246,39 @@ public class LoginPanel implements ActionListener {
                             instructionText.append(introText);
                         }
                         else if (check == true){
-//need code here to store inTxt2 and passTxt2 into db as admin level user
-                            window.setVisible(false);
-                            mainWindow();
+                            passwordTxt.setEditable(false);
+                            passwordTxt2.setEditable(false);
+                            dataPanel.setVisible(true);
+                            instructionText.setText(null);
+                            instructionText.append("Please enter your first and last name.");
+
                         }
                         else if (check == false){
                             introText = "Your Passwords do not Match.";
                             instructionText.setText(null);
                             instructionText.append(introText);       
                         }
+                    }
+            });
+                dataBttn.addActionListener(new ActionListener(){
+                    
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        String firstTxt = firstNameTxt.getText();
+                        String lastTxt = lastNameTxt.getText();
+     
+                        if((firstTxt.length()<1)||(lastTxt.length() < 1)){
+                            introText = "Your first or last name was not entered";
+                            instructionText.setText(null);
+                            instructionText.append(introText);
+                        }
+                        else{
+                            employeeDAO.insertEmployee(new EmployeeDTO(lastTxt, firstTxt, inTxt2, passTxt2, "yes"));
+                            //store inTxt2 and passTxt2  firstTxt and lastTxt and admin flag into db as admin level user
+                            window.setVisible(false);
+                            mainWindow();
+                        }
+                        
                     }
             });
     }
@@ -350,12 +389,12 @@ public class LoginPanel implements ActionListener {
 //                          window.setVisible(false);
 // open main program
 //                        }
-//else if (check == false){
-//                           infoText = "Your User Name and/or password are incorrect";
-//                          instructionText.setText(null);
-//                          instructionText.append(infoText);
-//                          instructionPanel.setVisible(true);
-//                      }
+                        else if (check == false){
+                        infoText = "Your User Name and/or password are incorrect";
+                       instructionText.setText(null);
+                        instructionText.append(infoText);
+                         instructionPanel.setVisible(true);
+                     }
                     }
             });
 	}
@@ -368,17 +407,11 @@ public class LoginPanel implements ActionListener {
            return background;  
       }
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
 	/**
 	 * @param args
 	 *            the command line arguments
 	 */
-/*	public static void main(String[] args) {
+	public static void main(String[] args) {
             try {
                 for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                     if ("Nimbus".equals(info.getName())) {
@@ -395,5 +428,5 @@ public class LoginPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-   }
-*/ }
+    }
+}
