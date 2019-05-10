@@ -414,8 +414,8 @@ public class OrdersPanel extends JPanel implements ActionListener {
 			Object[] orderContent = new Object[]{order.getOrderNumber(), order.getOrderDate(), order.getFirstName(),
 					order.getLastName(), order.getPhoneNumber(), order.getEmail(), order.getFlowerType(),
 					order.getFlowerQty(), order.getAccessoryType(), order.getArrangementTheme(), order.getAddress(),
-					order.getDeliveryDate(), order.getTotalCost(), order.getHasCard(), order.getCardText(),
-					order.getIsPaidFor(), order.getIsDelivered()};
+					order.getDeliveryDate(), CurrencyFormatter.formatDouble(order.getTotalCost()), order.getHasCard(),
+					order.getCardText(), order.getIsPaidFor(), order.getIsDelivered()};
 
 			tableModel.addRow(orderContent);
 		}

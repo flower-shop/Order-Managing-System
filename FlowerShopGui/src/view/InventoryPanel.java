@@ -28,7 +28,6 @@ import javax.swing.table.TableModel;
 
 import dao.FlowerDAO;
 import dto.FlowerDTO;
-import view.NewOrderPanel;
 
 public class InventoryPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -3718843315216000622L;
@@ -246,7 +245,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
 				int flowerQty = Integer.valueOf(flowerQtyTextField.getText());
 
 				flowerDAO.updateFlower(new FlowerDTO(flowerType, flowerCost, flowerQty));
-				
+
 				NewOrderPanel.populateFlowerTypeComboBox();
 
 				populateTable();
@@ -265,8 +264,8 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
 		for (int i = 0; i < flowers.size(); i++) {
 			FlowerDTO flower = flowers.get(i);
-			Object[] employeeContent = new Object[]{flower.getFlowerType(), flower.getFlowerCost(),
-					flower.getFlowerQty()};
+			Object[] employeeContent = new Object[]{flower.getFlowerType(),
+					CurrencyFormatter.formatDouble(flower.getFlowerCost()), flower.getFlowerQty()};
 
 			tableModel.addRow(employeeContent);
 		}
