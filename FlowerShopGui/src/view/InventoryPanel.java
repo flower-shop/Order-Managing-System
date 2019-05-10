@@ -28,6 +28,7 @@ import javax.swing.table.TableModel;
 
 import dao.FlowerDAO;
 import dto.FlowerDTO;
+import view.NewOrderPanel;
 
 public class InventoryPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -3718843315216000622L;
@@ -252,6 +253,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
 				int flowerQty = Integer.valueOf(flowerQtyTextField.getText());
 
 				flowerDAO.updateFlower(new FlowerDTO(flowerType, flowerCost, flowerQty));
+				
 				NewOrderPanel.populateFlowerTypeComboBox();
 
 				populateTable();

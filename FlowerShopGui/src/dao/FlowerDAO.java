@@ -75,7 +75,7 @@ public class FlowerDAO {
 	public List<String> selectInStock() {
 		List<String> flowersInStock = new ArrayList<>();
 
-		String query = "SELECT flowerType FROM Flower WHERE flowerQty != 0";
+		String query = "SELECT flowerType FROM Flower WHERE flowerQty != 0 ";
 
 		try {
 			ResultSet resultSet = stmt.executeQuery(query);
