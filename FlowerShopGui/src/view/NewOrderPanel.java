@@ -39,6 +39,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	private JTextField deliveryAddressTextField = new JTextField();
 	private JTextField quantityTextField = new JTextField();
 	private JTextField cardInfoTextField = new JTextField();
+	JTextField orderTotalTextField = new JTextField();
 	JTextField unitPriceTextField = new JTextField();
 	private JDateChooser dateChooser = new JDateChooser();
 	private static JComboBox<String> flowerTypeComboBox = new JComboBox<>();
@@ -184,7 +185,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		orderTotalPanel.setLayout(orderTotalLayout);
 
 		JLabel orderTotalLabel = new JLabel("Order total");
-		JTextField orderTotalTextField = new JTextField();
+		
 		orderTotalTextField.setFocusable(false);
 		orderTotalTextField.setColumns(4);
 		orderTotalTextField.setEditable(false);
@@ -264,6 +265,9 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			FlowerDTO flowerDTO = flowerDAO.select(selectedItem);
 
 			unitPriceTextField.setText(Double.toString(flowerDTO.getFlowerCost()));
+			orderTotalTextField.setText(String.valueOf(0));
+			quantityTextField.setText(String.valueOf(0));
+			
 		}
 	}
 }
