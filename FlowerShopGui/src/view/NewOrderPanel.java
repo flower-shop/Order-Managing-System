@@ -55,8 +55,8 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	private static FlowerDAO flowerDAO = new FlowerDAO();
 	private OrderDAO orderDAO = new OrderDAO();
 
-	JButton placeOrder = new JButton("Place Order");
-	JButton cancelOrder = new JButton("Cancel Order");
+	private JButton placeOrder = new JButton("Place Order");
+	private JButton cancelOrder = new JButton("Cancel Order");
 
 	public NewOrderPanel() {
 		JPanel customerInfoPanel = new JPanel();
