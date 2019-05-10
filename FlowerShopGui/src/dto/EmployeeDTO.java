@@ -7,8 +7,7 @@ public class EmployeeDTO {
 	private String password;
 	private String isAdmin;
 
-	public EmployeeDTO(String lastName, String firstName, String employeeId, String password,
-			String isAdmin) {
+	public EmployeeDTO(String lastName, String firstName, String employeeId, String password, String isAdmin) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.employeeId = employeeId;
