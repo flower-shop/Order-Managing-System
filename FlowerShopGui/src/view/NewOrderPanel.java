@@ -319,6 +319,14 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 					|| address.isEmpty() || deliveryDate.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Please fill out all fields");
 			} else {
+				
+				FlowerDAO flowerDAO = new FlowerDAO();
+				FlowerDTO flowerDTO = flowerDAO.select(flowerType);
+				int qtyLeftInStock = Integer.valueOf(flowerDTO.getFlowerQty())- quantity;
+				
+				if (qtyLeftInStock < 0) {
+					JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
+				} else {
 
 				orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
 						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
@@ -327,6 +335,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 				OrdersPanel.populateTable();
 				CustomersPanel.populateTable();
 				cancelOrder.doClick();
+			}
 			}
 
 		} else if (e.getSource().equals(cancelOrder)) {
