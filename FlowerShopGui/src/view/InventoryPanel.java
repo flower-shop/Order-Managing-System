@@ -266,10 +266,10 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
 		for (int i = 0; i < flowers.size(); i++) {
 			FlowerDTO flower = flowers.get(i);
-			Object[] employeeContent = new Object[]{flower.getFlowerType(),
+			Object[] flowersContent = new Object[]{flower.getFlowerType(),
 					CurrencyFormatter.formatDouble(flower.getFlowerCost()), flower.getFlowerQty()};
 
-			tableModel.addRow(employeeContent);
+			tableModel.addRow(flowersContent);
 		}
 	}
 }
