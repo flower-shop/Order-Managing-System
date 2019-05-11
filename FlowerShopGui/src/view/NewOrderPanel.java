@@ -1,6 +1,9 @@
 package view;
 
 import java.awt.Component;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,7 +41,11 @@ import util.CurrencyFormatter;
 
 public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;
-
+     
+	private static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+	private static Pattern pattern;
+	private Matcher matcher;
+	
 	private JTextField firstNameInputField = new JTextField();
 	private JTextField lastNameInputField = new JTextField();
 	private JTextField phoneNumberTextField = new JTextField();
@@ -74,6 +81,8 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 		JLabel emailLabel = new JLabel("Email");
 
+		pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+		
 		GroupLayout customerInfoLayout = new GroupLayout(customerInfoPanel);
 		customerInfoPanel.setLayout(customerInfoLayout);
 		customerInfoLayout.setAutoCreateContainerGaps(true);
@@ -321,6 +330,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			} else {
 				
 				
+
 			//	FlowerDTO flowerDTO = flowerDAO.select(flowerType);
 
 			//	int qtyLeftInStock = Integer.valueOf(flowerDTO.getFlowerQty())- quantity;
@@ -329,6 +339,14 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			//		JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
 			//	} else {
 
+				//if (qtyLeftInStock < 0) {
+					//JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
+				//} else {
+					
+					if(!validateEmail(email)) {
+						JOptionPane.showMessageDialog(null, "Enter valid email address");
+					} else {
+					
 				orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
 						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
 						hasCard, cardText, isPaid, isDelivered));
@@ -342,7 +360,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 				OrdersPanel.populateTable();
 				CustomersPanel.populateTable();
 				cancelOrder.doClick();
-			//}
+			}
 			}
 
 		} else if (e.getSource().equals(cancelOrder)) {
@@ -356,5 +374,9 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			orderTotalTextField.setText("");
 			//dateChooser.setDateFormatString("");
 		}
+	}
+	public boolean validateEmail(String email) {
+		matcher = pattern.matcher(email);
+		return matcher.matches();
 	}
 }

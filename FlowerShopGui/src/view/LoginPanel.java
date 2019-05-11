@@ -409,7 +409,7 @@ public class LoginPanel implements ActionListener {
 		LoginPanel begin = new LoginPanel();
 		begin.adminCheck();
 
-		// new MainWindow();
+		 //new MainWindow();
 	}
 
 	@Override
