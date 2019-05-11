@@ -135,8 +135,53 @@ public class OrdersPanel extends JPanel implements ActionListener {
 					isDeliveredTextField.setText((String) ordersTable.getValueAt(selectedRow, 16));
 
 					orderNumberTextField.setEditable(false);
+					orderDateTextField.setEditable(false);
+					firstNameTextField.setEditable(false);
+					lastNameTextField.setEditable(false);
+					phoneNumberTextField.setEditable(false);
+					emailTextField.setEditable(false);
+					flowerTypeTextField.setEditable(false);
+					quantityTextField.setEditable(false);
+					accessoryTypeTextField.setEditable(false);
+					arrangementThemeTextField.setEditable(false);
+					addressTextField.setEditable(false);
+					deliveryDateTextField.setEditable(false);
+					totalCostTextField.setEditable(false);
+					hasCardTextField.setEditable(false);
+					cardTextTextField.setEditable(false);
+					
 					orderNumberTextField.setFocusable(false);
+					orderDateTextField.setFocusable(false);
+					firstNameTextField.setFocusable(false);
+					lastNameTextField.setFocusable(false);
+					phoneNumberTextField.setFocusable(false);
+					emailTextField.setFocusable(false);
+					flowerTypeTextField.setFocusable(false);
+					quantityTextField.setFocusable(false);
+					accessoryTypeTextField.setFocusable(false);
+					arrangementThemeTextField.setFocusable(false);
+					addressTextField.setFocusable(false);
+					deliveryDateTextField.setFocusable(false);
+					totalCostTextField.setFocusable(false);
+					hasCardTextField.setFocusable(false);
+					cardTextTextField.setFocusable(false);
+					
 					orderNumberTextField.setBackground(new Color(224, 224, 224));
+					orderDateTextField.setBackground(new Color(224, 224, 224));
+					firstNameTextField.setBackground(new Color(224, 224, 224));
+					lastNameTextField.setBackground(new Color(224, 224, 224));
+					phoneNumberTextField.setBackground(new Color(224, 224, 224));
+					emailTextField.setBackground(new Color(224, 224, 224));
+					flowerTypeTextField.setBackground(new Color(224, 224, 224));
+					quantityTextField.setBackground(new Color(224, 224, 224));
+					accessoryTypeTextField.setBackground(new Color(224, 224, 224));
+					arrangementThemeTextField.setBackground(new Color(224, 224, 224));
+					addressTextField.setBackground(new Color(224, 224, 224));
+					deliveryDateTextField.setBackground(new Color(224, 224, 224));
+					totalCostTextField.setBackground(new Color(224, 224, 224));
+					hasCardTextField.setBackground(new Color(224, 224, 224));
+					cardTextTextField.setBackground(new Color(224, 224, 224));	
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Please select a row");
 				}
