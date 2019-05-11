@@ -1,6 +1,6 @@
 .metadata
 .settings/
-
+derby.log
 bin/
 
 /FlowershopData/*
