@@ -327,6 +327,10 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			String cardText = cardInfoTextField.getText();
 			String isPaid = "no";
 			String isDelivered = "no";
+			
+			FlowerDTO flowerDTO = flowerDAO.select(flowerType);
+			
+			flowerDAO.connect();
 
 			if (lastName.isEmpty() || firstName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()
 					|| address.isEmpty() || deliveryDate.isEmpty()) {
@@ -338,13 +342,16 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			} else if (!validatePhone(phoneNumber)) {
 				JOptionPane.showMessageDialog(null,
 						"Incorrect Phone Number Format. Use '-' '.' or spaces to separate digits.");
+				
+			} else if (Integer.valueOf(flowerDTO.getFlowerQty()- quantity) < 0) {
+				JOptionPane.showMessageDialog(null,"Flower quantity requested is not in stock");	
 
 			} else {
 				orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
 						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
 						hasCard, cardText, isPaid, isDelivered));
 
-				FlowerDTO flowerDTO = flowerDAO.select(flowerType);
+				//FlowerDTO flowerDTO = flowerDAO.select(flowerType);
 				flowerDTO.setFlowerQuantity(flowerDTO.getFlowerQty() - quantity);
 				flowerDAO.connect();
 				flowerDAO.updateFlower(flowerDTO);
