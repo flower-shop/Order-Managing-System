@@ -351,9 +351,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
 						hasCard, cardText, isPaid, isDelivered));
 
-				//FlowerDTO flowerDTO = flowerDAO.select(flowerType);
 				flowerDTO.setFlowerQuantity(flowerDTO.getFlowerQty() - quantity);
-				flowerDAO.connect();
 				flowerDAO.updateFlower(flowerDTO);
 				InventoryPanel.populateTable();
 
@@ -362,26 +360,6 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 				cancelOrder.doClick();
 
 			}
-
-			// FlowerDTO flowerDTO = flowerDAO.select(flowerType);
-
-			// int qtyLeftInStock =
-			// Integer.valueOf(flowerDTO.getFlowerQty())- quantity;
-
-			// if (qtyLeftInStock < 0) {
-			// JOptionPane.showMessageDialog(null, "Flower quantity
-			// requested is not in stock");
-			// } else {
-
-			// if (qtyLeftInStock < 0) {
-			// JOptionPane.showMessageDialog(null, "Flower quantity
-			// requested is not in stock");
-			// } else {
-
-			// if (qtyLeftInStock < 0) {
-			// JOptionPane.showMessageDialog(null, "Flower quantity
-			// requested is not in stock");
-			// } else {
 
 		} else if (e.getSource().equals(cancelOrder)) {
 
@@ -393,7 +371,6 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			quantityTextField.setText("0");
 			cardInfoTextField.setText("");
 			orderTotalTextField.setText("");
-			// dateChooser.setDateFormatString("");
 		}
 	}
 
