@@ -21,6 +21,15 @@ public class FlowerDAO {
 		}
 	}
 
+	public void connect() {
+		try {
+			con = ConnectionFactory.getConnection();
+			stmt = con.createStatement();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public FlowerDTO select(String flowerType) {
 		String query = "SELECT * FROM Flower WHERE flowerType='" + flowerType + "'";
 

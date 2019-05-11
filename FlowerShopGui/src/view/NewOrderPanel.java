@@ -346,6 +346,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 				FlowerDTO flowerDTO = flowerDAO.select(flowerType);
 				flowerDTO.setFlowerQuantity(flowerDTO.getFlowerQty() - quantity);
+				flowerDAO.connect();
 				flowerDAO.updateFlower(flowerDTO);
 				InventoryPanel.populateTable();
 
