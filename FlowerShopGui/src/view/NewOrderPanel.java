@@ -344,11 +344,10 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
 						hasCard, cardText, isPaid, isDelivered));
 
-				// flowerDTO.setFlowerQuantity(qtyLeftInStock);
-				// FlowerDAO flowerDAO = new FlowerDAO();
-
-				// flowerDAO.updateFlower(flowerDTO);
-				// InventoryPanel.populateTable();
+				FlowerDTO flowerDTO = flowerDAO.select(flowerType);
+				flowerDTO.setFlowerQuantity(flowerDTO.getFlowerQty() - quantity);
+				flowerDAO.updateFlower(flowerDTO);
+				InventoryPanel.populateTable();
 
 				OrdersPanel.populateTable();
 				CustomersPanel.populateTable();
