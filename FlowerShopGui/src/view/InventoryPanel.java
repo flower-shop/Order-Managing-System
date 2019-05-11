@@ -35,7 +35,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
 	private JButton inventoryUpdateButton = new JButton("Update Inventory");
 	private JButton inventoryAddButton = new JButton("Add Record");
-	private JTable inventoryTable;
+	private static JTable inventoryTable;
 
 	private FlowerDAO flowerDAO = new FlowerDAO();
 
@@ -233,7 +233,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
 				String flowerType = flowerTypeTextField.getText();
 				double flowerCost = Double.valueOf(flowerCostTextField.getText());
 				int flowerQty = Integer.valueOf(flowerQtyTextField.getText());
-
+				
 				flowerDAO.insertFlower(new FlowerDTO(flowerType, flowerCost, flowerQty));
 
 				NewOrderPanel.populateFlowerTypeComboBox();
@@ -245,9 +245,9 @@ public class InventoryPanel extends JPanel implements ActionListener {
 				String flowerType = flowerTypeTextField.getText();
 				double flowerCost = Double.valueOf(flowerCostTextField.getText());
 				int flowerQty = Integer.valueOf(flowerQtyTextField.getText());
-
+				
 				flowerDAO.updateFlower(new FlowerDTO(flowerType, flowerCost, flowerQty));
-
+                
 				NewOrderPanel.populateFlowerTypeComboBox();
 
 				populateTable();
@@ -258,10 +258,11 @@ public class InventoryPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	public void populateTable() {
+	public static void populateTable() {
+		FlowerDAO flowerDAO = new FlowerDAO();
 		List<FlowerDTO> flowers = flowerDAO.selectAll();
 
-		DefaultTableModel tableModel = (DefaultTableModel) this.inventoryTable.getModel();
+		DefaultTableModel tableModel = (DefaultTableModel)inventoryTable.getModel();
 		tableModel.setRowCount(0);
 
 		for (int i = 0; i < flowers.size(); i++) {

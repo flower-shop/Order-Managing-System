@@ -320,22 +320,29 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Please fill out all fields");
 			} else {
 				
-				FlowerDAO flowerDAO = new FlowerDAO();
-				FlowerDTO flowerDTO = flowerDAO.select(flowerType);
-				int qtyLeftInStock = Integer.valueOf(flowerDTO.getFlowerQty())- quantity;
 				
-				if (qtyLeftInStock < 0) {
-					JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
-				} else {
+			//	FlowerDTO flowerDTO = flowerDAO.select(flowerType);
+
+			//	int qtyLeftInStock = Integer.valueOf(flowerDTO.getFlowerQty())- quantity;
+				
+			//	if (qtyLeftInStock < 0) {
+			//		JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
+			//	} else {
 
 				orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
 						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
 						hasCard, cardText, isPaid, isDelivered));
+				
+				//flowerDTO.setFlowerQuantity(qtyLeftInStock);
+				//FlowerDAO flowerDAO = new FlowerDAO();
+
+				//flowerDAO.updateFlower(flowerDTO);
+				//InventoryPanel.populateTable();
 
 				OrdersPanel.populateTable();
 				CustomersPanel.populateTable();
 				cancelOrder.doClick();
-			}
+			//}
 			}
 
 		} else if (e.getSource().equals(cancelOrder)) {
@@ -347,7 +354,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			quantityTextField.setText("0");
 			cardInfoTextField.setText("");
 			orderTotalTextField.setText("");
-			dateChooser.setDateFormatString("");
+			//dateChooser.setDateFormatString("");
 		}
 	}
 }
