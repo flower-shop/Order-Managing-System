@@ -397,6 +397,7 @@ public class OrdersPanel extends JPanel implements ActionListener {
 						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
 						hasCard, cardText, isPaid, isDelivered));
 
+				CustomersPanel.populateTable();
 				populateTable();
 
 				MainWindow.getTabbedPane().setEnabled(true);
