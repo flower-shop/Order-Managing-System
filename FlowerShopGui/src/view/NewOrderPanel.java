@@ -1,9 +1,6 @@
 package view;
 
 import java.awt.Component;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -41,7 +40,7 @@ import util.CurrencyFormatter;
 
 public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;
-     
+
 	private static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 	private static final String PHONE_REGEX = "\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}";
 	private static Pattern pattern;
@@ -49,7 +48,6 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	private static Pattern patternPN;
 	private Matcher matcherPN;
 
-	
 	private JTextField firstNameInputField = new JTextField();
 	private JTextField lastNameInputField = new JTextField();
 	private JTextField phoneNumberTextField = new JTextField();
@@ -87,10 +85,8 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 		pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
 
-
 		patternPN = Pattern.compile(PHONE_REGEX);
 
-		
 		GroupLayout customerInfoLayout = new GroupLayout(customerInfoPanel);
 		customerInfoPanel.setLayout(customerInfoLayout);
 		customerInfoLayout.setAutoCreateContainerGaps(true);
@@ -335,49 +331,24 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			if (lastName.isEmpty() || firstName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()
 					|| address.isEmpty() || deliveryDate.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Please fill out all fields");
+
+			} else if (!validateEmail(email)) {
+				JOptionPane.showMessageDialog(null, "Enter valid email address");
+
+			} else if (!validatePhone(phoneNumber)) {
+				JOptionPane.showMessageDialog(null,
+						"Incorrect Phone Number Format. Use '-' '.' or spaces to separate digits.");
+
 			} else {
-				
-				
-
-			//	FlowerDTO flowerDTO = flowerDAO.select(flowerType);
-
-			//	int qtyLeftInStock = Integer.valueOf(flowerDTO.getFlowerQty())- quantity;
-				
-			//	if (qtyLeftInStock < 0) {
-			//		JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
-			//	} else {
-
-
-				//if (qtyLeftInStock < 0) {
-					//JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
-				//} else {
-					
-					if(!validateEmail(email)) {
-						JOptionPane.showMessageDialog(null, "Enter valid email address");
-					} else {
-					
-
-				//if (qtyLeftInStock < 0) {
-					//JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
-				//} else {
-					
-					if(!validateEmail(email)) {
-						JOptionPane.showMessageDialog(null, "Enter valid email address");
-					} else {
-						if (!validatePhone(phoneNumber)) {
-							JOptionPane.showMessageDialog(null, "Incorrect Phone Number Format. Use '-' '.' or spaces to separate digits.");
-						} else {
-				
-
 				orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
 						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
 						hasCard, cardText, isPaid, isDelivered));
-				
-				//flowerDTO.setFlowerQuantity(qtyLeftInStock);
-				//FlowerDAO flowerDAO = new FlowerDAO();
 
-				//flowerDAO.updateFlower(flowerDTO);
-				//InventoryPanel.populateTable();
+				// flowerDTO.setFlowerQuantity(qtyLeftInStock);
+				// FlowerDAO flowerDAO = new FlowerDAO();
+
+				// flowerDAO.updateFlower(flowerDTO);
+				// InventoryPanel.populateTable();
 
 				OrdersPanel.populateTable();
 				CustomersPanel.populateTable();
@@ -385,15 +356,28 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 			}
 
-			  }
-			}
-				}
+			// FlowerDTO flowerDTO = flowerDAO.select(flowerType);
 
-			}
+			// int qtyLeftInStock =
+			// Integer.valueOf(flowerDTO.getFlowerQty())- quantity;
 
-			 
-				if (e.getSource().equals(cancelOrder)) {
-			}
+			// if (qtyLeftInStock < 0) {
+			// JOptionPane.showMessageDialog(null, "Flower quantity
+			// requested is not in stock");
+			// } else {
+
+			// if (qtyLeftInStock < 0) {
+			// JOptionPane.showMessageDialog(null, "Flower quantity
+			// requested is not in stock");
+			// } else {
+
+			// if (qtyLeftInStock < 0) {
+			// JOptionPane.showMessageDialog(null, "Flower quantity
+			// requested is not in stock");
+			// } else {
+
+		} else if (e.getSource().equals(cancelOrder)) {
+
 			firstNameInputField.setText("");
 			lastNameInputField.setText("");
 			phoneNumberTextField.setText("");
@@ -402,18 +386,16 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			quantityTextField.setText("0");
 			cardInfoTextField.setText("");
 			orderTotalTextField.setText("");
-			//dateChooser.setDateFormatString("");
+			// dateChooser.setDateFormatString("");
 		}
-	
-
+	}
 
 	public boolean validateEmail(String email) {
 		matcher = pattern.matcher(email);
 		return matcher.matches();
 	}
-		public boolean validatePhone(String phoneNumber) {
-			matcherPN = patternPN.matcher(phoneNumber);
-			return matcherPN.matches();
-		}
+	public boolean validatePhone(String phoneNumber) {
+		matcherPN = patternPN.matcher(phoneNumber);
+		return matcherPN.matches();
 	}
-
+}
