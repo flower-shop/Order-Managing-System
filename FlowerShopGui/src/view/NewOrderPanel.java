@@ -43,8 +43,12 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;
      
 	private static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+	private static final String PHONE_REGEX = "\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}";
 	private static Pattern pattern;
 	private Matcher matcher;
+	private static Pattern patternPN;
+	private Matcher matcherPN;
+
 	
 	private JTextField firstNameInputField = new JTextField();
 	private JTextField lastNameInputField = new JTextField();
@@ -82,6 +86,10 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		JLabel emailLabel = new JLabel("Email");
 
 		pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+
+
+		patternPN = Pattern.compile(PHONE_REGEX);
+
 		
 		GroupLayout customerInfoLayout = new GroupLayout(customerInfoPanel);
 		customerInfoPanel.setLayout(customerInfoLayout);
@@ -339,6 +347,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			//		JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
 			//	} else {
 
+
 				//if (qtyLeftInStock < 0) {
 					//JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
 				//} else {
@@ -347,6 +356,19 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 						JOptionPane.showMessageDialog(null, "Enter valid email address");
 					} else {
 					
+
+				//if (qtyLeftInStock < 0) {
+					//JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
+				//} else {
+					
+					if(!validateEmail(email)) {
+						JOptionPane.showMessageDialog(null, "Enter valid email address");
+					} else {
+						if (!validatePhone(phoneNumber)) {
+							JOptionPane.showMessageDialog(null, "Incorrect Phone Number Format. Use '-' '.' or spaces to separate digits.");
+						} else {
+				
+
 				orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
 						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
 						hasCard, cardText, isPaid, isDelivered));
@@ -360,10 +382,18 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 				OrdersPanel.populateTable();
 				CustomersPanel.populateTable();
 				cancelOrder.doClick();
-			}
+
 			}
 
-		} else if (e.getSource().equals(cancelOrder)) {
+			  }
+			}
+				}
+
+			}
+
+			 
+				if (e.getSource().equals(cancelOrder)) {
+			}
 			firstNameInputField.setText("");
 			lastNameInputField.setText("");
 			phoneNumberTextField.setText("");
@@ -374,9 +404,16 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			orderTotalTextField.setText("");
 			//dateChooser.setDateFormatString("");
 		}
-	}
+	
+
+
 	public boolean validateEmail(String email) {
 		matcher = pattern.matcher(email);
 		return matcher.matches();
 	}
-}
+		public boolean validatePhone(String phoneNumber) {
+			matcherPN = patternPN.matcher(phoneNumber);
+			return matcherPN.matches();
+		}
+	}
+
