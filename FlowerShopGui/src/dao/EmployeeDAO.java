@@ -21,6 +21,15 @@ public class EmployeeDAO {
 		}
 	}
 
+	public void connect() {
+		try {
+			con = ConnectionFactory.getConnection();
+			stmt = con.createStatement();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public EmployeeDTO select(String employeeId) {
 		String query = "SELECT * FROM Employee WHERE employeeId='" + employeeId + "'";
 

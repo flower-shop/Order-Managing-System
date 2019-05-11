@@ -361,6 +361,7 @@ public class LoginPanel implements ActionListener {
 				String passTxt = passwordTxtl.getText();
 
 				EmployeeDTO user = employeeDAO.select(inTxtl);
+				employeeDAO.connect();
 
 				if (user != null && user.getPassword().equals(passTxt)) {
 					check = true;
@@ -409,7 +410,7 @@ public class LoginPanel implements ActionListener {
 		LoginPanel begin = new LoginPanel();
 		begin.adminCheck();
 
-		 //new MainWindow();
+		// new MainWindow();
 	}
 
 	@Override
