@@ -1,5 +1,8 @@
 .metadata
 .settings/
+.classpath/
+
+
 derby.log
 bin/
 
