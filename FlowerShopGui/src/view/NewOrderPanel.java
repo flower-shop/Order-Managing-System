@@ -375,6 +375,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 				OrdersPanel.populateTable();
 				CustomersPanel.populateTable();
+				populateFlowerTypeComboBox();
 				cancelOrder.doClick();
 
 			}
