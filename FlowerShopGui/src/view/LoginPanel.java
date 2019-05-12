@@ -40,12 +40,13 @@ public class LoginPanel implements ActionListener {
 	private JTextField passwordTxt2;
 	private String introText, infoText;
 	private boolean check;
+	private int attempts = 0;
 	private EmployeeDAO employeeDAO = new EmployeeDAO();
 
 	private void adminCheck() {
 		/*
-		 * check the db to see if Employee table contains entries. if yes then
-		 * go to mainWindow(), if no then go to setUpAccount()
+		 * check the db to see if Employee table contains entries. if yes then go to
+		 * mainWindow(), if no then go to setUpAccount()
 		 */
 		List<EmployeeDTO> employees = employeeDAO.selectAll();
 
@@ -167,7 +168,7 @@ public class LoginPanel implements ActionListener {
 		dataPanel.setOpaque(false);
 		dataPanel.setVisible(false);
 
-		// insert panells to Window
+		// insert panels to Window
 		// Add all panels to main panel
 
 		mainPanel.setLayout(new GridLayout(2, 2));
@@ -267,6 +268,7 @@ public class LoginPanel implements ActionListener {
 	}
 
 	private void mainWindow() {
+		attempts = 0;
 		// Create Main window
 		JFrame window = new JFrame("Flower Shop Management Program");
 		// window.getContentPane().setBackground(Color.GREEN);
@@ -327,7 +329,7 @@ public class LoginPanel implements ActionListener {
 		instructionPanel.setOpaque(false);
 		instructionPanel.setVisible(false);
 
-		// insert panells to Window
+		// insert panels to Window
 		// Add all panels to main panel
 
 		mainPanel.setLayout(new GridLayout(3, 2));
@@ -375,8 +377,14 @@ public class LoginPanel implements ActionListener {
 				} else if (check == true) {
 					window.setVisible(false);
 					new MainWindow(user);
-				} else if (check == false) {
-					infoText = "Your User Name and/or password are incorrect";
+				} else if ((check == false) && (attempts < 3)) {
+					infoText = "Your User Name and/or password are incorrect.Try Again";
+					attempts++;
+					instructionText.setText(null);
+					instructionText.append(infoText);
+					instructionPanel.setVisible(true);
+				} else if ((check == false) && (attempts > 2)) {
+					infoText = "Maximum Number of Attempts Reached. Please Contact your Admin Account Holder";
 					instructionText.setText(null);
 					instructionText.append(infoText);
 					instructionPanel.setVisible(true);
@@ -394,8 +402,7 @@ public class LoginPanel implements ActionListener {
 	}
 
 	/**
-	 * @param args
-	 *            the command line arguments
+	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
 		try {
