@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -184,7 +183,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cardInfoTextField.setEditable(false);
-				cardInfoTextField.setBackground(new Color(224, 224, 224));
+				cardInfoTextField.setText("");
 			}
 		});
 
@@ -322,8 +321,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 				orderNumber++;
 			}
 
-			String orderDate = DateFormat.getDateInstance().format(todayDate);
-			;
+			String orderDate = DateFormat.getDateInstance().format(todayDate);;
 			String lastName = lastNameInputField.getText().trim();
 			String firstName = firstNameInputField.getText().trim();
 			String phoneNumber = phoneNumberTextField.getText().trim();
