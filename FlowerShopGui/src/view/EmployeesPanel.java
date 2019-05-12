@@ -49,8 +49,8 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	public EmployeesPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 
-		String[] employeesColumnNames = new String[]{"Last Name", "First Name", "Employee ID", "Password",
-				"Admin Privileges"};
+		String[] employeesColumnNames = new String[] { "Last Name", "First Name", "Employee ID", "Password",
+				"Admin Privileges" };
 
 		TableModel tableModel = new DefaultTableModel(employeesColumnNames, 0);
 
@@ -260,11 +260,20 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 				String password = passwordTextField.getText();
 				String isAdmin = isAdminTextField.getText();
 
-				employeeDAO.insertEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
+				if (lastName.isEmpty() || firstName.isEmpty() || employeeId.isEmpty() || password.isEmpty()
+						|| isAdmin.isEmpty() || password.length() < 8) {
+					this.setVisible(false);
+					JOptionPane.showMessageDialog(null,
+							"Please ensure all fields have entries, and Password is at least 8 characters long.");
 
-				populateTable();
-				MainWindow.getTabbedPane().setEnabled(true);
-				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+				} else {
+
+					employeeDAO.insertEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
+
+					populateTable();
+					MainWindow.getTabbedPane().setEnabled(true);
+					this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+				}
 			} else {
 				String lastName = lastNameTextField.getText();
 				String firstName = firstNameTextField.getText();
@@ -272,12 +281,20 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 				String password = passwordTextField.getText();
 				String isAdmin = isAdminTextField.getText();
 
-				employeeDAO.updateEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
+				if (lastName.isEmpty() || firstName.isEmpty() || employeeId.isEmpty() || password.isEmpty()
+						|| isAdmin.isEmpty() || password.length() < 8) {
+					this.setVisible(false);
+					JOptionPane.showMessageDialog(null,
+							"Please ensure all fields have entries, and Password is at least 8 characters long.");
 
-				populateTable();
+				} else {
+					employeeDAO.updateEmployee(new EmployeeDTO(lastName, firstName, employeeId, password, isAdmin));
 
-				MainWindow.getTabbedPane().setEnabled(true);
-				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+					populateTable();
+
+					MainWindow.getTabbedPane().setEnabled(true);
+					this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+				}
 			}
 		}
 	}
@@ -290,8 +307,8 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 		for (int i = 0; i < employees.size(); i++) {
 			EmployeeDTO employee = employees.get(i);
-			Object[] employeeContent = new Object[]{employee.getLastName(), employee.getFirstName(),
-					employee.getEmployeeId(), employee.getPassword(), employee.isAdmin()};
+			Object[] employeeContent = new Object[] { employee.getLastName(), employee.getFirstName(),
+					employee.getEmployeeId(), employee.getPassword(), employee.isAdmin() };
 
 			tableModel.addRow(employeeContent);
 		}

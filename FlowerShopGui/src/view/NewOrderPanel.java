@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -183,6 +184,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cardInfoTextField.setEditable(false);
+				cardInfoTextField.setBackground(new Color(224, 224, 224));
 			}
 		});
 
