@@ -176,6 +176,22 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		cardOptionsButtonGroup.add(yesRadioButton);
 
 		cardInfoTextField.setToolTipText("Card text goes here");
+		cardInfoTextField.setEditable(false);
+
+		/* ActionListeners for hasCard Buttons */
+		noRadioButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cardInfoTextField.setEditable(false);
+			}
+		});
+
+		yesRadioButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cardInfoTextField.setEditable(true);
+			}
+		});
 
 		GroupLayout orderInfoLayout = new GroupLayout(orderInfoPanel);
 		orderInfoLayout.setAutoCreateGaps(true);
@@ -304,7 +320,8 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 				orderNumber++;
 			}
 
-			String orderDate = DateFormat.getDateInstance().format(todayDate);;
+			String orderDate = DateFormat.getDateInstance().format(todayDate);
+			;
 			String lastName = lastNameInputField.getText().trim();
 			String firstName = firstNameInputField.getText().trim();
 			String phoneNumber = phoneNumberTextField.getText().trim();
@@ -327,9 +344,9 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			String cardText = cardInfoTextField.getText();
 			String isPaid = "no";
 			String isDelivered = "no";
-			
+
 			FlowerDTO flowerDTO = flowerDAO.select(flowerType);
-			
+
 			flowerDAO.connect();
 
 			if (lastName.isEmpty() || firstName.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()
@@ -342,11 +359,12 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			} else if (!validatePhone(phoneNumber)) {
 				JOptionPane.showMessageDialog(null,
 						"Incorrect Phone Number Format. Use '-' '.' or spaces to separate digits.");
-				
-			} else if (Integer.valueOf(flowerDTO.getFlowerQty()- quantity) < 0) {
-				JOptionPane.showMessageDialog(null,"Flower quantity requested is not in stock");	
+
+			} else if (Integer.valueOf(flowerDTO.getFlowerQty() - quantity) < 0) {
+				JOptionPane.showMessageDialog(null, "Flower quantity requested is not in stock");
 
 			} else {
+				JOptionPane.showMessageDialog(null, "New Order Placed!");
 				orderDAO.insertOrder(new OrderDTO(orderNumber, orderDate, lastName, firstName, phoneNumber, email,
 						flowerType, quantity, accessoryType, arrangementTheme, address, deliveryDate, totalCost,
 						hasCard, cardText, isPaid, isDelivered));
@@ -378,6 +396,7 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 		matcher = pattern.matcher(email);
 		return matcher.matches();
 	}
+
 	public boolean validatePhone(String phoneNumber) {
 		matcherPN = patternPN.matcher(phoneNumber);
 		return matcherPN.matches();
