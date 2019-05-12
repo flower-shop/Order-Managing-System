@@ -234,7 +234,15 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 
 		quantityTextField.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
-				String quantity = quantityTextField.getText();
+				int quantity;
+				try {
+					quantity = Integer.parseInt(quantityTextField.getText());
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(null, "Please Enter a Numerical Value");
+					quantityTextField.setText("");
+					return;
+				}
+
 				String price = unitPriceTextField.getText().replace('$', Character.MIN_VALUE);
 				if (quantityTextField.getText().isEmpty()) {
 					orderTotalTextField.setText(String.valueOf(0));
@@ -321,7 +329,8 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 				orderNumber++;
 			}
 
-			String orderDate = DateFormat.getDateInstance().format(todayDate);;
+			String orderDate = DateFormat.getDateInstance().format(todayDate);
+			;
 			String lastName = lastNameInputField.getText().trim();
 			String firstName = firstNameInputField.getText().trim();
 			String phoneNumber = phoneNumberTextField.getText().trim();
@@ -334,6 +343,14 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			String deliveryDate = DateFormat.getDateInstance().format(dateChooser.getDate());
 			double totalCost = Double.parseDouble(orderTotalTextField.getText());
 			String hasCard = "";
+
+			try {
+				quantity = Integer.parseInt(quantityTextField.getText());
+			} catch (NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(null, "Please Enter a Numerical Value");
+				quantityTextField.setText("");
+				return;
+			}
 
 			if (yesRadioButton.isSelected()) {
 				hasCard = "yes";
