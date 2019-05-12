@@ -330,7 +330,6 @@ public class NewOrderPanel extends JPanel implements ActionListener {
 			}
 
 			String orderDate = DateFormat.getDateInstance().format(todayDate);
-			;
 			String lastName = lastNameInputField.getText().trim();
 			String firstName = firstNameInputField.getText().trim();
 			String phoneNumber = phoneNumberTextField.getText().trim();

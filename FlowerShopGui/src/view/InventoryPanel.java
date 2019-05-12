@@ -47,7 +47,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
 	public InventoryPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
-		String[] inventoryColumnNames = { "Flower Type", "Price", "Quantity" };
+		String[] inventoryColumnNames = {"Flower Type", "Price", "Quantity"};
 
 		TableModel tableModel = new DefaultTableModel(inventoryColumnNames, 0);
 
@@ -230,24 +230,17 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			String flowerType = flowerTypeTextField.getText();
-			String flowerCostValue = flowerCostTextField.getText();
-			double flowerCost = Double.valueOf(flowerCostTextField.getText());
-			int flowerQty = Integer.valueOf(flowerQtyTextField.getText());
+			double flowerCost;
+			int flowerQty;
 
 			if (isInsertWindow) {
 
 				try {
 					flowerCost = Double.parseDouble(flowerCostTextField.getText());
-				} catch (NumberFormatException ne) {
-					JOptionPane.showMessageDialog(null, "Please Enter Dollar Amount");
-					flowerCostTextField.setText("");
-					return;
-				}
-
-				try {
 					flowerQty = Integer.parseInt(flowerQtyTextField.getText());
-				} catch (NumberFormatException ne) {
-					JOptionPane.showMessageDialog(null, "Please Enter a Numerical Value");
+				} catch (NumberFormatException ne1) {
+					System.out.println(ne1);
+					flowerCostTextField.setText("");
 					flowerQtyTextField.setText("");
 					return;
 				}
@@ -259,6 +252,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
 				MainWindow.getTabbedPane().setEnabled(true);
 				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+
 			} else {
 
 				try {
@@ -297,8 +291,8 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
 		for (int i = 0; i < flowers.size(); i++) {
 			FlowerDTO flower = flowers.get(i);
-			Object[] flowersContent = new Object[] { flower.getFlowerType(),
-					CurrencyFormatter.formatDouble(flower.getFlowerCost()), flower.getFlowerQty() };
+			Object[] flowersContent = new Object[]{flower.getFlowerType(),
+					CurrencyFormatter.formatDouble(flower.getFlowerCost()), flower.getFlowerQty()};
 
 			tableModel.addRow(flowersContent);
 		}
