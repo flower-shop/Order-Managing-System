@@ -16,5 +16,5 @@ Once cloned, complete the following steps from Eclipse:
 The program should launch and contain a brand-new database with the following empty tables: 
 
 1. Employee
-2. Customer
+2. Flower
 3. Orders
