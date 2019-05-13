@@ -28,6 +28,12 @@ import dao.OrderDAO;
 import dto.OrderDTO;
 import util.CurrencyFormatter;
 
+/*
+ * File: OrdersPanel.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 public class OrdersPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 2666270557360720356L;
 
@@ -149,7 +155,7 @@ public class OrdersPanel extends JPanel implements ActionListener {
 					totalCostTextField.setEditable(false);
 					hasCardTextField.setEditable(false);
 					cardTextTextField.setEditable(false);
-					
+
 					orderNumberTextField.setFocusable(false);
 					orderDateTextField.setFocusable(false);
 					firstNameTextField.setFocusable(false);
@@ -165,7 +171,7 @@ public class OrdersPanel extends JPanel implements ActionListener {
 					totalCostTextField.setFocusable(false);
 					hasCardTextField.setFocusable(false);
 					cardTextTextField.setFocusable(false);
-					
+
 					orderNumberTextField.setBackground(new Color(224, 224, 224));
 					orderDateTextField.setBackground(new Color(224, 224, 224));
 					firstNameTextField.setBackground(new Color(224, 224, 224));
@@ -180,8 +186,8 @@ public class OrdersPanel extends JPanel implements ActionListener {
 					deliveryDateTextField.setBackground(new Color(224, 224, 224));
 					totalCostTextField.setBackground(new Color(224, 224, 224));
 					hasCardTextField.setBackground(new Color(224, 224, 224));
-					cardTextTextField.setBackground(new Color(224, 224, 224));	
-					
+					cardTextTextField.setBackground(new Color(224, 224, 224));
+
 				} else {
 					JOptionPane.showMessageDialog(null, "Please select a row");
 				}

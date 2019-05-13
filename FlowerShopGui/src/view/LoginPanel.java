@@ -1,9 +1,4 @@
 package view;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,7 +26,11 @@ import javax.swing.WindowConstants;
 import dao.EmployeeDAO;
 import dto.EmployeeDTO;
 
-//add Nimbus theme
+/*
+ * File: LoginPanel.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
 
 public class LoginPanel implements ActionListener {
 	private JTextField inputTxt, inputTxtl;
@@ -45,8 +44,8 @@ public class LoginPanel implements ActionListener {
 
 	private void adminCheck() {
 		/*
-		 * check the db to see if Employee table contains entries. if yes then go to
-		 * mainWindow(), if no then go to setUpAccount()
+		 * check the db to see if Employee table contains entries. if yes then
+		 * go to mainWindow(), if no then go to setUpAccount()
 		 */
 		List<EmployeeDTO> employees = employeeDAO.selectAll();
 
@@ -402,7 +401,8 @@ public class LoginPanel implements ActionListener {
 	}
 
 	/**
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
 		try {

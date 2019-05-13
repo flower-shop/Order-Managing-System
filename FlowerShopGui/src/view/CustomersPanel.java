@@ -13,6 +13,12 @@ import javax.swing.table.TableModel;
 import dao.CustomerDAO;
 import dto.CustomerDTO;
 
+/*
+ * File: CustomersPanel.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 public class CustomersPanel extends JPanel {
 	private static final long serialVersionUID = 3722861926434523695L;
 
@@ -58,7 +64,7 @@ public class CustomersPanel extends JPanel {
 	public static void populateTable() {
 		List<CustomerDTO> customers = customerDAO.selectAll();
 
-		DefaultTableModel tableModel = (DefaultTableModel)customersTable.getModel();
+		DefaultTableModel tableModel = (DefaultTableModel) customersTable.getModel();
 		tableModel.setRowCount(0);
 
 		for (int i = 0; i < customers.size(); i++) {

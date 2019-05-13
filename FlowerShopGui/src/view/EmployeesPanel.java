@@ -29,6 +29,12 @@ import javax.swing.table.TableModel;
 import dao.EmployeeDAO;
 import dto.EmployeeDTO;
 
+/*
+ * File: LoginPanel.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 public class EmployeesPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 5803744138819090040L;
 
@@ -49,8 +55,8 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 	public EmployeesPanel() {
 		this.setBackground(ViewConstants.BACKGROUND_TAB_COLOR);
 
-		String[] employeesColumnNames = new String[] { "Last Name", "First Name", "Employee ID", "Password",
-				"Admin Privileges" };
+		String[] employeesColumnNames = new String[]{"Last Name", "First Name", "Employee ID", "Password",
+				"Admin Privileges"};
 
 		TableModel tableModel = new DefaultTableModel(employeesColumnNames, 0);
 
@@ -307,8 +313,8 @@ public class EmployeesPanel extends JPanel implements ActionListener {
 
 		for (int i = 0; i < employees.size(); i++) {
 			EmployeeDTO employee = employees.get(i);
-			Object[] employeeContent = new Object[] { employee.getLastName(), employee.getFirstName(),
-					employee.getEmployeeId(), employee.getPassword(), employee.isAdmin() };
+			Object[] employeeContent = new Object[]{employee.getLastName(), employee.getFirstName(),
+					employee.getEmployeeId(), employee.getPassword(), employee.isAdmin()};
 
 			tableModel.addRow(employeeContent);
 		}

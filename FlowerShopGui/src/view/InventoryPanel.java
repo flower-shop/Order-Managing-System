@@ -30,6 +30,12 @@ import dao.FlowerDAO;
 import dto.FlowerDTO;
 import util.CurrencyFormatter;
 
+/*
+ * File: InventoryPanel.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 public class InventoryPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -3718843315216000622L;
 

@@ -38,6 +38,12 @@ import enums.AccessoryType;
 import enums.ArrangementTheme;
 import util.CurrencyFormatter;
 
+/*
+ * File: NewOrderPanel.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 public class NewOrderPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -7938215989557472207L;
 

@@ -5,6 +5,12 @@ import javax.swing.JTabbedPane;
 
 import dto.EmployeeDTO;
 
+/*
+ * File: MainWindow.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 3434469359320329958L;
 
