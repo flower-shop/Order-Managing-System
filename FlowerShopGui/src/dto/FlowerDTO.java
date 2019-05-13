@@ -1,6 +1,10 @@
 package dto;
 
-/*import enums.FlowerType;*/
+/*
+ * File: FLowerDTO.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
 
 public class FlowerDTO {
 	private double flowerCost;

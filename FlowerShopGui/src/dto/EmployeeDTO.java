@@ -1,5 +1,11 @@
 package dto;
 
+/*
+ * File: EmployeeDTO.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 public class EmployeeDTO {
 	private String firstName;
 	private String lastName;

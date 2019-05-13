@@ -1,5 +1,11 @@
 package dto;
 
+/*
+ * File: OrderDTO.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 public class OrderDTO {
 	private int orderNumber;
 	private String orderDate;
