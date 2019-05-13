@@ -8,6 +8,12 @@ import java.util.List;
 
 import dto.FlowerDTO;
 
+/*
+ * File: FlowerDAO.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 public class FlowerDAO {
 	private Connection con = null;
 	private Statement stmt = null;

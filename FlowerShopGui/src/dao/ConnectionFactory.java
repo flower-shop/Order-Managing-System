@@ -1,5 +1,12 @@
 package dao;
 import java.sql.Connection;
+
+/*
+ * File: ConnectionFactory.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 import java.sql.DriverManager;
 
 public class ConnectionFactory {

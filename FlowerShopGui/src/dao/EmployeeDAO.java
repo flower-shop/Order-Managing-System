@@ -8,6 +8,12 @@ import java.util.List;
 
 import dto.EmployeeDTO;
 
+/*
+ * File: EmployeeDAO.java
+ * Date: May 12, 2019
+ * Authors: Olga Samborski, Jasmine Jones, Scott Hussey, and James DeBenedictis
+ */
+
 public class EmployeeDAO {
 	private Connection con = null;
 	private Statement stmt = null;
