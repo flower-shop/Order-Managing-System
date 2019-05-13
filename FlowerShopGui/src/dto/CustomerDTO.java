@@ -13,10 +13,9 @@ public class CustomerDTO {
 	private String phoneNumber;
 	private String email;
 
-	public CustomerDTO(String lastName, String firstName, /* String address, */String phoneNumber, String email) {
+	public CustomerDTO(String lastName, String firstName, String phoneNumber, String email) {
 		this.lastName = lastName;
 		this.firstName = firstName;
-		/* this.address = address; */
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 	}
