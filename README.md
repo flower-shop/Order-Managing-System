@@ -13,7 +13,7 @@ Once cloned, complete these steps from Eclipse:
 5. Set system library to JavaSE-10 by choosing "Edit"
 
 
-The program should then be ready to launch and contain a brand-new database with three empty tables: 
+The program should then be ready to launch and contain a new database with three empty tables: 
 
 1. Employee
 2. Flower
